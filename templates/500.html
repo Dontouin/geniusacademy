@@ -1,0 +1,11 @@
+{% extends 'error_handler_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1>{% trans 'Erreur serveur' %}</h1>
+    <p>{% trans 'Veuillez réessayer plus tard.' %}</p>
+    <a href="/" class="link">&larr; {% trans 'Retour à l’application' %}</a>
+</div>
+{% endblock %}
+

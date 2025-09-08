@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Aide - The Genius Academy" %}{% endblock %}
+
+{% block content %}
+<section class="py-12 sm:py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl sm:text-4xl font-bold text-center text-[var(--primary-color)] mb-6">{% trans "Centre d’Aide" %}</h1>
+    <p class="text-center text-gray-600 mb-8 text-base sm:text-lg">{% trans "Trouvez des réponses ou contactez notre équipe pour une assistance personnalisée." %}</p>
+    <div class="space-y-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl sm:text-2xl font-bold text-[var(--primary-color)] mb-4">{% trans "Problèmes de connexion" %}</h3>
+            <p class="text-gray-700">{% trans "Si vous ne pouvez pas vous connecter, vérifiez votre email/mot de passe ou réinitialisez votre mot de passe." %}</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl sm:text-2xl font-bold text-[var(--primary-color)] mb-4">{% trans "Support technique" %}</h3>
+            <p class="text-gray-700">{% trans "Contactez-nous à info@geniusacademy.cm pour tout problème technique." %}</p>
+        </div>
+        <div class="text-center">
+            <a href="{% url 'core:contact' %}" class="inline-block bg-[var(--accent-color)] text-white px-6 py-3 rounded-lg font-medium hover:bg-[var(--secondary-color)] transition text-base">{% trans "Contacter le support" %}</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

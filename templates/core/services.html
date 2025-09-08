@@ -1,0 +1,581 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ _('Nos Services') }} - The Genius Academy{% endblock %}
+
+{% block header %}
+<style>
+    /* Hero Section Styles */
+    .hero-services {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 0;
+    }
+    
+    /* Bubbles animation */
+    .bubbles-hero {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    
+    .bubbles-hero span.bubble {
+        position: absolute;
+        bottom: -50px;
+        width: calc(8px + var(--i) * 6px);
+        height: calc(8px + var(--i) * 6px);
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        animation: riseHero calc(10s + var(--i)s) infinite linear;
+        left: calc(var(--i) * 6%);
+    }
+    
+    @keyframes riseHero {
+        0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.2; }
+        50% { opacity: 0.6; }
+        100% { transform: translateY(-500px) rotate(360deg) scale(1.2); opacity: 0; }
+    }
+    
+    /* Services Section */
+    .service-card-upgraded {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .service-card-upgraded::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(to right, #4c1d95, #2563eb);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .service-card-upgraded:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+    
+    .service-card-upgraded:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .service-icon-upgraded {
+        font-size: 2.5rem;
+        color: #0d6efd;
+        transition: transform 0.3s ease, color 0.3s ease;
+        margin-bottom: 1rem;
+    }
+    
+    .service-card-upgraded:hover .service-icon-upgraded {
+        color: #0a58ca;
+        transform: scale(1.2) rotate(10deg);
+    }
+    
+    .service-features li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .service-features li i {
+        color: #10b981;
+        margin-right: 0.5rem;
+    }
+    
+    /* CTA Section */
+    .cta-services {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 0;
+    }
+    
+    .cta-services::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,160C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Testimonials */
+    .testimonial-card {
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .testimonial-card .card-body {
+        position: relative;
+    }
+    
+    .testimonial-card .card-body::before {
+        content: '"';
+        font-size: 4rem;
+        color: rgba(79, 70, 229, 0.1);
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        font-family: Georgia, serif;
+    }
+    
+    /* Section titles */
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #4c1d95, #2563eb);
+        border-radius: 3px;
+    }
+    
+    /* Stats counter */
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        background: linear-gradient(to right, #4c1d95, #2563eb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .hero-services .display-4 {
+            font-size: 2rem;
+        }
+        
+        .service-card-upgraded {
+            margin-bottom: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-services text-white">
+    <div class="bubbles-hero">
+        <span class="bubble" style="--i:1;"></span>
+        <span class="bubble" style="--i:2;"></span>
+        <span class="bubble" style="--i:3;"></span>
+        <span class="bubble" style="--i:4;"></span>
+        <span class="bubble" style="--i:5;"></span>
+        <span class="bubble" style="--i:6;"></span>
+        <span class="bubble" style="--i:7;"></span>
+        <span class="bubble" style="--i:8;"></span>
+        <span class="bubble" style="--i:9;"></span>
+        <span class="bubble" style="--i:10;"></span>
+        <span class="bubble" style="--i:11;"></span>
+        <span class="bubble" style="--i:12;"></span>
+        <span class="bubble" style="--i:13;"></span>
+        <span class="bubble" style="--i:14;"></span>
+        <span class="bubble" style="--i:15;"></span>
+    </div>
+    
+    <div class="container py-5 text-center position-relative" style="z-index: 2;">
+        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown">{{ _('Découvrez nos services éducatifs') }}</h1>
+        <p class="lead mb-4 animate__animated animate__fadeInUp">{{ _('Un accompagnement sur mesure pour chaque élève, de la maternelle à la terminale.') }}</p>
+        <a href="#services" class="btn btn-lg btn-light shadow fw-bold animate__animated animate__bounceIn">{{ _('Voir nos services') }}</a>
+    </div>
+</section>
+<!-- Services Section - Améliorée -->
+<section id="services" class="py-5">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold mb-3 section-title">{% trans 'Nos Services' %}</h2>
+                <p class="lead fs-4">{% trans 'Un accompagnement sur mesure pour tous les niveaux' %}</p>
+            </div>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Carte Maternelle -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="{% static 'img/maternelle.jpg' %}" alt="Service Maternelle" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-baby text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">Maternelle</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans "Éveil et initiation aux bases de la lecture, de l'écriture et du calcul grâce à des méthodes ludiques et adaptées." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Initiation aux chiffres et lettres' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Activités ludiques et éducatives' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Développement de la motricité' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+            
+            <!-- Carte Primaire -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="{% static 'img/primaire.jpg' %}" alt="Service Primaire" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-pencil-alt text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">{% trans 'Primaire' %}</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans 'Renforcement dans toutes les matières fondamentales et préparation aux examens de fin de cycle.' %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i>{% trans ' Toutes matières fondamentales' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Préparation au CEP/FSLC' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Méthodologie de travail' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+            
+            <!-- Carte Secondaire -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="{% static 'img/secondaire.jpg' %}" alt="Service Secondaire" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-book text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">{% trans 'Secondaire' %}</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans "Soutien scolaire de la 6ème à la Terminale, toutes séries confondues (scientifique et littéraire)." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Mathématiques, Physique, SVT' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Philosophie, Histoire-Géo' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Langues vivantes' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+            
+            <!-- Carte Section Francophone -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="{% static 'img/francophone.jpg' %}" alt="Service Francophone" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-globe-africa text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">{% trans 'Section Francophone' %}</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans 'Programmes adaptés au système éducatif francophone avec des enseignants spécialisés.' %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Programme officiel camerounais' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Enseignants francophones' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Préparation aux examens nationaux' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+            
+            <!-- Carte Section Anglophone -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="{% static 'img/anglophone.jpg' %}" alt="Service Anglophone" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-globe-americas text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">{% trans 'Section Anglophone' %}</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans "Cours alignés sur le curriculum anglophone avec des enseignants bilingues expérimentés." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Programme British/Nigerian' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Enseignants anglophones' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'Préparation GCE O/A-Level' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+            
+            <!-- Carte Préparation aux Examens -->
+            <div class="service-card-upgraded">
+                <div class="service-header position-relative" style="padding: 0; overflow: hidden;">
+                    <div class="service-image-container" style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1560785496-3c9d27877182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Service Préparation Examens" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="service-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(58, 12, 163, 0.7), rgba(67, 97, 238, 0.7));"></div>
+                    </div>
+                    <div class="service-icon-upgraded" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <i class="fas fa-medal text-white"></i>
+                    </div>
+                    <h4 class="card-title position-absolute bottom-0 start-0 end-0 text-white p-3 mb-0" style="z-index: 2;">{% trans 'Préparation aux Examens' %}</h4>
+                </div>
+                <div class="service-body">
+                    <p>{% trans ' préparation spécifique pour tous les examens nationaux.' %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> {% trans 'BEPC, Probatoire, Baccalauréat' %}</li>
+                        <li><i class="fas fa-check-circle"></i> {% trans 'GCE O-Level, A-Level' %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <a href="#contact" class="btn btn-sm btn-primary">{% trans 'Demander un enseignant' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton Voir Plus -->
+    <div class="text-center mt-12">
+        <a href="/services" class="btn btn-sm btn-primary">{% trans 'Voir plus' %}</a>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-services text-white">
+    <div class="container position-relative text-center py-5" style="z-index: 2;">
+        <h2 class="fw-bold mb-3">{{ _('Besoin d’un enseignant particulier ?') }}</h2>
+        <p class="mb-4 fs-5">{{ _('Contactez-nous dès maintenant pour réserver votre cours personnalisé.') }}</p>
+        <a href="#contact" class="btn btn-lg btn-light shadow fw-bold">{{ _('Demander un enseignant') }}</a>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-white">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold mb-3 section-title">{% trans 'Témoignages' %}</h2>
+                <p class="lead">{% trans 'Ce que disent les parents et élèves' %}</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card testimonial-card shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <p class="fst-italic">"{% trans 'Excellent accompagnement, mon enfant a progressé rapidement ! Les enseignants sont très compétents et à l écoute.' %}"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold">MK</span>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="fw-bold mb-0">Mme. Kameni</h6>
+                                <small class="text-muted">{% trans 'Mère d élève en CM2' %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card testimonial-card shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <p class="fst-italic">"{% trans 'Les enseignants sont très qualifiés et patients. Ma fille qui avait des difficultés en maths a finalement eu son bac avec mention.' %}"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold">JN</span>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="fw-bold mb-0">M. Nlend</h6>
+                                <small class="text-muted">{% trans 'Père d élève en Terminale' %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card testimonial-card shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <p class="fst-italic">"{% trans 'Méthodes pédagogiques modernes et efficaces. Mon fils a repris confiance en lui et ses résultats se sont considérablement améliorés.' %}"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold">AT</span>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="fw-bold mb-0">Mme. Tchinda</h6>
+                                <small class="text-muted">{% trans 'Mère d élève en 4ème' %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold mb-3 section-title">{% trans 'Questions Fréquentes' %}</h2>
+                <p class="lead">{% trans 'Trouvez les réponses à vos questions' %}</p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                {% trans 'Comment se déroulent les cours à domicile ?' %}
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {% trans 'Nos enseignants se déplacent à votre domicile aux horaires convenus. Les cours sont personnalisés selon les besoins de l élève et durent généralement 1h30 à 2h. Un bilan régulier est effectué avec les parents pour suivre les progrès.' %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                {% trans 'Quelle est la qualification de vos enseignants ?' %}
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {% trans 'Tous nos enseignants sont diplômés et expérimentés. Ils passent par un processus de sélection rigoureux et reçoivent une formation continue pour garantir la qualité de nos services.' %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                {% trans 'Proposez-vous des cours en groupe ?' %}
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {% trans 'Oui, nous proposons des cours en petits groupes (maximum 5 élèves) pour ceux qui préfèrent cette formule. Les groupes sont constitués d élèves de niveau similaire pour un apprentissage optimal.' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'faq' %}" class="btn btn-outline-primary">{% trans 'Voir toutes les questions' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    // Animation des statistiques
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation des compteurs
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            let count = 0;
+            
+            const updateCount = () => {
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    count += increment;
+                    if (count > target) count = target;
+                    counter.innerText = count;
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            
+            // Démarrer l'animation quand l'élément est dans le viewport
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCount();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(counter);
+        });
+        
+        // Animation des cartes de service au scroll
+        const serviceCards = document.querySelectorAll('.service-card-upgraded');
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        serviceCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            cardObserver.observe(card);
+        });
+    });
+</script>
+{% endblock %}

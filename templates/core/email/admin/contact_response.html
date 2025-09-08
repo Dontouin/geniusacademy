@@ -1,0 +1,34 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="module">
+    <h1>{{ title }}</h1>
+
+    <div class="message-details" style="background:#f8f9fa; padding:15px; border-radius:5px; margin-bottom:20px;">
+        <p><strong>{% trans "Nom" %}:</strong> {{ contact_message.nom }}</p>
+        <p><strong>{% trans "Email" %}:</strong> {{ contact_message.email }}</p>
+        <p><strong>{% trans "Sujet" %}:</strong> {{ contact_message.sujet }}</p>
+        <div style="background:white; padding:10px; border:1px solid #dee2e6; border-radius:3px;">
+            {{ contact_message.message|linebreaks }}
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-row">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+            {% for error in form.message.errors %}
+                <div class="errors">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="submit-row" style="margin-top:20px;">
+            <button type="submit" class="button">{% trans "Envoyer la réponse" %}</button>
+            <a href="{% url 'admin:core_contactmessage_changelist' %}" class="button">{% trans "Annuler" %}</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

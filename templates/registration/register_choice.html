@@ -1,0 +1,129 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+
+{% block title %}Créer Votre Compte | The Genius Academy{% endblock %}
+
+{% block content %}
+<style>
+/* --- Fond bleu marine élégant --- */
+body {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #001f3f, #003366, #001a33);
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Container en vitre lumineuse --- */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 3rem auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-radius: 25px;
+    padding: 3rem 2rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.4s ease-in-out;
+}
+.container:hover {
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+/* --- Titres éclatants --- */
+h1 {
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 0.7rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.9);
+}
+p {
+    text-align: center;
+    color: #e6e6e6;
+    margin-bottom: 2.5rem;
+    font-size: 1.15rem;
+}
+
+/* --- Boutons futuristes --- */
+.account-btn {
+    border-radius: 18px;
+    font-weight: 600;
+    transition: transform 0.35s, box-shadow 0.35s, background 0.35s;
+    position: relative;
+    z-index: 1;
+    border: none;
+    padding: 1.1rem 0;
+    font-size: 1.2rem;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    color: #fff;
+}
+.account-btn:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 0 22px rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.18);
+}
+
+/* Icônes blanches avec glow */
+.account-btn i {
+    margin-right: 8px;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
+
+/* --- Lien de connexion --- */
+.link {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+.link:hover {
+    color: #ffa500;
+    text-shadow: 0 0 12px #ffa500;
+}
+</style>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1>Choisissez le type de compte</h1>
+        <p>Sélectionnez le type de compte que vous souhaitez créer</p>
+    </div>
+
+    <div class="row justify-content-center g-3">
+        <div class="col-md-4">
+            <a href="{% url 'register_user' 'lecturer' %}" class="btn w-100 shadow account-btn">
+                <i class="fas fa-chalkboard-teacher"></i> Enseignant
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'register_user' 'parent' %}" class="btn w-100 shadow account-btn">
+                <i class="fas fa-user-friends"></i> Parent
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'register_user' 'student' %}" class="btn w-100 shadow account-btn">
+                <i class="fas fa-user-graduate"></i> Étudiant
+            </a>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'login' %}" class="link">Vous avez déjà un compte ? Connectez-vous</a>
+    </div>
+</div>
+{% endblock content %}

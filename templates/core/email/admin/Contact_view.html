@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="module">
+    <h1>{{ title }}</h1>
+
+    <div class="message-details" style="background:#f8f9fa; padding:15px; border-radius:5px;">
+        <p><strong>{% trans "Nom" %}:</strong> {{ contact_message.nom }}</p>
+        <p><strong>{% trans "Email" %}:</strong> {{ contact_message.email }}</p>
+        {% if contact_message.phone %}
+        <p><strong>{% trans "Téléphone" %}:</strong> {{ contact_message.phone }}</p>
+        {% endif %}
+        <p><strong>{% trans "Sujet" %}:</strong> {{ contact_message.sujet }}</p>
+        <p><strong>{% trans "Message" %}:</strong></p>
+        <div style="background:white; padding:10px; border:1px solid #dee2e6; border-radius:3px;">
+            {{ contact_message.message|linebreaks }}
+        </div>
+        <p><strong>{% trans "Newsletter" %}:</strong> {{ contact_message.newsletter|yesno:"Oui,Non" }}</p>
+        <p><strong>{% trans "Reçu le" %}:</strong> {{ contact_message.created_at }}</p>
+        <p><strong>{% trans "Répondu" %}:</strong> {{ contact_message.is_answered|yesno:"Oui,Non" }}</p>
+    </div>
+
+    <div style="margin-top:20px;">
+        <a href="{% url 'admin:respond_to_contact' contact_message.pk %}" class="button">{% trans "Répondre" %}</a>
+        <a href="{% url 'admin:core_contactmessage_changelist' %}" class="button">{% trans "Retour à la liste" %}</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,471 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        {% trans 'Edit Post' %}
+    {% else %}
+        {% trans 'Create New Post' %}
+    {% endif %} | {% trans 'Learning management system' %}
+{% endblock title %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">{% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'post_list' %}" class="text-decoration-none">{% trans 'Blog' %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {% if form.instance.pk %}
+                {% trans 'Edit Post' %}
+            {% else %}
+                {% trans 'Create Post' %}
+            {% endif %}
+        </li>
+    </ol>
+</nav>
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card border-0 shadow-lg">
+            <div class="card-header bg-primary text-white py-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-pen-square me-3 fs-2"></i>
+                    <div>
+                        <h2 class="h4 mb-0">
+                            {% if form.instance.pk %}
+                                {% trans 'Edit Post' %}
+                            {% else %}
+                                {% trans 'Create New Post' %}
+                            {% endif %}
+                        </h2>
+                        <p class="small mb-0 opacity-75">{% trans 'Share news and events with the community' %}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-5">
+                {% include 'snippets/messages.html' %}
+                
+                <form action="" method="POST" enctype="multipart/form-data" id="postForm" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Title Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.title.id_for_label }}" class="form-label fw-semibold">
+                                    {% trans 'Post Title' %} <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" 
+                                       name="{{ form.title.name }}" 
+                                       id="{{ form.title.id_for_label }}" 
+                                       class="form-control form-control-lg {% if form.title.errors %}is-invalid{% endif %}" 
+                                       value="{{ form.title.value|default_if_none:'' }}" 
+                                       maxlength="255" 
+                                       required 
+                                       placeholder="{% trans 'Enter a catchy title' %}">
+                                {% if form.title.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">{% trans 'Enter a catchy title (max 255 characters)' %}</div>
+                            </div>
+                            
+                            <!-- Summary Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.summary.id_for_label }}" class="form-label fw-semibold">
+                                    {% trans 'Short Summary' %} <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="{{ form.summary.name }}" 
+                                          id="{{ form.summary.id_for_label }}" 
+                                          class="form-control {% if form.summary.errors %}is-invalid{% endif %}" 
+                                          required>{{ form.summary.value|default_if_none:'' }}</textarea>
+                                {% if form.summary.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.summary.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">{% trans 'Briefly describe what this post is about' %}</div>
+                            </div>
+                            
+                            <!-- Content Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.content.id_for_label }}" class="form-label fw-semibold">
+                                    {% trans 'Content' %} <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="{{ form.content.name }}" 
+                                          id="{{ form.content.id_for_label }}" 
+                                          class="form-control {% if form.content.errors %}is-invalid{% endif %}" 
+                                          required>{{ form.content.value|default_if_none:'' }}</textarea>
+                                {% if form.content.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.content.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="d-flex justify-content-between mt-2">
+                                    <div class="form-text">{% trans 'Full content of your post' %}</div>
+                                    <span id="charCount" class="text-muted small">0 characters</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Categories Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.categories.id_for_label }}" class="form-label fw-semibold">
+                                    {% trans 'Categories' %}
+                                </label>
+                                <select name="{{ form.categories.name }}" 
+                                        id="{{ form.categories.id_for_label }}" 
+                                        class="form-select select2" 
+                                        multiple>
+                                    {% for category in form.categories.field.queryset %}
+                                        <option value="{{ category.pk }}" 
+                                                {% if category.pk in form.categories.value %}selected{% endif %}>
+                                            {{ category.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.categories.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.categories.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">{% trans 'Select one or more categories' %}</div>
+                            </div>
+                            
+                            <!-- Tags Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.tags.id_for_label }}" class="form-label fw-semibold">
+                                    {% trans 'Tags' %}
+                                </label>
+                                <select name="{{ form.tags.name }}" 
+                                        id="{{ form.tags.id_for_label }}" 
+                                        class="form-select select2" 
+                                        multiple>
+                                    {% for tag in form.tags.field.queryset %}
+                                        <option value="{{ tag.pk }}" 
+                                                {% if tag.pk in form.tags.value %}selected{% endif %}>
+                                            {{ tag.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.tags.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.tags.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">{% trans 'Add relevant tags' %}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Sidebar with additional fields -->
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">{% trans 'Post Details' %}</h5>
+                                    
+                                    <!-- Posted As Field -->
+                                    <div class="mb-3">
+                                        <label for="{{ form.posted_as.id_for_label }}" class="form-label fw-semibold">
+                                            {% trans 'Post Type' %} <span class="text-danger">*</span>
+                                        </label>
+                                        <select name="{{ form.posted_as.name }}" 
+                                                id="{{ form.posted_as.id_for_label }}" 
+                                                class="form-select">
+                                            {% for value, label in form.posted_as.field.choices %}
+                                                <option value="{{ value }}" 
+                                                        {% if value == form.posted_as.value %}selected{% endif %}>
+                                                    {{ label }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        {% if form.posted_as.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.posted_as.errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Status Field -->
+                                    <div class="mb-3">
+                                        <label for="{{ form.status.id_for_label }}" class="form-label fw-semibold">
+                                            {% trans 'Status' %} <span class="text-danger">*</span>
+                                        </label>
+                                        <select name="{{ form.status.name }}" 
+                                                id="{{ form.status.id_for_label }}" 
+                                                class="form-select">
+                                            {% for value, label in form.status.field.choices %}
+                                                <option value="{{ value }}" 
+                                                        {% if value == form.status.value %}selected{% endif %}>
+                                                    {{ label }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        {% if form.status.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.status.errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Image Upload -->
+                                    <div class="mb-4">
+                                        <label for="{{ form.image.id_for_label }}" class="form-label fw-semibold">
+                                            {% trans 'Featured Image' %}
+                                        </label>
+                                        <div class="image-upload-container">
+                                            <input type="file" 
+                                                   name="{{ form.image.name }}" 
+                                                   id="{{ form.image.id_for_label }}" 
+                                                   class="form-control {% if form.image.errors %}is-invalid{% endif %}" 
+                                                   accept="image/*">
+                                            {% if form.image.errors %}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.image.errors %}
+                                                        {{ error }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="image-preview mt-2 text-center" id="imagePreview">
+                                                {% if form.instance.image %}
+                                                    <img src="{{ form.instance.image.url }}" alt="Preview" class="img-thumbnail" id="previewImage" style="max-height: 150px;">
+                                                {% else %}
+                                                    <img src="{% static 'img/image-placeholder.jpg' %}" alt="Preview" class="img-thumbnail" id="previewImage" style="max-height: 150px; display: none;">
+                                                    <div class="no-preview text-muted py-4" id="noPreview">
+                                                        <i class="fas fa-image fs-1 mb-2"></i>
+                                                        <p class="small mb-0">{% trans 'Image preview will appear here' %}</p>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="form-text">{% trans 'Recommended size: 1200x630 pixels' %}</div>
+                                    </div>
+                                    
+                                    <!-- Image Credit -->
+                                    <div class="mb-3">
+                                        <label for="{{ form.image_credit.id_for_label }}" class="form-label fw-semibold">
+                                            {% trans 'Image Credit' %}
+                                        </label>
+                                        <input type="text" 
+                                               name="{{ form.image_credit.name }}" 
+                                               id="{{ form.image_credit.id_for_label }}" 
+                                               class="form-control {% if form.image_credit.errors %}is-invalid{% endif %}" 
+                                               value="{{ form.image_credit.value|default_if_none:'' }}">
+                                        {% if form.image_credit.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.image_credit.errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Featured Checkbox -->
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" 
+                                               name="{{ form.is_featured.name }}" 
+                                               id="{{ form.is_featured.id_for_label }}" 
+                                               class="form-check-input" 
+                                               {% if form.is_featured.value %}checked{% endif %}>
+                                        <label class="form-check-label" for="{{ form.is_featured.id_for_label }}">
+                                            {% trans 'Feature this post' %}
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Pinned Checkbox -->
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" 
+                                               name="{{ form.is_pinned.name }}" 
+                                               id="{{ form.is_pinned.id_for_label }}" 
+                                               class="form-check-input" 
+                                               {% if form.is_pinned.value %}checked{% endif %}>
+                                        <label class="form-check-label" for="{{ form.is_pinned.id_for_label }}">
+                                            {% trans 'Pin this post' %}
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Allow Comments Checkbox -->
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" 
+                                               name="{{ form.allow_comments.name }}" 
+                                               id="{{ form.allow_comments.id_for_label }}" 
+                                               class="form-check-input" 
+                                               {% if form.allow_comments.value %}checked{% endif %}>
+                                        <label class="form-check-label" for="{{ form.allow_comments.id_for_label }}">
+                                            {% trans 'Allow comments' %}
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Author Info -->
+                                    <div class="border-top pt-3 mt-3">
+                                        <h6 class="small fw-semibold">{% trans 'Author Information' %}</h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img src="{% if request.user.picture %}{{ request.user.picture.url }}{% else %}{% static 'img/default-user.jpg' %}{% endif %}" 
+                                                     alt="{% trans 'User' %}" class="rounded-circle" width="40" height="40">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <p class="small mb-0 fw-semibold">{{ request.user.get_full_name|default:request.user.username }}</p>
+                                                <p class="small text-muted mb-0">{{ request.user.email }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-5 pt-3 border-top">
+                        <a href="{% url 'post_list' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>{% trans 'Back to Posts' %}
+                        </a>
+                        <div>
+                            <button type="reset" class="btn btn-light me-2">
+                                <i class="fas fa-undo me-2"></i>{% trans 'Reset' %}
+                            </button>
+                            <button type="submit" name="save" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>
+                                {% if form.instance.pk %}
+                                    {% trans 'Update Post' %}
+                                {% else %}
+                                    {% trans 'Save Post' %}
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+    }
+    
+    .image-upload-container {
+        border: 2px dashed #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        transition: all 0.3s;
+    }
+    
+    .image-upload-container:hover {
+        border-color: #0d6efd;
+        background-color: #f8f9fa;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        border-color: #86b7fe;
+    }
+    
+    .form-control.is-invalid, .form-select.is-invalid {
+        border-color: #dc3545;
+    }
+    
+    textarea.form-control {
+        min-height: 200px;
+    }
+    
+    #previewImage {
+        transition: all 0.3s;
+    }
+
+    .select2-container .select2-selection--multiple {
+        min-height: 38px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 4px;
+    }
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Select2 for categories and tags
+        $('.select2').select2({
+            placeholder: "{% trans 'Select options' %}",
+            allowClear: true,
+            width: '100%'
+        });
+
+        // Character count for content
+        const contentField = document.getElementById('{{ form.content.id_for_label }}');
+        const charCount = document.getElementById('charCount');
+        if (contentField && charCount) {
+            contentField.addEventListener('input', function() {
+                charCount.textContent = this.value.length + ' characters';
+            });
+            charCount.textContent = contentField.value.length + ' characters';
+        }
+        
+        // Image preview functionality
+        const imageInput = document.getElementById('{{ form.image.id_for_label }}');
+        const previewImage = document.getElementById('previewImage');
+        const noPreview = document.getElementById('noPreview');
+        if (imageInput && previewImage && noPreview) {
+            imageInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', function() {
+                        previewImage.src = reader.result;
+                        previewImage.style.display = 'block';
+                        noPreview.style.display = 'none';
+                    });
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImage.style.display = 'none';
+                    noPreview.style.display = 'block';
+                }
+            });
+        }
+        
+        // Form validation
+        const form = document.getElementById('postForm');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        }
+        
+        // Ensure select elements have form-select class
+        const selectElements = document.querySelectorAll('select');
+        selectElements.forEach(select => {
+            select.classList.add('form-select');
+        });
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,78 @@
+/* Personnalisation de l'admin pour The Genius Academy */
+
+/* Logo dans la navbar */
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+    margin-right: 10px;
+    
+}
+
+/* Menu supérieur responsive */
+@media (max-width: 768px) {
+    .main-header .navbar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .main-header .navbar-nav .nav-item {
+        margin: 2px 5px;
+    }
+    
+    /* Cacher le texte des liens et ne montrer que les icônes sur mobile */
+    .main-header .navbar-nav .nav-link span {
+        display: none;
+    }
+    
+    .main-header .navbar-nav .nav-link i {
+        font-size: 1.2rem;
+        margin-right: 0;
+    }
+    
+    /* Ajustement de la navbar */
+    .navbar-nav {
+        margin-top: 5px;
+    }
+}
+
+/* Amélioration de la sidebar sur mobile */
+@media (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+    }
+    
+    .content-wrapper {
+        margin-left: 0 !important;
+    }
+}
+
+/* Style personnalisé pour les cartes */
+.card-header {
+    font-weight: 600;
+}
+
+/* Boutons personnalisés */
+.btn-primary {
+    background-color: #3b7ddd;
+    border-color: #3b7ddd;
+}
+
+.btn-primary:hover {
+    background-color: #2c6ac1;
+    border-color: #2c6ac1;
+}
+
+/* Badges */
+.badge-primary {
+    background-color: #3b7ddd;
+}
+
+/* Header personnalisé */
+.main-header {
+    border-bottom: 2px solid #3b7ddd;
+}
+
+/* Footer personnalisé */
+.main-footer {
+    border-top: 2px solid #3b7ddd;
+}

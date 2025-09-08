@@ -1,0 +1,643 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "FAQ - The Genius Academy" %}{% endblock %}
+
+{% block header %}
+<style>
+    /* Hero Section */
+    .faq-hero {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 0;
+    }
+    
+    .faq-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        opacity: 0.15;
+    }
+    
+    /* FAQ Cards */
+    .faq-card {
+        background: #ffffff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    .faq-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .faq-icon {
+        width: 50px;
+        height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        font-size: 20px;
+        margin-bottom: 1rem;
+    }
+    
+    /* Badges colorés */
+    .bullet {
+        min-width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.1);
+    }
+    
+    .bullet.icon svg {
+        width: 12px;
+        height: 12px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+    }
+    
+    .bullet.num {
+        font-size: 12px;
+        line-height: 1;
+        color: #fff;
+    }
+    
+    /* Colour variants */
+    .bullet.blue { background: #0d6efd; color: #fff; }
+    .bullet.green { background: #28a745; color: #fff; }
+    .bullet.teal { background: #20c997; color: #fff; }
+    .bullet.purple { background: #6f42c1; color: #fff; }
+    .bullet.orange { background: #fd7e14; color: #fff; }
+    .bullet.red { background: #dc3545; color: #fff; }
+    .bullet.yellow { background: #ffc107; color: #212529; }
+    .bullet.indigo { background: #3b82f6; color: #fff; }
+    .bullet.pink { background: #d63384; color: #fff; }
+    
+    .faq-list {
+        margin-top: 0.5rem;
+    }
+    
+    .faq-list li {
+        margin-bottom: 0.6rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+    
+    .faq-small-muted {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    /* Accordion styles */
+    .accordion-button {
+        font-weight: 600;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(13, 110, 253, 0.05);
+        color: #0d6efd;
+    }
+    
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+    
+    .accordion-button:not(.collapsed)::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+    
+    .accordion-body {
+        padding: 1.5rem;
+    }
+    
+    /* Section titles */
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #4c1d95, #2563eb);
+        border-radius: 3px;
+    }
+    
+    /* CTA Section */
+    .faq-cta {
+        background: linear-gradient(135deg, #4c1d95 0%, #2563eb 100%);
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .faq-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,160C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Floating button */
+    .floating-help-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .accordion-button {
+            padding: 1rem;
+            font-size: 1rem;
+        }
+        
+        .floating-help-btn {
+            width: 50px;
+            height: 50px;
+            bottom: 15px;
+            right: 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="faq-hero text-white">
+    <div class="container position-relative py-5 text-center">
+        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown">{% trans "Foire aux Questions" %}</h1>
+        <p class="lead mb-4 animate__animated animate__fadeInUp">
+            {% trans "Trouvez les réponses à vos questions sur The Genius Academy" %}
+        </p>
+        <a href="#faq-content" class="btn btn-light btn-lg shadow animate__animated animate__bounceIn">
+            {% trans "Explorer les questions" %} <i class="fas fa-chevron-down ms-2"></i>
+        </a>
+    </div>
+</section>
+
+<!-- FAQ Content -->
+<section id="faq-content" class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold section-title">{% trans "Questions Fréquentes" %}</h2>
+            <p class="text-muted lead">
+                {% trans "Nous avons rassemblé les questions les plus courantes sur nos programmes académiques et processus d'admission." %}
+            </p>
+        </div>
+
+        <!-- Detailed FAQ Section -->
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold section-title">{% trans 'Questions Détailées' %}</h2>
+                    <p class="text-muted lead">{% trans 'Toutes les réponses à vos questions sur nos services' %}</p>
+                </div>
+
+                <div class="accordion" id="faqAccordion">
+                    <!-- Question 1 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                                aria-controls="collapseOne">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans 'Comment se déroule le processus de sélection des enseignants ?' %}
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans 'Nous avons un processus rigoureux en 4 étapes :' %}</p>
+                                <ul class="list-unstyled faq-list ms-2">
+                                    <li>
+                                        <span class="bullet icon blue" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans 'Vérification des diplômes et certifications' %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet icon green" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans 'Évaluation des compétences pédagogiques' %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet icon purple" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans 'Test de connaissance de la matière' %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet icon teal" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans 'Entretien avec notre responsable pédagogique' %}</div>
+                                    </li>
+                                </ul>
+                                <p class="mb-0 faq-small-muted">{% trans 'Seuls les candidats qui remplissent nos critères sont retenus pour enseigner à The Genius Academy.' %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans 'Quelles sont les modalités de paiement acceptées ?' %}
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans 'Nous proposons plusieurs modes de paiement pour plus de flexibilité :' %}</p>
+                                <ul class="list-unstyled faq-list ms-2">
+                                    <li>
+                                        <span class="bullet num blue" aria-hidden="true">1</span>
+                                        <div>{% trans 'Paiement mensuel ou trimestriel' %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet num green" aria-hidden="true">2</span>
+                                        <div>{% trans 'Espèces ou virement bancaire' %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet num yellow" aria-hidden="true">3</span>
+                                        <div>{% trans 'Mobile money (Orange Money, MTN Mobile Money)' %}</div>
+                                    </li>
+                                </ul>
+                                <p class="mb-0 faq-small-muted">{% trans 'Des facilités de paiement peuvent être accordées sur demande pour les forfaits de longue durée.' %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                aria-controls="collapseThree">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans "Que se passe-t-il si mon enfant n'est pas satisfait de son enseignant ?" %}
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans "La satisfaction de nos élèves est notre priorité. Si votre enfant n'est pas satisfait de son enseignant :" %}</p>
+                                <ul class="list-unstyled faq-list ms-2">
+                                    <li>
+                                        <span class="bullet icon green" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans "Vous pouvez demander un changement d'enseignant à tout moment, sans frais supplémentaires" %}</div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet icon orange" aria-hidden="true">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <div>{% trans 'Notre responsable pédagogique vous proposera un nouveau profil sous 48h' %}</div>
+                                    </li>
+                                </ul>
+                                <p class="mb-0 faq-small-muted">{% trans 'Nous nous engageons à trouver le professeur idéal pour votre enfant.' %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                                aria-controls="collapseFour">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans 'Comment se déroulent les séances de cours à domicile ?' %}
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans 'Une séance type comprend :' %}</p>
+                                <ul class="list-unstyled ms-2">
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <span class="bullet num blue" aria-hidden="true">1</span>
+                                        <div>
+                                            <strong>{% trans "Révision (15 min)" %}</strong> : {% trans "reprise des notions précédentes" %}
+                                        </div>
+                                    </li>
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <span class="bullet num indigo" aria-hidden="true">2</span>
+                                        <div>
+                                            <strong>{% trans "Explication (60 min)" %}</strong> : {% trans "enseignement des nouvelles notions" %}
+                                        </div>
+                                    </li>
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <span class="bullet num purple" aria-hidden="true">3</span>
+                                        <div>
+                                            <strong>{% trans "Application (30 min)" %}</strong> : {% trans "exercices pratiques" %}
+                                        </div>
+                                    </li>
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <span class="bullet num green" aria-hidden="true">4</span>
+                                        <div>
+                                            <strong>{% trans "Bilan (15 min)" %}</strong> : {% trans "synthèse et planning de révision" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p class="mb-0 faq-small-muted">{% trans "Bien sûr, ce schéma est adapté en fonction du niveau et des besoins spécifiques de l'élève." %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+                                aria-controls="collapseFive">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans 'Proposez-vous des cours en groupe ou uniquement individuels ?' %}
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans 'Nous proposons les deux formules :' %}</p>
+
+                                <div class="row mt-3 g-3">
+                                    <!-- Cours individuels -->
+                                    <div class="col-md-6">
+                                        <div class="bg-white p-4 rounded-3 h-100 shadow-sm">
+                                            <div class="d-flex align-items-start mb-3 gap-3">
+                                                <div class="faq-icon"><i class="fas fa-user-graduate"></i></div>
+                                                <div>
+                                                    <h5 class="text-primary mb-1">{% trans 'Cours Individuels' %}</h5>
+                                                    <p class="mb-0">{% trans 'Enseignement personnalisé à domicile avec un professeur dédié.' %}</p>
+                                                </div>
+                                            </div>
+
+                                            <ul class="list-unstyled faq-list ms-2">
+                                                <li>
+                                                    <span class="bullet icon purple" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans '100% sur mesure' %}</div>
+                                                </li>
+                                                <li>
+                                                    <span class="bullet icon blue" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans 'Flexibilité horaire' %}</div>
+                                                </li>
+                                                <li>
+                                                    <span class="bullet icon green" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans "Adaptation complète au rythme de l'élève" %}</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cours en groupe -->
+                                    <div class="col-md-6">
+                                        <div class="bg-white p-4 rounded-3 h-100 shadow-sm">
+                                            <div class="d-flex align-items-start mb-3 gap-3">
+                                                <div class="faq-icon"><i class="fas fa-users"></i></div>
+                                                <div>
+                                                    <h5 class="text-primary mb-1">{% trans 'Cours en Groupe' %}</h5>
+                                                    <p class="mb-0">{% trans 'Groupes de 3 à 5 élèves de niveau similaire, de préférence du même voisinage.' %}</p>
+                                                </div>
+                                            </div>
+
+                                            <ul class="list-unstyled faq-list ms-2">
+                                                <li>
+                                                    <span class="bullet icon orange" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans 'Tarif réduit' %}</div>
+                                                </li>
+                                                <li>
+                                                    <span class="bullet icon teal" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans 'Apprentissage collaboratif' %}</div>
+                                                </li>
+                                                <li>
+                                                    <span class="bullet icon pink" aria-hidden="true">
+                                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path d="M2 8l3 3 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                    <div>{% trans 'Stimulation par le groupe' %}</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="mt-4 mb-0 fw-semibold text-muted">{% trans "Nous pouvons vous conseiller sur la formule la plus adaptée après l'évaluation initiale." %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="accordion-item border-0 mb-3 faq-card shadow-sm">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed fs-5 fw-medium bg-transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+                                aria-controls="collapseSix">
+                                <i class="fas fa-question-circle text-primary me-3"></i>
+                                {% trans 'Comment mesurer les progrès de mon enfant ?' %}
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p class="mb-3">{% trans "Nous utilisons un système complet d'évaluation et de suivi :" %}</p>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3">
+                                                <div class="faq-icon"><i class="fas fa-clipboard-check"></i></div>
+                                            </div>
+                                            <div>
+                                                <h6>{% trans 'Bilans Réguliers' %}</h6>
+                                                <p class="small mb-0">{% trans 'Évaluation mensuelle des progrès avec compte-rendu détaillé' %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3">
+                                                <div class="faq-icon"><i class="fas fa-chart-line"></i></div>
+                                            </div>
+                                            <div>
+                                                <h6>{% trans 'Courbe de Progression' %}</h6>
+                                                <p class="small mb-0">{% trans 'Visualisation graphique des résultats dans chaque matière' %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3">
+                                                <div class="faq-icon"><i class="fas fa-comments"></i></div>
+                                            </div>
+                                            <div>
+                                                <h6>{% trans 'Entretiens Téléphoniques' %}</h6>
+                                                <p class="small mb-0">{% trans 'Points réguliers avec notre responsable pédagogique' %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3">
+                                                <div class="faq-icon"><i class="fas fa-school"></i></div>
+                                            </div>
+                                            <div>
+                                                <h6>{% trans "Liaison avec l'École" %}</h6>
+                                                <p class="small mb-0">{% trans "Coordination avec les professeurs de l'établissement scolaire" %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="mb-0 faq-small-muted">{% trans 'Vous recevrez également des alertes immédiates en cas de difficulté persistante.' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-5">
+            <div class="faq-cta p-5 text-white text-center position-relative">
+                <div class="position-relative">
+                    <h3 class="fw-bold">{% trans "Vous ne trouvez pas votre réponse ?" %}</h3>
+                    <p class="mb-4">{% trans "Notre équipe d'admission est disponible pour répondre à toutes vos questions personnalisées." %}</p>
+                    <a href="tel:+237690123456" class="btn btn-light btn-lg me-2 shadow-sm">
+                        <i class="fas fa-phone-alt me-2"></i>{% trans "Nous appeler" %}
+                    </a>
+                    <a href="mailto:admissions@geniusacademy.cm" class="btn btn-outline-light btn-lg shadow-sm">
+                        <i class="fas fa-envelope me-2"></i>{% trans "Envoyer un email" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Floating Help Button -->
+<a href="#faq-content" class="floating-help-btn btn btn-primary shadow-lg">
+    <i class="fas fa-question"></i>
+</a>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation pour les éléments d'accordéon lorsqu'ils s'ouvrent
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            item.addEventListener('shown.bs.collapse', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+        
+        // Animation pour les cartes FAQ
+        const faqCards = document.querySelectorAll('.faq-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        faqCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

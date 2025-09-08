@@ -1,0 +1,11 @@
+{% extends 'error_handler_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1>{% trans 'Requête invalide' %}</h1>
+    <p>{% trans 'Veuillez vous assurer que le formulaire est correctement rempli.' %}</p>
+    <a href="/" class="link">&larr; {% trans 'Retour à l’application' %}</a>
+</div>
+{% endblock %}
+

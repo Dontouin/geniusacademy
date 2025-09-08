@@ -1,0 +1,142 @@
+{% extends 'registration/registration_base.html' %}
+{% block title %}Register Teacher{% endblock %}
+
+{% block content %}
+<style>
+/* --- Fond bleu nuit élégant --- */
+body {
+    background: linear-gradient(135deg, #001f3f, #001a33, #00264d);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-size: 200% 200%;
+    animation: gradientShift 18s ease infinite;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Container en vitre lumineuse --- */
+.container {
+    max-width: 700px;
+    margin: 4rem auto;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-radius: 25px;
+    padding: 2.8rem 2rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.4s ease-in-out;
+}
+.container:hover {
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.85);
+}
+
+/* --- Titres avec gradient animé --- */
+h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 2.2rem;
+    background: linear-gradient(90deg, #48dbfb, #5f27cd, #ff6b6b);
+    background-size: 300% 300%;
+    animation: textFlow 6s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes textFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Champs de formulaire --- */
+input, select, textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    margin-top: 0.3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+    background: rgba(255,255,255,0.1);
+    border-color: #48dbfb;
+    box-shadow: 0 0 14px rgba(72,219,251,0.7);
+}
+
+/* --- Labels --- */
+label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #f1f1f1;
+}
+
+/* --- Bouton néon futuriste --- */
+.btn-primary {
+    position: relative;
+    z-index: 1;
+    border: none;
+    padding: 0.95rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 22px;
+    color: #fff;
+    background: linear-gradient(90deg, #48dbfb, #5f27cd);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    background: linear-gradient(45deg, #ff6b6b, #48dbfb, #1dd1a1, #feca57, #5f27cd);
+    filter: blur(14px);
+    border-radius: 22px;
+    opacity: 0.6;
+    z-index: -1;
+    animation: pulse 3s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+.btn-primary:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 0 28px rgba(255,255,255,0.85);
+}
+
+/* --- Messages d'erreur --- */
+.text-danger {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    color: #ff6b6b;
+}
+</style>
+
+<div class="container">
+    <h2>Register Teacher</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                <div class="text-danger">{{ field.errors }}</div>
+            </div>
+        {% endfor %}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

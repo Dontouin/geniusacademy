@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{{ title }} | {% trans 'Système de gestion de l’apprentissage' %}{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">{% trans 'Accueil' %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans 'Panneau Admin' %}</li>
+    </ol>
+</nav>  
+
+<div class="title-1"><i class="fas fa-user-tie"></i>{% trans 'Panneau Admin' %}</div>
+<br>
+<br>
+
+{% include 'snippets/messages.html' %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="border-bottom">
+                {% trans 'Gérer' %}<a class="link" href="{% url 'lecturer_list' %}"> {% trans 'Enseignants' %} &raquo;</a>
+                <p class="text-muted">CRUD (Créer, Consulter, Mettre à jour &amp; Supprimer) les enseignants</p>
+            </div>
+
+            <div class="border-bottom mt-3">
+                {% trans 'Gérer' %}<a class="link" href="{% url 'student_list' %}"> {% trans 'Étudiants' %} &raquo;</a>
+                <p class="text-muted">CRUD (Créer, Consulter, Mettre à jour &amp; Supprimer) les étudiants</p>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="border-bottom">
+                {% trans 'Ajouter' %} &amp; {% trans 'Supprimer' %} {% trans 'Cours' %} 
+                <label class="switch switch-text switch-success switch-pill" style="float: right;">
+                <input type="checkbox" class="switch-input" checked="true">
+                <span data-on="{% trans 'Activé' %}" data-off="{% trans 'Désactivé' %}" class="switch-label"></span>
+                <span class="switch-handle"></span>
+                </label>
+                <p class="text-muted">{% trans 'Basculer' %} 
+                    <i class="info-text py-0 px-2 bg-success text-light">{% trans 'ON' %}</i> 
+                    {% trans 'ou' %} 
+                    <i class="info-text py-0 px-2 bg-danger text-light">{% trans 'OFF' %}</i>
+                </p>
+            </div>
+            
+            <div class="mt-3">
+                {% trans 'Gérer' %}<a class="link" href="{% url 'home' %}"> {% trans 'Actualités' %} &amp; {% trans 'Événements' %} &raquo;</a>
+                <p class="text-muted">CRUD (Créer, Consulter, Mettre à jour &amp; Supprimer) les actualités &amp; événements</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

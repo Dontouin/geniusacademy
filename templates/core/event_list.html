@@ -1,0 +1,41 @@
+<!-- core/templates/core/events_list.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Calendrier Académique</h3>
+
+    <!-- Boutons d'action -->
+    <a href="{% url 'event_add' %}" class="btn btn-success mb-3">+ Ajouter un événement</a>
+    <a href="{% url 'calendrier_academique_pdf' %}" class="btn btn-danger mb-3">📄 Exporter PDF complet</a>
+    <a href="{% url 'calendrier_academique_docx' %}" class="btn btn-primary mb-3">📄 Exporter DOCX complet</a>
+
+    <!-- Tableau des événements -->
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Date</th>
+                <th>Activité</th>
+                <th>Responsable</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.date|date:"d/m/Y" }}</td>
+                <td>{{ event.activity }}</td>
+                <td>{{ event.responsible }}</td>
+                <td>
+                    <a href="{% url 'event_edit' event.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+                    <!-- PDF spécifique par événement si nécessaire -->
+                    <a href="{% url 'calendrier_academique_pdf' %}" class="btn btn-info btn-sm">PDF</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center">Aucun événement trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

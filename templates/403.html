@@ -1,0 +1,20 @@
+{% extends 'error_handler_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1>403, {% trans 'Interdit' %}</h1>
+    <p>{% trans 'Vous n’avez pas les permissions nécessaires pour effectuer cette action.' %}</p>
+    <a href="/" class="link">&larr; {% trans 'Retour à l’application' %}</a>
+</div>
+{% endblock %}
+{% extends 'error_handler_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1>403, {% trans 'Interdit' %}</h1>
+    <p>{% trans 'Vous n’avez pas les permissions nécessaires pour effectuer cette action.' %}</p>
+    <a href="/" class="link">&larr; {% trans 'Retour à l’application' %}</a>
+</div>
+{% endblock %}

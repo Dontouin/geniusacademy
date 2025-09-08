@@ -1,0 +1,3450 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-08 16:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\accounts\models.py:15 .\accounts\models.py:24
+#: .\accounts\models.py:15 .\accounts\models.py:24
+msgid "Père"
+msgstr "Father"
+
+#: .\accounts\models.py:16 .\accounts\models.py:25
+msgid "Mère"
+msgstr "Mother"
+
+#: .\accounts\models.py:17 .\accounts\models.py:26
+msgid "Frère"
+msgstr "Brother"
+
+#: .\accounts\models.py:18 .\accounts\models.py:27
+msgid "Sœur"
+msgstr "Sister"
+
+#: .\accounts\models.py:19 .\accounts\models.py:28
+msgid "Grand-mère"
+msgstr "Grandmother"
+
+#: .\accounts\models.py:20 .\accounts\models.py:29
+msgid "Grand-père"
+msgstr "Grandfather"
+
+#: .\accounts\models.py:21 .\accounts\models.py:30 .\core\models.py:167
+msgid "Autre"
+msgstr "Other"
+
+#: .\accounts\models.py:33
+msgid "M"
+msgstr "M"
+
+#: .\accounts\models.py:33
+msgid "Masculin"
+msgstr "Male"
+
+#: .\accounts\models.py:33
+msgid "F"
+msgstr "F"
+
+#: .\accounts\models.py:33
+msgid "Féminin"
+msgstr "Female"
+
+#: .\accounts\models.py:36
+msgid "Célibataire"
+msgstr "Single"
+
+#: .\accounts\models.py:37
+msgid "Marié(e)"
+msgstr "Married"
+
+#: .\accounts\models.py:38
+msgid "Divorcé(e)"
+msgstr "Divorced"
+
+#: .\accounts\models.py:39
+msgid "Veuf(ve)"
+msgstr "Widowed"
+
+#: .\accounts\models.py:125
+msgid "Super Administrateur"
+msgstr "Super Administrator"
+
+#: .\accounts\models.py:126
+msgid "Admin Académique"
+msgstr "Academic Administrator"
+
+#: .\accounts\models.py:127 .\templates\core\base_secretary.html:53
+msgid "Secrétaire"
+msgstr "Secretary"
+
+#: .\accounts\models.py:128
+msgid "Comptable"
+msgstr "Accountant"
+
+#: .\accounts\models.py:137
+msgid "Rôle Administrateur"
+msgstr "Administrator Role"
+
+#: .\accounts\models.py:138
+msgid "Rôles Administrateurs"
+msgstr "Administrator Roles"
+
+#: .\accounts\models.py:147 .\core\models.py:350
+#: .\templates\core\contact.html:151 .\templates\core\index.html:860
+#: .\templates\core\index.html:1751 .\templates\core\services.html:264
+msgid "Primaire"
+msgstr "Primary"
+
+#: .\accounts\models.py:148 .\templates\core\index.html:885
+#: .\templates\core\services.html:289
+msgid "Secondaire"
+msgstr "Secondary"
+
+#: .\accounts\models.py:149 .\core\models.py:352
+#: .\templates\core\contact.html:153 .\templates\core\index.html:1753
+msgid "Lycée"
+msgstr "High School"
+
+#: .\accounts\models.py:240
+msgid "Scientifique"
+msgstr "Scientific"
+
+#: .\accounts\models.py:241
+msgid "Littéraire"
+msgstr "Literary"
+
+#: .\accounts\models.py:279
+msgid "Nom de la classe"
+msgstr "Class Name"
+
+#: .\accounts\models.py:282
+msgid "Classe"
+msgstr "Class"
+
+#: .\accounts\models.py:283
+msgid "Classes"
+msgstr "Classes"
+
+#: .\accounts\validators.py:14
+msgid ""
+"Enter a valid username. This value may contain only English letters, "
+"numbers, and @/./+/-/_ characters."
+msgstr ""
+"Enter a valid username. This value may contain only English letters, "
+"numbers, and @/./+/-/_ characters."
+
+#: .\config\settings.py:166
+msgid "English"
+msgstr "English"
+
+#: .\config\settings.py:167
+msgid "French"
+msgstr "French"
+
+#: .\config\settings.py:168
+msgid "Spanish"
+msgstr "Spanish"
+
+#: .\config\settings.py:169
+msgid "Russia"
+msgstr "Russian"
+
+#: .\config\settings.py:278
+msgid "Bachelor Degree"
+msgstr "Bachelor Degree"
+
+#: .\config\settings.py:279
+msgid "Master Degree"
+msgstr "Master Degree"
+
+#: .\config\settings.py:287 .\core\models.py:19 .\core\models.py:24
+msgid "First"
+msgstr "First"
+
+#: .\config\settings.py:288 .\core\models.py:20 .\core\models.py:25
+msgid "Second"
+msgstr "Second"
+
+#: .\config\settings.py:289 .\core\models.py:21 .\core\models.py:26
+msgid "Third"
+msgstr "Third"
+
+#: .\core\admin.py:45 .\core\admin.py:100
+msgid "Prévisualisation"
+msgstr "Preview"
+
+#: .\core\admin.py:59
+msgid "Nombre d'images"
+msgstr "Number of Images"
+
+#: .\core\admin.py:77 .\core\admin.py:166 .\templates\core\post_add.html:207
+msgid "Status"
+msgstr "Status"
+
+#: .\core\admin.py:80 .\core\admin.py:169
+msgid "Metadata"
+msgstr "Metadata"
+
+#: .\core\admin.py:88
+msgid "Aperçu du contenu"
+msgstr "Content Preview"
+
+#: .\core\admin.py:94
+msgid "Miniature"
+msgstr "Thumbnail"
+
+#: .\core\admin.py:104
+#, python-format
+msgid "%d témoignage(s) approuvé(s)."
+msgstr "%d testimonial(s) approved."
+
+#: .\core\admin.py:105
+msgid "Approuver les témoignages sélectionnés"
+msgstr "Approve selected testimonials"
+
+#: .\core\admin.py:109
+#, python-format
+msgid "%d témoignage(s) désapprouvé(s)."
+msgstr "%d testimonial(s) disapproved."
+
+#: .\core\admin.py:110
+msgid "Désapprouver les témoignages sélectionnés"
+msgstr "Disapprove selected testimonials"
+
+#: .\core\admin.py:127
+msgid "Subscription Info"
+msgstr "Subscription Information"
+
+#: .\core\admin.py:135
+msgid "Via formulaire de contact"
+msgstr "Via contact form"
+
+#: .\core\admin.py:135
+msgid "Via formulaire de newsletter"
+msgstr "Via newsletter form"
+
+#: .\core\admin.py:136
+msgid "Source de l'inscription"
+msgstr "Subscription Source"
+
+#: .\core\admin.py:140
+#, python-format
+msgid "%d abonné(s) activé(s)."
+msgstr "%d subscriber(s) activated."
+
+#: .\core\admin.py:141
+msgid "Activer les abonnés sélectionnés"
+msgstr "Activate selected subscribers"
+
+#: .\core\admin.py:145
+#, python-format
+msgid "%d abonné(s) désactivé(s)."
+msgstr "%d subscriber(s) deactivated."
+
+#: .\core\admin.py:146
+msgid "Désactiver les abonnés sélectionnés"
+msgstr "Deactivate selected subscribers"
+
+#: .\core\admin.py:163
+msgid "Preferences"
+msgstr "Preferences"
+
+#: .\core\admin.py:178 .\core\models.py:364
+msgid "Lu"
+msgstr "Read"
+
+#: .\core\admin.py:182
+#, python-format
+msgid "%d message(s) marqué(s) comme lu(s)."
+msgstr "%d message(s) marked as read."
+
+#: .\core\admin.py:183
+msgid "Marquer comme lu"
+msgstr "Mark as read"
+
+#: .\core\admin.py:187
+#, python-format
+msgid "%d message(s) marqué(s) comme non lu(s)."
+msgstr "%d message(s) marked as unread."
+
+#: .\core\admin.py:188
+msgid "Marquer comme non lu"
+msgstr "Mark as unread"
+
+#: .\core\admin.py:206
+msgid "Icône"
+msgstr "Icon"
+
+#: .\core\forms.py:35
+msgid "Entrez votre email"
+msgstr "Enter your email"
+
+#: .\core\forms.py:39 .\core\models.py:102
+msgid "Adresse email"
+msgstr "Email address"
+
+#: .\core\forms.py:45
+msgid "Cet email est déjà abonné à la newsletter."
+msgstr "This email is already subscribed to the newsletter."
+
+#: .\core\forms.py:59
+msgid "Je suis parent d'un élève de The Genius Academy"
+msgstr "I am a parent of a student at The Genius Academy"
+
+#: .\core\forms.py:76 .\core\forms.py:186
+msgid "Votre nom complet"
+msgstr "Your full name"
+
+#: .\core\forms.py:84 .\core\forms.py:112
+msgid "Nom de votre enfant"
+msgstr "Your child's name"
+
+#: .\core\forms.py:89 .\core\forms.py:113 .\core\models.py:201
+msgid "Matière enseignée"
+msgstr "Subject taught"
+
+#: .\core\forms.py:100
+msgid "Partagez votre expérience avec The Genius Academy..."
+msgstr "Share your experience with The Genius Academy..."
+
+#: .\core\forms.py:110 .\templates\core\testimonials.html:1096
+msgid "Votre nom"
+msgstr "Your name"
+
+#: .\core\forms.py:111 .\templates\core\testimonials.html:1105
+msgid "Vous êtes"
+msgstr "You are"
+
+#: .\core\forms.py:114 .\core\models.py:209
+msgid "Note (1-5 étoiles)"
+msgstr "Rating (1-5 stars)"
+
+#: .\core\forms.py:115 .\templates\core\testimonials.html:1165
+msgid "Votre témoignage"
+msgstr "Your testimonial"
+
+#: .\core\forms.py:116
+msgid "Votre photo (optionnelle)"
+msgstr "Your photo (optional)"
+
+#: .\core\forms.py:151
+msgid "Veuillez indiquer le nom de votre enfant."
+msgstr "Please provide your child's name."
+
+#: .\core\forms.py:155
+msgid "Veuillez confirmer que vous êtes parent d'un élève."
+msgstr "Please confirm that you are a parent of a student."
+
+#: .\core\forms.py:159
+msgid "Veuillez indiquer la matière que vous enseignez."
+msgstr "Please specify the subject you teach."
+
+#: .\core\forms.py:166
+msgid "Le témoignage doit contenir au moins 20 caractères."
+msgstr "The testimonial must contain at least 20 characters."
+
+#: .\core\forms.py:172
+msgid "La note doit être comprise entre 1 et 5."
+msgstr "The rating must be between 1 and 5."
+
+#: .\core\forms.py:178 .\core\models.py:362
+msgid "S'abonner à la newsletter"
+msgstr "Subscribe to the newsletter"
+
+#: .\core\forms.py:187 .\templates\footer.html:136
+msgid "Votre email"
+msgstr "Your email"
+
+#: .\core\forms.py:188
+msgid "Votre téléphone"
+msgstr "Your phone number"
+
+#: .\core\forms.py:190
+msgid "Sujet de votre message"
+msgstr "Subject of your message"
+
+#: .\core\forms.py:191
+msgid "Votre message"
+msgstr "Your message"
+
+#: .\core\forms.py:194 .\core\models.py:356
+#: .\templates\accounts\lecturer_list.html:32
+#: .\templates\accounts\student_list.html:33
+msgid "Nom complet"
+msgstr "Full name"
+
+#: .\core\forms.py:195 .\core\models.py:357
+#: .\templates\accounts\edit_lecturer.html:29
+#: .\templates\accounts\edit_student.html:25
+#: .\templates\accounts\lecturer_list.html:33
+#: .\templates\accounts\profile_single.html:92
+#: .\templates\accounts\student_list.html:34 .\templates\core\contact.html:235
+#: .\templates\core\email\admin\Contact_view.html:10
+#: .\templates\core\email\admin\contact_response.html:10
+#: .\templates\pdf\lecturer_list.html:14 .\templates\pdf\student_list.html:12
+#: .\templates\setting\profile_info_change.html:24
+msgid "Email"
+msgstr "Email"
+
+#: .\core\forms.py:196 .\core\models.py:358 .\templates\core\contact.html:139
+#: .\templates\core\email\admin\Contact_view.html:12
+#: .\templates\core\index.html:1739
+msgid "Téléphone"
+msgstr "Phone"
+
+#: .\core\forms.py:197 .\core\models.py:359
+msgid "Niveau scolaire"
+msgstr "School level"
+
+#: .\core\forms.py:198 .\core\models.py:360 .\templates\core\contact.html:162
+#: .\templates\core\email\admin\Contact_view.html:14
+#: .\templates\core\email\admin\contact_response.html:11
+#: .\templates\core\index.html:1762
+msgid "Sujet"
+msgstr "Subject"
+
+#: .\core\forms.py:199 .\core\models.py:361 .\templates\core\contact.html:171
+#: .\templates\core\email\admin\Contact_view.html:15
+#: .\templates\core\index.html:1771
+msgid "Message"
+msgstr "Message"
+
+#: .\core\forms.py:205
+msgid "Le nom doit contenir au moins 2 caractères."
+msgstr "The name must contain at least 2 characters."
+
+#: .\core\forms.py:211
+msgid "Le message doit contenir au moins 10 caractères."
+msgstr "The message must contain at least 10 characters."
+
+#: .\core\forms.py:223 .\templates\sidebar.html:119
+msgid "Administration"
+msgstr "Administration"
+
+#: .\core\forms.py:224
+msgid "Président Directeur Général"
+msgstr "Chief Executive Officer"
+
+#: .\core\forms.py:225
+msgid "Directeur de Zone"
+msgstr "Regional Director"
+
+#: .\core\forms.py:226
+msgid "Tout le Personnel"
+msgstr "All Staff"
+
+#: .\core\forms.py:227
+msgid "Jour férié"
+msgstr "Public Holiday"
+
+#: .\core\forms.py:234 .\core\forms.py:247 .\core\models.py:394
+msgid "Responsable"
+msgstr "Responsible"
+
+#: .\core\forms.py:242
+msgid "Ex: Fête de Noël"
+msgstr "Ex: Christmas Party"
+
+#: .\core\forms.py:245
+msgid "Date de l'événement"
+msgstr "Event Date"
+
+#: .\core\forms.py:246 .\core\models.py:393
+msgid "Activité"
+msgstr "Activity"
+
+#: .\core\models.py:11 .\core\models.py:15 .\templates\core\post.html:23
+#: .\templates\core\post.html:28
+msgid "News"
+msgstr "News"
+
+#: .\core\models.py:12 .\core\models.py:16
+msgid "Event"
+msgstr "Event"
+
+#: .\core\models.py:103 .\core\models.py:378
+#: .\templates\accounts\profile_single.html:76
+#: .\templates\core\email\admin\Contact_view.html:9
+#: .\templates\core\email\admin\contact_response.html:9
+msgid "Nom"
+msgstr "Name"
+
+#: .\core\models.py:104
+msgid "Source"
+msgstr "Source"
+
+#: .\core\models.py:105
+msgid "Date d'inscription"
+msgstr "Subscription Date"
+
+#: .\core\models.py:106 .\core\models.py:244
+msgid "Actif"
+msgstr "Active"
+
+#: .\core\models.py:109
+msgid "Abonné à la newsletter"
+msgstr "Subscribed to the newsletter"
+
+#: .\core\models.py:110
+msgid "Abonnés à la newsletter"
+msgstr "Newsletter subscribers"
+
+#: .\core\models.py:118
+msgid "Titre"
+msgstr "Title"
+
+#: .\core\models.py:119
+msgid "Étiquette"
+msgstr "Label"
+
+#: .\core\models.py:120
+msgid "Description"
+msgstr "Description"
+
+#: .\core\models.py:121 .\core\models.py:136
+msgid "Ordre"
+msgstr "Order"
+
+#: .\core\models.py:125
+msgid "Diapositive"
+msgstr "Slide"
+
+#: .\core\models.py:126
+msgid "Diapositives"
+msgstr "Slides"
+
+#: .\core\models.py:133
+msgid "Slide"
+msgstr "Slide"
+
+#: .\core\models.py:134
+msgid "Image"
+msgstr "Image"
+
+#: .\core\models.py:135
+msgid "Texte alternatif"
+msgstr "Alternative Text"
+
+#: .\core\models.py:137
+msgid "Appel à l'action principal"
+msgstr "Primary Call to Action"
+
+#: .\core\models.py:138
+msgid "Lien principal"
+msgstr "Primary Link"
+
+#: .\core\models.py:139
+msgid "Appel à l'action secondaire"
+msgstr "Secondary Call to Action"
+
+#: .\core\models.py:140
+msgid "Lien secondaire"
+msgstr "Secondary Link"
+
+#: .\core\models.py:141
+msgid "Icône secondaire"
+msgstr "Secondary Icon"
+
+#: .\core\models.py:145
+msgid "Image du carrousel"
+msgstr "Carousel Image"
+
+#: .\core\models.py:146
+msgid "Images du carrousel"
+msgstr "Carousel Images"
+
+#: .\core\models.py:149 .\core\models.py:152
+msgid "Image de la galerie"
+msgstr "Gallery Image"
+
+#: .\core\models.py:164
+msgid "Élève"
+msgstr "Student"
+
+#: .\core\models.py:165 .\templates\core\testimonials.html:1109
+msgid "Parent"
+msgstr "Parent"
+
+#: .\core\models.py:166 .\templates\core\testimonials.html:1110
+msgid "Enseignant"
+msgstr "Teacher"
+
+#: .\core\models.py:176
+msgid "Utilisateur"
+msgstr "User"
+
+#: .\core\models.py:180
+msgid "Auteur"
+msgstr "Author"
+
+#: .\core\models.py:185
+msgid "Type de témoignage"
+msgstr "Testimonial Type"
+
+#: .\core\models.py:193
+msgid "Nom de l'enfant"
+msgstr "Child's Name"
+
+#: .\core\models.py:205
+msgid "Contenu"
+msgstr "Content"
+
+#: .\core\models.py:218
+msgid "Élève concerné"
+msgstr "Concerned Student"
+
+#: .\core\models.py:226
+msgid "Parent concerné"
+msgstr "Concerned Parent"
+
+#: .\core\models.py:234
+msgid "Photo de l'auteur"
+msgstr "Author's Photo"
+
+#: .\core\models.py:239
+msgid "Date de création"
+msgstr "Creation Date"
+
+#: .\core\models.py:249
+msgid "Approuvé"
+msgstr "Approved"
+
+#: .\core\models.py:254
+msgid "Ordre d'affichage"
+msgstr "Display Order"
+
+#: .\core\models.py:260
+msgid "Nombre de 'utile'"
+msgstr "Number of 'Helpful'"
+
+#: .\core\models.py:265
+msgid "Témoignage en vedette"
+msgstr "Featured Testimonial"
+
+#: .\core\models.py:269
+msgid "Témoignage"
+msgstr "Testimonial"
+
+#: .\core\models.py:270 .\core\views.py:292 .\templates\core\index.html:988
+#: .\templates\core\services.html:400 .\templates\core\testimonials.html:14
+#: .\templates\core\testimonials.html:824 .\templates\sidebar.html:185
+msgid "Témoignages"
+msgstr "Testimonials"
+
+#: .\core\models.py:349 .\templates\core\contact.html:150
+#: .\templates\core\index.html:1750
+msgid "Maternelle"
+msgstr "Kindergarten"
+
+#: .\core\models.py:351 .\templates\core\contact.html:152
+#: .\templates\core\index.html:1752
+msgid "Collège"
+msgstr "Middle School"
+
+#: .\core\models.py:363
+msgid "Date d'envoi"
+msgstr "Submission Date"
+
+#: .\core\models.py:367
+msgid "Message de contact"
+msgstr "Contact Message"
+
+#: .\core\models.py:368
+msgid "Messages de contact"
+msgstr "Contact Messages"
+
+#: .\core\models.py:379
+msgid "Valeur"
+msgstr "Value"
+
+#: .\core\models.py:382
+msgid "Valeur de statistique"
+msgstr "Statistic Value"
+
+#: .\core\models.py:383
+msgid "Valeurs de statistiques"
+msgstr "Statistic Values"
+
+#: .\core\models.py:392 .\core\views.py:1239 .\core\views.py:1242
+#: .\core\views.py:1245
+msgid "Date"
+msgstr "Date"
+
+#: .\core\models.py:398
+msgid "Événement académique"
+msgstr "Academic Event"
+
+#: .\core\models.py:399
+msgid "Événements académiques"
+msgstr "Academic Events"
+
+#: .\core\models.py:418
+msgid "Absence"
+msgstr "Absence"
+
+#: .\core\models.py:419
+msgid "Absences"
+msgstr "Absences"
+
+#: .\core\models.py:435
+msgid "Réservation"
+msgstr "Reservation"
+
+#: .\core\models.py:436
+msgid "Réservations"
+msgstr "Reservations"
+
+#: .\core\views.py:168 .\templates\accounts\edit_lecturer.html:11
+#: .\templates\accounts\edit_student.html:11
+#: .\templates\accounts\edit_student_program.html:10
+#: .\templates\accounts\lecturer_list.html:9
+#: .\templates\accounts\profile.html:13
+#: .\templates\accounts\profile_single.html:13
+#: .\templates\accounts\student_list.html:9 .\templates\core\about.html:14
+#: .\templates\core\dashboard.html:13 .\templates\footer.html:47
+#: .\templates\search\search_view.html:11
+#: .\templates\setting\admin_panel.html:11
+#: .\templates\setting\password_change.html:11
+#: .\templates\setting\profile_info_change.html:11
+#: .\templates\sidebar.html:109
+msgid "Accueil"
+msgstr "Home"
+
+#: .\core\views.py:177
+msgid "Image alternative 1"
+msgstr "Alternative Image 1"
+
+#: .\core\views.py:179
+msgid "L'excellence éducative à Yaoundé"
+msgstr "Educational Excellence in Yaoundé"
+
+#: .\core\views.py:180
+msgid "Accompagnement scolaire personnalisé de la maternelle à la terminale."
+msgstr "Personalized academic support from kindergarten to high school."
+
+#: .\core\views.py:181 .\core\views.py:421
+msgid "Nos services"
+msgstr "Our Services"
+
+#: .\core\views.py:183 .\templates\core\about.html:285
+msgid "Contactez-nous"
+msgstr "Contact Us"
+
+#: .\core\views.py:186
+msgid "Excellence académique"
+msgstr "Academic Excellence"
+
+#: .\core\views.py:191
+msgid "Image alternative 2"
+msgstr "Alternative Image 2"
+
+#: .\core\views.py:193
+msgid "Une pédagogie adaptée à chaque élève"
+msgstr "A pedagogy tailored to each student"
+
+#: .\core\views.py:194
+msgid "Des enseignants qualifiés pour un suivi personnalisé."
+msgstr "Qualified teachers for personalized follow-up."
+
+#: .\core\views.py:195
+msgid "Découvrir nos cours"
+msgstr "Discover our courses"
+
+#: .\core\views.py:197 .\templates\core\index.html:1534
+msgid "Nous contacter"
+msgstr "Contact us"
+
+#: .\core\views.py:200
+msgid "Apprentissage sur mesure"
+msgstr "Tailored Learning"
+
+#: .\core\views.py:220
+msgid ""
+"Une erreur est survenue lors du chargement des données. Veuillez réessayer "
+"plus tard."
+msgstr "An error occurred while loading the data. Please try again later."
+
+#: .\core\views.py:243
+msgid "À propos de nous"
+msgstr "About Us"
+
+#: .\core\views.py:334 .\core\views.py:706
+msgid ""
+"Votre témoignage a été soumis avec succès. Il sera publié après validation "
+"par notre équipe."
+msgstr "Your testimonial has been successfully submitted. It will be published after validation by our team."
+
+#: .\core\views.py:340 .\core\views.py:712
+msgid "Une erreur technique est survenue lors de l'envoi de votre témoignage."
+msgstr "A technical error occurred while submitting your testimonial."
+
+#: .\core\views.py:342 .\core\views.py:714
+msgid "Veuillez corriger les erreurs ci-dessous."
+msgstr "Please correct the errors below."
+
+#: .\core\views.py:434
+msgid "Foire aux questions"
+msgstr "Frequently Asked Questions"
+
+#: .\core\views.py:438 .\templates\footer.html:149
+msgid "Politique de confidentialité"
+msgstr "Privacy Policy"
+
+#: .\core\views.py:442 .\templates\footer.html:150
+msgid "Conditions d'utilisation"
+msgstr "Terms of Use"
+
+#: .\core\views.py:446
+msgid "Gestion des cookies"
+msgstr "Cookie Management"
+
+#: .\core\views.py:450
+msgid "Aide"
+msgstr "Help"
+
+#: .\core\views.py:513 .\core\views.py:622
+msgid "Votre inscription à la newsletter a été réactivée."
+msgstr "Your newsletter subscription has been reactivated."
+
+#: .\core\views.py:515
+msgid "Vous êtes maintenant inscrit à notre newsletter."
+msgstr "You are now subscribed to our newsletter."
+
+#: .\core\views.py:565
+msgid "Erreur d'en-tête dans l'envoi d'email."
+msgstr "Header error in sending email."
+
+#: .\core\views.py:569
+msgid ""
+"Votre message a été envoyé avec succès ! Vous recevrez une confirmation par "
+"email."
+msgstr "Your message has been successfully sent! You will receive a confirmation by email."
+
+#: .\core\views.py:574
+msgid ""
+"Une erreur technique est survenue. Veuillez réessayer ou nous contacter "
+"directement par téléphone."
+msgstr "A technical error occurred. Please try again or contact us directly by phone."
+
+#: .\core\views.py:624
+msgid "Vous êtes déjà inscrit à notre newsletter."
+msgstr "You are already subscribed to our newsletter."
+
+#: .\core\views.py:626
+msgid "Inscription à la newsletter réussie !"
+msgstr "Newsletter subscription successful!"
+
+#: .\core\views.py:651
+msgid "Une erreur est survenue. Veuillez réessayer."
+msgstr "An error occurred. Please try again."
+
+#: .\core\views.py:666
+msgid "Soumettre un témoignage"
+msgstr "Submit a Testimonial"
+
+#: .\core\views.py:1167
+msgid "<i>No data available</i>"
+msgstr "<i>No data available</i>"
+
+#: .\core\views.py:1213
+msgid "Peace – Work – Fatherland"
+msgstr "Peace – Work – Fatherland"
+
+#: .\core\views.py:1216
+msgid "Paix – Travail – Patrie"
+msgstr "Peace – Work – Fatherland"
+
+#: .\core\views.py:1239
+msgid "Academic Events"
+msgstr "Academic Events"
+
+#: .\core\views.py:1239
+msgid "Activity"
+msgstr "Activity"
+
+#: .\core\views.py:1239
+msgid "Responsible"
+msgstr "Responsible"
+
+#: .\core\views.py:1242
+msgid "Teacher Absences"
+msgstr "Teacher Absences"
+
+#: .\core\views.py:1242
+msgid "Teacher"
+msgstr "Teacher"
+
+#: .\core\views.py:1242
+msgid "Reason"
+msgstr "Reason"
+
+#: .\core\views.py:1245
+msgid "Course Reservations"
+msgstr "Course Reservations"
+
+#: .\core\views.py:1245
+msgid "Course"
+msgstr "Course"
+
+#: .\core\views.py:1245
+msgid "Student"
+msgstr "Student"
+
+#: .\core\views.py:1250
+msgid "Secretary's approval"
+msgstr "Secretary's Approval"
+
+#: .\templates\400.html:6
+msgid "Requête invalide"
+msgstr "Invalid Request"
+
+#: .\templates\400.html:7
+msgid "Veuillez vous assurer que le formulaire est correctement rempli."
+msgstr "Please ensure the form is correctly filled out."
+
+#: .\templates\400.html:8 .\templates\403.html:8 .\templates\403.html:18
+#: .\templates\404.html:8 .\templates\500.html:8
+msgid "Retour à l’application"
+msgstr "Back to the application"
+
+#: .\templates\403.html:6 .\templates\403.html:16
+msgid "Interdit"
+msgstr "Forbidden"
+
+#: .\templates\403.html:7 .\templates\403.html:17
+msgid ""
+"Vous n’avez pas les permissions nécessaires pour effectuer cette action."
+msgstr "You do not have the necessary permissions to perform this action."
+
+#: .\templates\404.html:7
+msgid "La page que vous recherchez semble ne pas exister."
+msgstr "The page you are looking for does not seem to exist."
+
+#: .\templates\500.html:6
+msgid "Erreur serveur"
+msgstr "Server Error"
+
+#: .\templates\500.html:7
+msgid "Veuillez réessayer plus tard."
+msgstr "Please try again later."
+
+#: .\templates\accounts\add_staff.html:3
+#: .\templates\accounts\add_student.html:3 .\templates\core\post.html:3
+#: .\templates\core\post_add.html:10 .\templates\core\semester_list.html:3
+#: .\templates\core\semester_update.html:3
+msgid "Learning management system"
+msgstr "Learning Management System"
+
+#: .\templates\accounts\add_staff.html:11
+#: .\templates\accounts\add_student.html:12 .\templates\core\post.html:10
+#: .\templates\core\post_add.html:18 .\templates\core\semester_list.html:9
+#: .\templates\core\semester_update.html:11
+msgid "Home"
+msgstr "Home"
+
+#: .\templates\accounts\add_staff.html:12 .\templates\pdf\lecturer_list.html:5
+msgid "Lecturers"
+msgstr "Lecturers"
+
+#: .\templates\accounts\add_staff.html:13
+#: .\templates\accounts\add_student.html:14
+msgid "Add"
+msgstr "Add"
+
+#: .\templates\accounts\add_staff.html:17
+msgid "Lecturer Add Form"
+msgstr "Lecturer Add Form"
+
+#: .\templates\accounts\add_staff.html:26
+#: .\templates\accounts\add_student.html:27
+#: .\templates\pdf\profile_single.html:38
+
+#: .\templates\accounts\add_staff.html:38
+#: .\templates\accounts\add_student.html:48
+#: .\templates\core\semester_update.html:26
+msgid "Save"
+msgstr "Save"
+
+#: .\templates\accounts\add_student.html:13
+#: .\templates\pdf\student_list.html:4
+msgid "Students"
+msgstr "Students"
+
+#: .\templates\accounts\add_student.html:18
+msgid "Student Add Form"
+msgstr "Student Add Form"
+
+#: .\templates\accounts\add_student.html:40
+msgid "Others"
+msgstr "Others"
+
+#: .\templates\accounts\edit_lecturer.html:3
+#: .\templates\accounts\edit_student.html:3
+#: .\templates\accounts\lecturer_list.html:3
+#: .\templates\accounts\parent_form.html:3 .\templates\accounts\profile.html:3
+#: .\templates\accounts\profile_single.html:3
+#: .\templates\accounts\student_list.html:3
+msgid "Système de gestion de l\\"
+msgstr "Learning Management System"
+
+#: .\templates\accounts\edit_lecturer.html:12
+#: .\templates\accounts\lecturer_list.html:10
+#: .\templates\accounts\lecturer_list.html:21
+#: .\templates\core\dashboard.html:51 .\templates\core\testimonials.html:943
+#: .\templates\setting\admin_panel.html:26 .\templates\sidebar.html:138
+msgid "Enseignants"
+msgstr "Teachers"
+
+#: .\templates\accounts\edit_lecturer.html:13
+#: .\templates\accounts\edit_student.html:13
+#: .\templates\accounts\edit_student_program.html:12
+#: .\templates\accounts\lecturer_list.html:59
+#: .\templates\accounts\student_list.html:57
+msgid "Modifier"
+msgstr "Edit"
+
+#: .\templates\accounts\edit_lecturer.html:17
+#: .\templates\accounts\edit_student.html:17
+msgid "Formulaire de mise à jour d\\"
+msgstr "Update Form for"
+
+#: .\templates\accounts\edit_lecturer.html:29
+#: .\templates\accounts\edit_student.html:25
+#: .\templates\accounts\profile.html:58
+#: .\templates\accounts\profile_single.html:73
+#: .\templates\setting\profile_info_change.html:24
+msgid "Informations personnelles"
+msgstr "Personal Information"
+
+#: .\templates\accounts\edit_lecturer.html:42
+#: .\templates\accounts\edit_student.html:39
+#: .\templates\core\dashboard.html:105
+#: .\templates\setting\profile_info_change.html:37
+msgid "Autres"
+msgstr "Others"
+
+#: .\templates\accounts\edit_lecturer.html:49
+#: .\templates\accounts\edit_student.html:46
+#: .\templates\accounts\edit_student_program.html:34
+#: .\templates\accounts\parent_form.html:11
+msgid "Enregistrer"
+msgstr "Save"
+
+#: .\templates\accounts\edit_student.html:12
+#: .\templates\accounts\edit_student_program.html:11
+#: .\templates\accounts\student_list.html:10
+#: .\templates\accounts\student_list.html:21
+#: .\templates\core\dashboard.html:42
+#: .\templates\setting\admin_panel.html:31
+#: .\templates\sidebar.html:141
+msgid "Étudiants"
+msgstr "Students"
+
+#: .\templates\accounts\edit_student_program.html:16
+msgid "Formulaire de mise à jour du programme étudiant"
+msgstr "Student Program Update Form"
+
+#: .\templates\accounts\edit_student_program.html:24
+#: .\templates\accounts\profile_single.html:85
+#: .\templates\accounts\student_list.html:35
+#: .\templates\search\search_view.html:23
+#: .\templates\search\search_view.html:54
+#: .\templates\search\search_view.html:87
+msgid "Programme"
+msgstr "Program"
+
+#: .\templates\accounts\edit_student_program.html:27
+msgid "Modifier le programme de"
+msgstr "Edit the program for"
+
+#: .\templates\accounts\lecturer_list.html:16
+msgid "Ajouter un enseignant"
+msgstr "Add a Teacher"
+
+#: .\templates\accounts\lecturer_list.html:17
+#: .\templates\accounts\lecturer_list.html:60
+msgid "Télécharger PDF"
+msgstr "Download PDF"
+
+#: .\templates\accounts\lecturer_list.html:31
+msgid "N° ID"
+msgstr "ID Number"
+
+#: .\templates\accounts\lecturer_list.html:34
+msgid "N° Mobile"
+msgstr "Mobile Number"
+
+#: .\templates\accounts\lecturer_list.html:35
+#: .\templates\accounts\profile_single.html:94
+msgid "Adresse / Ville"
+msgstr "Address / City"
+
+#: .\templates\accounts\lecturer_list.html:36
+#: .\templates\accounts\profile_single.html:28
+#: .\templates\accounts\profile_single.html:100
+msgid "Dernière connexion"
+msgstr "Last Login"
+
+#: .\templates\accounts\lecturer_list.html:38
+msgid "Action"
+msgstr "Action"
+
+#: .\templates\accounts\lecturer_list.html:61
+#: .\templates\accounts\student_list.html:59
+#: .\templates\setting\admin_panel.html:38
+msgid "Supprimer"
+msgstr "Delete"
+
+#: .\templates\accounts\lecturer_list.html:71
+msgid "Aucun enseignant."
+msgstr "No teachers."
+
+#: .\templates\accounts\lecturer_list.html:75
+msgid "Ajouter un enseignant maintenant."
+msgstr "Add a teacher now."
+
+#: .\templates\accounts\profile.html:28 .\templates\accounts\profile.html:85
+msgid "Dernière connexion :"
+msgstr "Last Login:"
+
+#: .\templates\accounts\profile.html:29
+msgid "Rôle :"
+msgstr "Role:"
+
+#: .\templates\accounts\profile.html:34
+#: .\templates\accounts\profile_single.html:39
+#: .\templates\accounts\profile_single.html:47
+msgid "Modifier le profil"
+msgstr "Edit Profile"
+
+#: .\templates\accounts\profile.html:36
+#: .\templates\setting\password_change.html:21
+#: .\templates\setting\password_change.html:26
+msgid "Changer le mot de passe"
+msgstr "Change Password"
+
+#: .\templates\accounts\profile.html:45
+#: .\templates\accounts\profile_single.html:60
+msgid "Mes cours"
+msgstr "My Courses"
+
+#: .\templates\accounts\profile.html:53
+#: .\templates\accounts\profile_single.html:68
+msgid "Aucun cours assigné !"
+msgstr "No courses assigned!"
+
+#: .\templates\accounts\profile.html:60
+msgid "Prénom :"
+msgstr "First Name:"
+
+#: .\templates\accounts\profile.html:61
+msgid "Nom :"
+msgstr "Last Name:"
+
+#: .\templates\accounts\profile.html:62
+#: .\templates\accounts\profile_single.html:77
+#: .\templates\accounts\student_list.html:32
+msgid "N° d\\"
+msgstr "ID Number"
+
+#: .\templates\accounts\profile.html:67
+#: .\templates\accounts\profile_single.html:81
+msgid "Informations sur l\\"
+msgstr "Information about"
+
+#: .\templates\accounts\profile.html:69
+msgid "École :"
+msgstr "School:"
+
+#: .\templates\accounts\profile.html:69 .\templates\pdf\profile_single.html:49
+msgid "Hawas Preparatory School"
+msgstr "Hawas Preparatory School"
+
+#: .\templates\accounts\profile.html:70
+msgid "Niveau :"
+msgstr "Level:"
+
+#: .\templates\accounts\profile.html:75
+#: .\templates\accounts\profile_single.html:90
+msgid "Informations de contact"
+msgstr "Contact Information"
+
+#: .\templates\accounts\profile.html:77
+msgid "Email :"
+msgstr "Email:"
+
+#: .\templates\accounts\profile.html:78
+msgid "Tél. :"
+msgstr "Phone:"
+
+#: .\templates\accounts\profile.html:79
+msgid "Adresse / Ville :"
+msgstr "Address / City:"
+
+#: .\templates\accounts\profile.html:83
+#: .\templates\accounts\profile_single.html:98
+msgid "Dates importantes"
+msgstr "Important Dates"
+
+#: .\templates\accounts\profile.html:87
+msgid "Année académique :"
+msgstr "Academic Year:"
+
+#: .\templates\accounts\profile.html:87
+#: .\templates\accounts\profile_single.html:102
+msgid "Semestre"
+msgstr "Semester"
+
+#: .\templates\accounts\profile.html:89
+#: .\templates\accounts\profile_single.html:104
+msgid "Date d\\"
+msgstr "Date of"
+
+#: .\templates\accounts\profile_single.html:29
+msgid "Rôle"
+msgstr "Role"
+
+#: .\templates\accounts\profile_single.html:42
+msgid "Changer de programme"
+msgstr "Change Program"
+
+#: .\templates\accounts\profile_single.html:75
+msgid "Prénom"
+msgstr "First Name"
+
+#: .\templates\accounts\profile_single.html:83
+msgid "École"
+msgstr "School"
+
+#: .\templates\accounts\profile_single.html:84
+msgid "Niveau"
+msgstr "Level"
+
+#: .\templates\accounts\profile_single.html:93
+msgid "Tél."
+msgstr "Phone"
+
+#: .\templates\accounts\profile_single.html:102
+msgid "Année académique"
+msgstr "Academic Year"
+
+#: .\templates\accounts\student_list.html:16
+msgid "Ajouter un étudiant"
+msgstr "Add a Student"
+
+#: .\templates\accounts\student_list.html:17
+#: .\templates\accounts\student_list.html:58
+msgid "Télécharger le PDF"
+msgstr "Download PDF"
+
+#: .\templates\accounts\student_list.html:37
+#: .\templates\core\semester_list.html:34
+msgid "Actions"
+msgstr "Actions"
+
+#: .\templates\accounts\student_list.html:69
+msgid "Aucun étudiant."
+msgstr "No students."
+
+#: .\templates\accounts\student_list.html:73
+msgid "Ajouter un étudiant maintenant."
+msgstr "Add a student now."
+
+#: .\templates\accounts\teacher_info_form.html:6
+msgid "Teacher Info"
+msgstr "Teacher Information"
+
+#: .\templates\accounts\teacher_info_form.html:269
+msgid "Teacher Information Form"
+msgstr "Teacher Information Form"
+
+#: .\templates\accounts\teacher_info_form.html:270
+msgid "Complete your professional profile to enhance your teaching experience"
+msgstr "Complete your professional profile to enhance your teaching experience"
+
+#: .\templates\accounts\teacher_info_form.html:297
+msgid "Save Information"
+msgstr "Save Information"
+
+#: .\templates\accounts\teacher_info_form.html:302
+msgid "Download PDF"
+msgstr "Download PDF"
+
+#: .\templates\core\about.html:5
+msgid "À Propos - The Genius Academy"
+msgstr "About - The Genius Academy"
+
+#: .\templates\core\about.html:11 .\templates\registration\login.html:22
+msgid "The Genius Academy"
+msgstr "The Genius Academy"
+
+#: .\templates\core\about.html:12
+msgid "L'excellence académique à domicile pour tous les niveaux"
+msgstr "Academic excellence at home for all levels"
+
+#: .\templates\core\about.html:15
+msgid "En savoir plus"
+msgstr "Learn More"
+
+#: .\templates\core\about.html:26 .\templates\core\index.html:623
+msgid "Expertise reconnue"
+msgstr "Recognized Expertise"
+
+#: .\templates\core\about.html:27
+msgid "Qui Sommes-Nous?"
+msgstr "Who Are We?"
+
+#: .\templates\core\about.html:28 .\templates\core\index.html:625
+msgid ""
+"The Genius Academy est le leader des cours de répétition à domicile au "
+"Cameroun."
+msgstr "The Genius Academy is the leader in home tutoring in Cameroon."
+
+#: .\templates\core\about.html:29 .\templates\core\index.html:626
+msgid ""
+"Notre mission est d'accompagner chaque élève vers l'excellence académique "
+"grâce à un enseignement personnalisé adapté à son rythme et à ses besoins "
+"spécifiques"
+msgstr "Our mission is to guide each student toward academic excellence through personalized teaching tailored to their pace and specific needs."
+
+#: .\templates\core\about.html:39 .\templates\core\index.html:635
+msgid "Enseignants Qualifiés"
+msgstr "Qualified Teachers"
+
+#: .\templates\core\about.html:40 .\templates\core\index.html:636
+msgid "Des professeurs expérimentés et pédagogues"
+msgstr "Experienced and skilled teachers"
+
+#: .\templates\core\about.html:52 .\templates\core\index.html:648
+msgid "À Domicile"
+msgstr "At Home"
+
+#: .\templates\core\about.html:53 .\templates\core\index.html:649
+msgid "Apprentissage dans un environnement familier"
+msgstr "Learning in a familiar environment"
+
+#: .\templates\core\about.html:65 .\templates\core\index.html:661
+msgid "Résultats Garantis"
+msgstr "Guaranteed Results"
+
+#: .\templates\core\about.html:66 .\templates\core\index.html:662
+msgid "Amélioration notable des notes"
+msgstr "Significant grade improvement"
+
+#: .\templates\core\about.html:78 .\templates\core\index.html:674
+msgid "Flexibilité"
+msgstr "Flexibility"
+
+#: .\templates\core\about.html:79 .\templates\core\index.html:675
+msgid "Horaires adaptés à votre emploi du temps"
+msgstr "Schedules tailored to your availability"
+
+#: .\templates\core\about.html:92
+#, python-format
+msgid ""
+"\n"
+"                                %(rate)s%% de réussite\n"
+"                            "
+msgstr ""
+"\n"
+"                                %(rate)s%% success rate\n"
+"                            "
+
+#: .\templates\core\about.html:97
+#, python-format
+msgid ""
+"\n"
+"                                aux examens %(year)s\n"
+"                            "
+msgstr ""
+"\n"
+"                                in %(year)s exams\n"
+"                            "
+
+#: .\templates\core\about.html:112 .\templates\core\index.html:717
+msgid "Notre Méthode Pédagogique"
+msgstr "Our Teaching Method"
+
+#: .\templates\core\about.html:113 .\templates\core\index.html:718
+msgid "Une approche unique pour des résultats exceptionnels"
+msgstr "A unique approach for exceptional results"
+
+#: .\templates\core\about.html:125 .\templates\core\index.html:730
+msgid "Évaluation Initiale"
+msgstr "Initial Assessment"
+
+#: .\templates\core\about.html:126 .\templates\core\index.html:731
+msgid ""
+"Diagnostic précis des forces et faiblesses de chaque élève pour un programme "
+"sur mesure."
+msgstr "Accurate diagnosis of each student's strengths and weaknesses for a tailored program."
+
+#: .\templates\core\about.html:134 .\templates\core\index.html:739
+msgid "Enseignement Adaptatif"
+msgstr "Adaptive Teaching"
+
+#: .\templates\core\about.html:135 .\templates\core\index.html:740
+msgid ""
+"Méthodes pédagogiques ajustées en temps réel selon les progrès et "
+"difficultés."
+msgstr "Teaching methods adjusted in real-time based on progress and challenges."
+
+#: .\templates\core\about.html:143 .\templates\core\index.html:748
+msgid "Apprentissage Actif"
+msgstr "Active Learning"
+
+#: .\templates\core\about.html:144 .\templates\core\index.html:749
+msgid ""
+"L'élève est acteur de son apprentissage grâce à des exercices pratiques et "
+"concrets."
+msgstr "The student is an active participant in their learning through practical and concrete exercises."
+
+#: .\templates\core\about.html:152 .\templates\core\index.html:757
+msgid "Suivi Personnalisé"
+msgstr "Personalized Follow-Up"
+
+#: .\templates\core\about.html:153 .\templates\core\index.html:758
+msgid ""
+"Bilans réguliers et ajustements constants pour garantir une progression "
+"optimale."
+msgstr "Regular assessments and continuous adjustments to ensure optimal progress."
+
+#: .\templates\core\about.html:167 .\templates\core\index.html:772
+msgid "Méthode éprouvée"
+msgstr "Proven Method"
+
+#: .\templates\core\about.html:168 .\templates\core\index.html:773
+msgid "Excellence reconnue"
+msgstr "Recognized Excellence"
+
+#: .\templates\core\about.html:181 .\templates\core\index.html:786
+msgid "Des nombreux d’élèves"
+msgstr "Many students"
+
+#: .\templates\core\about.html:182 .\templates\core\index.html:787
+msgid "accompagnés avec succès"
+msgstr "successfully supported"
+
+#: .\templates\core\about.html:196 .\templates\core\index.html:801
+msgid "Prêt à transformer l'expérience d'apprentissage de votre enfant?"
+msgstr "Ready to transform your child's learning experience?"
+
+#: .\templates\core\about.html:197 .\templates\core\index.html:802
+msgid ""
+"Notre méthode unique a fait ses preuves auprès de nombreux d'élèves. "
+"Rejoignez la communauté The Genius Academy dès aujourd'hui."
+msgstr "Our unique method has proven successful with many students. Join the Genius Academy community today."
+
+#: .\templates\core\about.html:200 .\templates\core\index.html:805
+msgid "Démarrer maintenant"
+msgstr "Get Started Now"
+
+#: .\templates\core\about.html:213
+msgid "Notre Engagement"
+msgstr "Our Commitment"
+
+#: .\templates\core\about.html:215
+msgid "Découvrez les principes qui guident notre action éducative au quotidien"
+msgstr "Discover the principles that guide our daily educational efforts"
+
+#: .\templates\core\about.html:224
+msgid "Notre Mission"
+msgstr "Our Mission"
+
+#: .\templates\core\about.html:226
+msgid ""
+"Chez The Genius Academy, nous nous engageons à fournir un soutien scolaire "
+"personnalisé et des cours de répétition de haute qualité à domicile. Notre "
+"objectif est d'aider chaque élève, de la maternelle à la terminale, à "
+"atteindre son plein potentiel académique tout en développant des compétences "
+"essentielles pour leur futur."
+msgstr "At The Genius Academy, we are committed to providing personalized academic support and high-quality home tutoring. Our goal is to help every student, from kindergarten to high school, reach their full academic potential while developing essential skills for their future."
+
+#: .\templates\core\about.html:236
+msgid "Notre Vision"
+msgstr "Our Vision"
+
+#: .\templates\core\about.html:238
+msgid ""
+"Nous aspirons à devenir le centre de référence en matière d'éducation "
+"complémentaire au Cameroun, en révolutionnant l'apprentissage à domicile "
+"grâce à des méthodes innovantes et des enseignants passionnés. Notre "
+"ambition est de former une génération de leaders éclairés, créatifs et "
+"compétitifs sur le plan international."
+msgstr "We aspire to become the reference center for supplementary education in Cameroon, revolutionizing home learning through innovative methods and passionate teachers. Our ambition is to train a generation of enlightened, creative, and globally competitive leaders."
+
+#: .\templates\core\about.html:248
+msgid "Nos Valeurs"
+msgstr "Our Values"
+
+#: .\templates\core\about.html:253
+msgid "Excellence Académique"
+msgstr "Academic Excellence"
+
+#: .\templates\core\about.html:254
+msgid ""
+"Nous nous engageons à fournir un enseignement de la plus haute qualité, avec "
+"des résultats tangibles pour nos élèves."
+msgstr "We are committed to providing the highest quality education with tangible results for our students."
+
+#: .\templates\core\about.html:259
+msgid "Approche Personnalisée"
+msgstr "Personalized Approach"
+
+#: .\templates\core\about.html:260
+msgid ""
+"Chaque élève bénéficie d'un programme sur mesure adapté à ses besoins "
+"spécifiques et son rythme d'apprentissage."
+msgstr "Each student benefits from a tailored program adapted to their specific needs and learning pace."
+
+#: .\templates\core\about.html:265
+msgid "Innovation Pédagogique"
+msgstr "Pedagogical Innovation"
+
+#: .\templates\core\about.html:266
+msgid ""
+"Nous combinons méthodes traditionnelles et approches modernes pour un "
+"apprentissage optimal."
+msgstr "We combine traditional methods and modern approaches for optimal learning."
+
+#: .\templates\core\about.html:271
+msgid "Intégrité Professionnelle"
+msgstr "Professional Integrity"
+
+#: .\templates\core\about.html:272
+msgid ""
+"Transparence, éthique et professionnalisme guident toutes nos interactions "
+"avec élèves et parents."
+msgstr "Transparency, ethics, and professionalism guide all our interactions with students and parents."
+
+#: .\templates\core\about.html:283
+msgid "Prêt à booster votre réussite académique ?"
+msgstr "Ready to boost your academic success?"
+
+#: .\templates\core\about.html:284
+msgid ""
+"Rejoignez les nombreux élèves qui ont déjà bénéficié de notre accompagnement "
+"personnalisé."
+msgstr "Join the many students who have already benefited from our personalized support."
+
+#: .\templates\core\base_secretary.html:55
+msgid "Toggle navigation"
+msgstr "Toggle Navigation"
+
+#: .\templates\core\base_secretary.html:60
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\core\base_secretary.html:61
+msgid "PDF Calendrier"
+msgstr "PDF Calendar"
+
+#: .\templates\core\base_secretary.html:62
+msgid "Rapport PDF"
+msgstr "PDF Report"
+
+#: .\templates\core\base_secretary.html:63
+#: .\templates\core\testimonials.html:714 .\templates\navbar.html:239
+#: .\templates\sidebar.html:186
+msgid "Déconnexion"
+msgstr "Logout"
+
+#: .\templates\core\base_secretary.html:73
+msgid "Bienvenue sur votre tableau de bord"
+msgstr "Welcome to your dashboard"
+
+#: .\templates\core\base_secretary.html:74
+msgid "Sélectionnez une action dans le menu ci-dessus pour gérer vos tâches."
+msgstr "Select an action from the menu above to manage your tasks."
+
+#: .\templates\core\contact.html:5
+msgid "Contactez-nous - The Genius Academy"
+msgstr "Contact Us - The Genius Academy"
+
+#: .\templates\core\contact.html:73
+msgid "Contactez The Genius Academy"
+msgstr "Contact The Genius Academy"
+
+#: .\templates\core\contact.html:74
+msgid "Votre excellence académique commence ici"
+msgstr "Your academic excellence starts here"
+
+#: .\templates\core\contact.html:77
+msgid "Envoyer un message"
+msgstr "Send a Message"
+
+#: .\templates\core\contact.html:94 .\templates\core\index.html:1694
+msgid "Contact Image"
+msgstr "Contact Image"
+
+#: .\templates\core\contact.html:104 .\templates\core\index.html:1704
+#: .\templates\footer.html:69
+msgid "Contactez-Nous"
+msgstr "Contact Us"
+
+#: .\templates\core\contact.html:120 .\templates\core\index.html:1720
+msgid "Nom Complet"
+msgstr "Full Name"
+
+#: .\templates\core\contact.html:128 .\templates\core\index.html:1728
+msgid "Adresse Email"
+msgstr "Email Address"
+
+#: .\templates\core\contact.html:147 .\templates\core\index.html:1747
+msgid "Niveau Scolaire"
+msgstr "School Level"
+
+#: .\templates\core\contact.html:149 .\templates\core\index.html:1749
+msgid "Sélectionnez un niveau"
+msgstr "Select a level"
+
+#: .\templates\core\contact.html:182 .\templates\core\index.html:1782
+msgid ""
+"M'abonner à la newsletter pour recevoir les actualités et offres spéciales"
+msgstr "Subscribe to the newsletter to receive news and special offers"
+
+#: .\templates\core\contact.html:188 .\templates\core\index.html:1788
+msgid "Envoyer la Demande"
+msgstr "Submit Request"
+
+#: .\templates\core\contact.html:210
+msgid "Notre Adresse"
+msgstr "Our Address"
+
+#: .\templates\core\contact.html:221
+msgid "Appelez-nous"
+msgstr "Call Us"
+
+#: .\templates\core\contact.html:224
+msgid "Appeler maintenant"
+msgstr "Call Now"
+
+#: .\templates\core\contact.html:238 .\templates\core\faq.html:596
+msgid "Envoyer un email"
+msgstr "Send an Email"
+
+#: .\templates\core\contact.html:249
+msgid "Horaires d'ouverture"
+msgstr "Opening Hours"
+
+#: .\templates\core\contact.html:253
+msgid "Lundi - Vendredi"
+msgstr "Monday - Friday"
+
+#: .\templates\core\contact.html:257
+msgid "Samedi"
+msgstr "Saturday"
+
+#: .\templates\core\contact.html:261
+msgid "Dimanche"
+msgstr "Sunday"
+
+#: .\templates\core\contact.html:262
+msgid "Fermé"
+msgstr "Closed"
+
+#: .\templates\core\contact.html:267
+msgid "Service à domicile"
+msgstr "Home Service"
+
+#: .\templates\core\contact.html:268
+msgid ""
+"Nous offrons des cours à domicile pour tous les niveaux scolaires. Contactez-"
+"nous pour planifier votre session."
+msgstr "We offer home tutoring for all school levels. Contact us to schedule your session."
+
+#: .\templates\core\contact.html:283 .\templates\core\faq.html:228
+#: .\templates\core\index.html:1171 .\templates\core\services.html:465
+msgid "Questions Fréquentes"
+msgstr "Frequently Asked Questions"
+
+#: .\templates\core\contact.html:291
+msgid "Quels niveaux scolaires couvrez-vous ?"
+msgstr "Which school levels do you cover?"
+
+#: .\templates\core\contact.html:296
+msgid ""
+"Nous couvrons tous les niveaux, de la maternelle au lycée, pour francophones "
+"et anglophones."
+msgstr "We cover all levels, from kindergarten to high school, for both French-speaking and English-speaking students."
+
+#: .\templates\core\contact.html:304
+msgid "Proposez-vous des cours à domicile ?"
+msgstr "Do you offer home tutoring?"
+
+#: .\templates\core\contact.html:309
+msgid "Oui, nos enseignants se déplacent à votre domicile selon vos besoins."
+msgstr "Yes, our teachers come to your home based on your needs."
+
+#: .\templates\core\contact.html:317
+msgid "Comment réserver un cours ?"
+msgstr "How can I book a course?"
+
+#: .\templates\core\contact.html:322
+msgid ""
+"Vous pouvez réserver un cours via notre formulaire de contact ou notre "
+"application web."
+msgstr "You can book a course through our contact form or web application."
+
+#: .\templates\core\contact.html:333
+msgid "Prêt à commencer votre apprentissage ?"
+msgstr "Ready to start your learning journey?"
+
+#: .\templates\core\contact.html:334
+msgid ""
+"Rejoignez The Genius Academy et découvrez une expérience éducative "
+"personnalisée."
+msgstr "Join The Genius Academy and discover a personalized educational experience."
+
+#: .\templates\core\contact.html:336
+msgid "Contactez-nous maintenant"
+msgstr "Contact Us Now"
+
+#: .\templates\core\dashboard.html:3 .\templates\core\dashboard.html:14
+#: .\templates\core\dashboard.html:21 .\templates\sidebar.html:127
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+#: .\templates\core\dashboard.html:3
+msgid "Système de gestion pédagogique"
+msgstr "Educational Management System"
+
+#: .\templates\core\dashboard.html:28
+msgid "Paramètres du tableau de bord"
+msgstr "Dashboard Settings"
+
+#: .\templates\core\dashboard.html:29
+msgid "Afficher la grille"
+msgstr "Show Grid"
+
+#: .\templates\core\dashboard.html:30
+msgid "Afficher le tableau"
+msgstr "Show Table"
+
+#: .\templates\core\dashboard.html:32
+msgid "Gérer le tableau de bord"
+msgstr "Manage Dashboard"
+
+#: .\templates\core\dashboard.html:60
+msgid "Administrateurs"
+msgstr "Administrators"
+
+#: .\templates\core\dashboard.html:69
+msgid "Assistants de laboratoire"
+msgstr "Laboratory Assistants"
+
+#: .\templates\core\dashboard.html:78
+msgid "Bibliothécaires"
+msgstr "Librarians"
+
+#: .\templates\core\dashboard.html:87
+msgid "Superviseurs"
+msgstr "Supervisors"
+
+#: .\templates\core\dashboard.html:96
+msgid "Assistants de bureau"
+msgstr "Office Assistants"
+
+#: .\templates\core\dashboard.html:133
+msgid "Activités récentes"
+msgstr "Recent Activities"
+
+#: .\templates\core\dashboard.html:138
+msgid "Aucune activité récente"
+msgstr "No recent activity"
+
+#: .\templates\core\dashboard.html:146
+msgid "Démographie scolaire"
+msgstr "School Demographics"
+
+#: .\templates\core\email\admin\Contact_view.html:19
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: .\templates\core\email\admin\Contact_view.html:20
+msgid "Reçu le"
+msgstr "Received on"
+
+#: .\templates\core\email\admin\Contact_view.html:21
+msgid "Répondu"
+msgstr "Replied"
+
+#: .\templates\core\email\admin\Contact_view.html:25
+msgid "Répondre"
+msgstr "Reply"
+
+#: .\templates\core\email\admin\Contact_view.html:26
+msgid "Retour à la liste"
+msgstr "Back to the list"
+
+#: .\templates\core\email\admin\contact_response.html:29
+msgid "Envoyer la réponse"
+msgstr "Send Reply"
+
+#: .\templates\core\email\admin\contact_response.html:30
+msgid "Annuler"
+msgstr "Cancel"
+
+#: .\templates\core\faq.html:4
+msgid "FAQ - The Genius Academy"
+msgstr "FAQ - The Genius Academy"
+
+#: .\templates\core\faq.html:214
+msgid "Foire aux Questions"
+msgstr "Frequently Asked Questions"
+
+#: .\templates\core\faq.html:216
+msgid "Trouvez les réponses à vos questions sur The Genius Academy"
+msgstr "Find answers to your questions about The Genius Academy"
+
+#: .\templates\core\faq.html:219
+msgid "Explorer les questions"
+msgstr "Explore Questions"
+
+#: .\templates\core\faq.html:230
+msgid ""
+"Nous avons rassemblé les questions les plus courantes sur nos programmes "
+"académiques et processus d'admission."
+msgstr "We have compiled the most common questions about our academic programs and admission process."
+
+#: .\templates\core\faq.html:238
+msgid "Questions Détailées"
+msgstr "Detailed Questions"
+
+#: .\templates\core\faq.html:239 .\templates\core\index.html:1172
+msgid "Toutes les réponses à vos questions sur nos services"
+msgstr "All the answers to your questions about our services"
+
+#: .\templates\core\faq.html:250 .\templates\core\index.html:1187
+msgid "Comment se déroule le processus de sélection des enseignants ?"
+msgstr "How does the teacher selection process work?"
+
+#: .\templates\core\faq.html:256 .\templates\core\index.html:1193
+msgid "Nous avons un processus rigoureux en 4 étapes :"
+msgstr "We have a rigorous 4-step process:"
+
+#: .\templates\core\faq.html:264 .\templates\core\index.html:1201
+msgid "Vérification des diplômes et certifications"
+msgstr "Verification of degrees and certifications"
+
+#: .\templates\core\faq.html:272 .\templates\core\index.html:1209
+msgid "Évaluation des compétences pédagogiques"
+msgstr "Assessment of teaching skills"
+
+#: .\templates\core\faq.html:280 .\templates\core\index.html:1217
+msgid "Test de connaissance de la matière"
+msgstr "Subject knowledge test"
+
+#: .\templates\core\faq.html:288 .\templates\core\index.html:1225
+msgid "Entretien avec notre responsable pédagogique"
+msgstr "Interview with our academic manager"
+
+#: .\templates\core\faq.html:291 .\templates\core\index.html:1228
+msgid ""
+"Seuls les candidats qui remplissent nos critères sont retenus pour enseigner "
+"à The Genius Academy."
+msgstr "Only candidates who meet our criteria are selected to teach at The Genius Academy."
+
+#: .\templates\core\faq.html:303 .\templates\core\index.html:1240
+msgid "Quelles sont les modalités de paiement acceptées ?"
+msgstr "What are the accepted payment methods?"
+
+#: .\templates\core\faq.html:309 .\templates\core\index.html:1246
+msgid "Nous proposons plusieurs modes de paiement pour plus de flexibilité :"
+msgstr "We offer several payment methods for greater flexibility:"
+
+#: .\templates\core\faq.html:313 .\templates\core\index.html:1250
+msgid "Paiement mensuel ou trimestriel"
+msgstr "Monthly or quarterly payment"
+
+#: .\templates\core\faq.html:317 .\templates\core\index.html:1254
+msgid "Espèces ou virement bancaire"
+msgstr "Cash or bank transfer"
+
+#: .\templates\core\faq.html:321 .\templates\core\index.html:1258
+msgid "Mobile money (Orange Money, MTN Mobile Money)"
+msgstr "Mobile money (Orange Money, MTN Mobile Money)"
+
+#: .\templates\core\faq.html:324 .\templates\core\index.html:1261
+msgid ""
+"Des facilités de paiement peuvent être accordées sur demande pour les "
+"forfaits de longue durée."
+msgstr "Payment plans can be arranged upon request for long-term packages."
+
+#: .\templates\core\faq.html:336 .\templates\core\index.html:1273
+msgid "Que se passe-t-il si mon enfant n'est pas satisfait de son enseignant ?"
+msgstr "What happens if my child is not satisfied with their teacher?"
+
+#: .\templates\core\faq.html:342 .\templates\core\index.html:1279
+msgid ""
+"La satisfaction de nos élèves est notre priorité. Si votre enfant n'est pas "
+"satisfait de son enseignant :"
+msgstr "Our students' satisfaction is our priority. If your child is not satisfied with their teacher:"
+
+#: .\templates\core\faq.html:350 .\templates\core\index.html:1287
+msgid ""
+"Vous pouvez demander un changement d'enseignant à tout moment, sans frais "
+"supplémentaires"
+msgstr "You can request a teacher change at any time, at no additional cost."
+
+#: .\templates\core\faq.html:358 .\templates\core\index.html:1295
+msgid "Notre responsable pédagogique vous proposera un nouveau profil sous 48h"
+msgstr "Our academic manager will propose a new teacher profile within 48 hours."
+
+#: .\templates\core\faq.html:361 .\templates\core\index.html:1298
+msgid "Nous nous engageons à trouver le professeur idéal pour votre enfant."
+msgstr "We are committed to finding the ideal teacher for your child."
+
+#: .\templates\core\faq.html:373 .\templates\core\index.html:1310
+msgid "Comment se déroulent les séances de cours à domicile ?"
+msgstr "How do home tutoring sessions work?"
+
+#: .\templates\core\faq.html:379 .\templates\core\index.html:1316
+msgid "Une séance type comprend :"
+msgstr "A typical session includes:"
+
+#: .\templates\core\faq.html:384 .\templates\core\index.html:1321
+msgid "Révision (15 min)"
+msgstr "Review (15 min)"
+
+#: .\templates\core\faq.html:384 .\templates\core\index.html:1321
+msgid "reprise des notions précédentes"
+msgstr "review of previous concepts"
+
+#: .\templates\core\faq.html:390 .\templates\core\index.html:1327
+msgid "Explication (60 min)"
+msgstr "Explanation (60 min)"
+
+#: .\templates\core\faq.html:390 .\templates\core\index.html:1327
+msgid "enseignement des nouvelles notions"
+msgstr "teaching of new concepts"
+
+#: .\templates\core\faq.html:396 .\templates\core\index.html:1333
+msgid "Application (30 min)"
+msgstr "Application (30 min)"
+
+#: .\templates\core\faq.html:396 .\templates\core\index.html:1333
+msgid "exercices pratiques"
+msgstr "practical exercises"
+
+#: .\templates\core\faq.html:402 .\templates\core\index.html:1339
+msgid "Bilan (15 min)"
+msgstr "Summary (15 min)"
+
+#: .\templates\core\faq.html:402 .\templates\core\index.html:1339
+msgid "synthèse et planning de révision"
+msgstr "summary and revision planning"
+
+#: .\templates\core\faq.html:406 .\templates\core\index.html:1343
+msgid ""
+"Bien sûr, ce schéma est adapté en fonction du niveau et des besoins "
+"spécifiques de l'élève."
+msgstr "Of course, this structure is adapted based on the student's level and specific needs."
+
+#: .\templates\core\faq.html:418 .\templates\core\index.html:1355
+msgid "Proposez-vous des cours en groupe ou uniquement individuels ?"
+msgstr "Do you offer group or only individual classes?"
+
+#: .\templates\core\faq.html:424 .\templates\core\index.html:1361
+msgid "Nous proposons les deux formules :"
+msgstr "We offer both options:"
+
+#: .\templates\core\faq.html:433 .\templates\core\index.html:1370
+msgid "Cours Individuels"
+msgstr "Individual Classes"
+
+#: .\templates\core\faq.html:434 .\templates\core\index.html:1371
+msgid "Enseignement personnalisé à domicile avec un professeur dédié."
+msgstr "Personalized home tutoring with a dedicated teacher."
+
+#: .\templates\core\faq.html:445 .\templates\core\index.html:1382
+#, python-format
+msgid "100%% sur mesure"
+msgstr "100% tailored"
+
+#: .\templates\core\faq.html:453 .\templates\core\index.html:1390
+msgid "Flexibilité horaire"
+msgstr "Flexible Scheduling"
+
+#: .\templates\core\faq.html:461 .\templates\core\index.html:1398
+msgid "Adaptation complète au rythme de l'élève"
+msgstr "Complete adaptation to the student's pace"
+
+#: .\templates\core\faq.html:473 .\templates\core\index.html:1410
+msgid "Cours en Groupe"
+msgstr "Group Classes"
+
+#: .\templates\core\faq.html:474 .\templates\core\index.html:1411
+msgid ""
+"Groupes de 3 à 5 élèves de niveau similaire, de préférence du même voisinage."
+msgstr "Groups of 3 to 5 students of similar levels, preferably from the same neighborhood."
+
+#: .\templates\core\faq.html:485 .\templates\core\index.html:1422
+msgid "Tarif réduit"
+msgstr "Reduced Rate"
+
+#: .\templates\core\faq.html:493 .\templates\core\index.html:1430
+msgid "Apprentissage collaboratif"
+msgstr "Collaborative Learning"
+
+#: .\templates\core\faq.html:501 .\templates\core\index.html:1438
+msgid "Stimulation par le groupe"
+msgstr "Group Stimulation"
+
+#: .\templates\core\faq.html:508 .\templates\core\index.html:1445
+msgid ""
+"Nous pouvons vous conseiller sur la formule la plus adaptée après "
+"l'évaluation initiale."
+msgstr "We can advise you on the most suitable option after the initial assessment."
+
+#: .\templates\core\faq.html:520 .\templates\core\index.html:1457
+msgid "Comment mesurer les progrès de mon enfant ?"
+msgstr "How can I measure my child's progress?"
+
+#: .\templates\core\faq.html:526 .\templates\core\index.html:1463
+msgid "Nous utilisons un système complet d'évaluation et de suivi :"
+msgstr "We use a comprehensive evaluation and tracking system:"
+
+#: .\templates\core\faq.html:535 .\templates\core\index.html:1472
+msgid "Bilans Réguliers"
+msgstr "Regular Assessments"
+
+#: .\templates\core\faq.html:536 .\templates\core\index.html:1473
+msgid "Évaluation mensuelle des progrès avec compte-rendu détaillé"
+msgstr "Monthly progress evaluation with a detailed report"
+
+#: .\templates\core\faq.html:547 .\templates\core\index.html:1484
+msgid "Courbe de Progression"
+msgstr "Progress Curve"
+
+#: .\templates\core\faq.html:548 .\templates\core\index.html:1485
+msgid "Visualisation graphique des résultats dans chaque matière"
+msgstr "Graphical visualization of results in each subject"
+
+#: .\templates\core\faq.html:559 .\templates\core\index.html:1496
+msgid "Entretiens Téléphoniques"
+msgstr "Phone Interviews"
+
+#: .\templates\core\faq.html:560 .\templates\core\index.html:1497
+msgid "Points réguliers avec notre responsable pédagogique"
+msgstr "Regular check-ins with our academic manager"
+
+#: .\templates\core\faq.html:571 .\templates\core\index.html:1508
+msgid "Liaison avec l'École"
+msgstr "School Liaison"
+
+#: .\templates\core\faq.html:572 .\templates\core\index.html:1509
+msgid "Coordination avec les professeurs de l'établissement scolaire"
+msgstr "Coordination with the school’s teachers"
+
+#: .\templates\core\faq.html:578 .\templates\core\index.html:1515
+msgid ""
+"Vous recevrez également des alertes immédiates en cas de difficulté "
+"persistante."
+msgstr "You will also receive immediate alerts in case of persistent difficulties."
+
+#: .\templates\core\faq.html:590
+msgid "Vous ne trouvez pas votre réponse ?"
+msgstr "Can’t find your answer?"
+
+#: .\templates\core\faq.html:591
+msgid ""
+"Notre équipe d'admission est disponible pour répondre à toutes vos questions "
+"personnalisées."
+msgstr "Our admissions team is available to answer all your personalized questions."
+
+#: .\templates\core\faq.html:593
+msgid "Nous appeler"
+msgstr "Call Us"
+
+#: .\templates\core\help.html:4
+msgid "Aide - The Genius Academy"
+msgstr "Help - The Genius Academy"
+
+#: .\templates\core\help.html:8
+msgid "Centre d’Aide"
+msgstr "Help Center"
+
+#: .\templates\core\help.html:9
+msgid ""
+"Trouvez des réponses ou contactez notre équipe pour une assistance "
+"personnalisée."
+msgstr "Find answers or contact our team for personalized assistance."
+
+#: .\templates\core\help.html:12
+msgid "Problèmes de connexion"
+msgstr "Login Issues"
+
+#: .\templates\core\help.html:13
+msgid ""
+"Si vous ne pouvez pas vous connecter, vérifiez votre email/mot de passe ou "
+"réinitialisez votre mot de passe."
+msgstr "If you can’t log in, check your email/password or reset your password."
+
+#: .\templates\core\help.html:16
+msgid "Support technique"
+msgstr "Technical Support"
+
+#: .\templates\core\help.html:17
+msgid "Contactez-nous à info@geniusacademy.cm pour tout problème technique."
+msgstr "Contact us at info@geniusacademy.cm for any technical issues."
+
+#: .\templates\core\help.html:20
+msgid "Contacter le support"
+msgstr "Contact Support"
+
+#: .\templates\core\index.html:599
+msgid "Excellence Académique notre signature"
+msgstr "Academic Excellence, Our Signature"
+
+#: .\templates\core\index.html:601
+msgid "De la Maternelle à la Terminale"
+msgstr "From Kindergarten to High School"
+
+#: .\templates\core\index.html:602
+msgid "Section Francophone & Anglophone"
+msgstr "French-Speaking & English-Speaking Sections"
+
+#: .\templates\core\index.html:603
+msgid ""
+"Cours de tutorat à domicile par des enseignants qualifiés pour réussir aux "
+"examens nationaux au Cameroun"
+msgstr "Home tutoring by qualified teachers to succeed in national exams in Cameroon"
+
+#: .\templates\core\index.html:606
+msgid "Demander un Enseignant"
+msgstr "Request a Teacher"
+
+#: .\templates\core\index.html:609 .\templates\core\index.html:819
+#: .\templates\core\services.html:4 .\templates\core\services.html:223
+#: .\templates\footer.html:48 .\templates\footer.html:57
+msgid "Nos Services"
+msgstr "Our Services"
+
+#: .\templates\core\index.html:689
+#, python-format
+msgid ""
+"\n"
+"                        %(rate)s %% de réussite\n"
+"                    "
+msgstr ""
+"\n"
+"                        %(rate)s%% success rate\n"
+"                    "
+
+#: .\templates\core\index.html:695
+#, python-format
+msgid ""
+"\n"
+"                        aux examens %(year)s\n"
+"                    "
+msgstr ""
+"\n"
+"                        in %(year)s exams\n"
+"                    "
+
+#: .\templates\core\index.html:707 .\templates\core\index.html:978
+#: .\templates\core\index.html:1099 .\templates\core\index.html:1521
+#: .\templates\core\services.html:382
+msgid "Voir plus"
+msgstr "See More"
+
+#: .\templates\core\index.html:820 .\templates\core\services.html:224
+msgid "Un accompagnement sur mesure pour tous les niveaux"
+msgstr "Tailored support for all levels"
+
+#: .\templates\core\index.html:838 .\templates\core\services.html:242
+msgid ""
+"Éveil et initiation aux bases de la lecture, de l'écriture et du calcul "
+"grâce à des méthodes ludiques et adaptées."
+msgstr "Awakening and introduction to the basics of reading, writing, and arithmetic through playful and adapted methods."
+
+#: .\templates\core\index.html:840 .\templates\core\services.html:244
+msgid "Initiation aux chiffres et lettres"
+msgstr "Introduction to Numbers and Letters"
+
+#: .\templates\core\index.html:841 .\templates\core\services.html:245
+msgid "Activités ludiques et éducatives"
+msgstr "Playful and Educational Activities"
+
+#: .\templates\core\index.html:842 .\templates\core\services.html:246
+msgid "Développement de la motricité"
+msgstr "Motor Skill Development"
+
+#: .\templates\core\index.html:846 .\templates\core\index.html:871
+#: .\templates\core\index.html:896 .\templates\core\index.html:921
+#: .\templates\core\index.html:946 .\templates\core\index.html:970
+#: .\templates\core\services.html:250 .\templates\core\services.html:275
+#: .\templates\core\services.html:300 .\templates\core\services.html:325
+#: .\templates\core\services.html:350 .\templates\core\services.html:374
+#: .\templates\core\services.html:391
+msgid "Demander un enseignant"
+msgstr "Request a Teacher"
+
+#: .\templates\core\index.html:863 .\templates\core\services.html:267
+msgid ""
+"Renforcement dans toutes les matières fondamentales et préparation aux "
+"examens de fin de cycle."
+msgstr "Reinforcement in all core subjects and preparation for end-of-cycle exams."
+
+#: .\templates\core\index.html:865 .\templates\core\services.html:269
+msgid " Toutes matières fondamentales"
+msgstr "All Core Subjects"
+
+#: .\templates\core\index.html:866 .\templates\core\services.html:270
+msgid "Préparation au CEP/FSLC"
+msgstr "Preparation for CEP/FSLC"
+
+#: .\templates\core\index.html:867 .\templates\core\services.html:271
+msgid "Méthodologie de travail"
+msgstr "Work Methodology"
+
+#: .\templates\core\index.html:888 .\templates\core\services.html:292
+msgid ""
+"Soutien scolaire de la 6ème à la Terminale, toutes séries confondues "
+"(scientifique et littéraire)."
+msgstr "Academic support from 6th grade to high school, all streams included (scientific and literary)."
+
+#: .\templates\core\index.html:890 .\templates\core\services.html:294
+msgid "Mathématiques, Physique, SVT"
+msgstr "Mathematics, Physics, Biology"
+
+#: .\templates\core\index.html:891 .\templates\core\services.html:295
+msgid "Philosophie, Histoire-Géo"
+msgstr "Philosophy, History-Geography"
+
+#: .\templates\core\index.html:892 .\templates\core\services.html:296
+msgid "Langues vivantes"
+msgstr "Modern Languages"
+
+#: .\templates\core\index.html:910 .\templates\core\services.html:314
+#: .\templates\footer.html:62
+msgid "Section Francophone"
+msgstr "French-Speaking Section"
+
+#: .\templates\core\index.html:913 .\templates\core\services.html:317
+msgid ""
+"Programmes adaptés au système éducatif francophone avec des enseignants "
+"spécialisés."
+msgstr "Programs tailored to the French-speaking educational system with specialized teachers."
+
+#: .\templates\core\index.html:915 .\templates\core\services.html:319
+msgid "Programme officiel camerounais"
+msgstr "Official Cameroonian Curriculum"
+
+#: .\templates\core\index.html:916 .\templates\core\services.html:320
+msgid "Enseignants francophones"
+msgstr "French-Speaking Teachers"
+
+#: .\templates\core\index.html:917 .\templates\core\services.html:321
+msgid "Préparation aux examens nationaux"
+msgstr "Preparation for National Exams"
+
+#: .\templates\core\index.html:935 .\templates\core\services.html:339
+#: .\templates\footer.html:63
+msgid "Section Anglophone"
+msgstr "English-Speaking Section"
+
+#: .\templates\core\index.html:938 .\templates\core\services.html:342
+msgid ""
+"Cours alignés sur le curriculum anglophone avec des enseignants bilingues "
+"expérimentés."
+msgstr "Courses aligned with the English-speaking curriculum, taught by experienced bilingual teachers."
+
+#: .\templates\core\index.html:940 .\templates\core\services.html:344
+msgid "Programme British/Nigerian"
+msgstr "British/Nigerian Curriculum"
+
+#: .\templates\core\index.html:941 .\templates\core\services.html:345
+msgid "Enseignants anglophones"
+msgstr "English-Speaking Teachers"
+
+#: .\templates\core\index.html:942 .\templates\core\services.html:346
+msgid "Préparation GCE O/A-Level"
+msgstr "Preparation for GCE O/A-Level"
+
+#: .\templates\core\index.html:960 .\templates\core\services.html:364
+#: .\templates\footer.html:102
+msgid "Préparation aux Examens"
+msgstr "Exam Preparation"
+
+#: .\templates\core\index.html:963 .\templates\core\services.html:367
+msgid " préparation spécifique pour tous les examens nationaux."
+msgstr "Specific preparation for all national exams."
+
+#: .\templates\core\index.html:965 .\templates\core\services.html:369
+msgid "BEPC, Probatoire, Baccalauréat"
+msgstr "BEPC, Probatoire, Baccalauréat"
+
+#: .\templates\core\index.html:966 .\templates\core\services.html:370
+msgid "GCE O-Level, A-Level"
+msgstr "GCE O-Level, A-Level"
+
+#: .\templates\core\index.html:989 .\templates\core\services.html:401
+msgid "Ce que disent les parents et élèves"
+msgstr "What Parents and Students Say"
+
+#: .\templates\core\index.html:1008
+msgid ""
+"Grâce à The Genius Academy, ma fille a enfin compris les mathématiques. Son "
+"enseignant est patient et compétent. Ses notes sont passées de 8 à 15 en "
+"seulement 3 mois !"
+msgstr "Thanks to The Genius Academy, my daughter finally understood mathematics. Her teacher is patient and skilled. Her grades went from 8 to 15 in just 3 months!"
+
+#: .\templates\core\index.html:1014
+msgid "Marie T."
+msgstr "Marie T."
+
+#: .\templates\core\index.html:1015
+msgid "Mère de Julie, 4ème"
+msgstr "Mother of Julie, 4th Grade"
+
+#: .\templates\core\index.html:1029
+msgid ""
+"Les cours de préparation au BAC avec The Genius Academy ont été "
+"déterminants. Mon fils a obtenu une mention Bien alors qu'il avait des "
+"difficultés en philosophie."
+msgstr "The BAC preparation courses with The Genius Academy were decisive. My son earned a 'Good' mention despite struggling with philosophy."
+
+#: .\templates\core\index.html:1035
+msgid "Paul E."
+msgstr "Paul E."
+
+#: .\templates\core\index.html:1036
+msgid "Père de Marc, Terminale"
+msgstr "Father of Marc, High School Senior"
+
+#: .\templates\core\index.html:1050
+msgid ""
+"Nous avons choisi le programme anglophone et sommes ravis. L'enseignant est "
+"natif et s'adapte parfaitement au rythme de notre fille. Ses progrès en "
+"anglais sont remarquables."
+msgstr "We chose the English-speaking program and are thrilled. The teacher is a native speaker and adapts perfectly to our daughter’s pace. Her progress in English is remarkable."
+
+#: .\templates\core\index.html:1056
+msgid "Chantal D."
+msgstr "Chantal D."
+
+#: .\templates\core\index.html:1057
+msgid "Mère de Sarah, CM2"
+msgstr "Mother of Sarah, 5th Grade"
+
+#: .\templates\core\index.html:1071
+msgid ""
+"Le soutien scolaire personnalisé a redonné confiance à mon enfant. Les "
+"progrès sont visibles et constants. Je recommande vivement The Genius "
+"Academy à tous les parents."
+msgstr "The personalized academic support restored my child’s confidence. The progress is visible and consistent. I highly recommend The Genius Academy to all parents."
+
+#: .\templates\core\index.html:1077
+msgid "Jean-Luc K."
+msgstr "Jean-Luc K."
+
+#: .\templates\core\index.html:1078
+msgid "Père d'Adrien, 5ème"
+msgstr "Father of Adrien, 6th Grade"
+
+#: .\templates\core\index.html:1087 .\templates\core\testimonials.html:920
+msgid "Précédent"
+msgstr "Previous"
+
+#: .\templates\core\index.html:1091 .\templates\core\testimonials.html:924
+msgid "Suivant"
+msgstr "Next"
+
+#: .\templates\core\index.html:1530
+msgid "Vous avez d'autres questions ?"
+msgstr "Do you have other questions?"
+
+#: .\templates\core\index.html:1531
+msgid ""
+"Notre équipe est à votre disposition pour répondre à toutes vos "
+"interrogations"
+msgstr "Our team is available to answer all your questions."
+
+#: .\templates\core\index.html:1560
+msgid "Rejoignez notre communauté"
+msgstr "Join Our Community"
+
+#: .\templates\core\index.html:1562
+msgid ""
+"Restez informés de nos nouveautés, conseils et événements via nos canaux "
+"officiels"
+msgstr "Stay informed about our news, tips, and events through our official channels."
+
+#: .\templates\core\index.html:1580
+msgid "Notre chaîne WhatsApp"
+msgstr "Our WhatsApp Channel"
+
+#: .\templates\core\index.html:1582
+msgid "Recevez en temps réel nos annonces, actualités et programmes éducatifs."
+msgstr "Receive our announcements, news, and educational programs in real time."
+
+#: .\templates\core\index.html:1587
+msgid "Rejoindre"
+msgstr "Join"
+
+#: .\templates\core\index.html:1604
+msgid "Notre page Facebook"
+msgstr "Our Facebook Page"
+
+#: .\templates\core\index.html:1606
+msgid "Découvrez nos publications, photos et rejoignez la discussion."
+msgstr "Discover our posts, photos, and join the conversation."
+
+#: .\templates\core\index.html:1617
+msgid "Suivre"
+msgstr "Follow"
+
+#: .\templates\core\post.html:16
+msgid "Add New Post"
+msgstr "Add New Post"
+
+#: .\templates\core\post.html:23 .\templates\core\post.html:31
+msgid "Events"
+msgstr "Events"
+
+#: .\templates\core\post.html:41
+msgid "news"
+msgstr "News"
+
+#: .\templates\core\post.html:41
+msgid "events"
+msgstr "Events"
+
+#: .\templates\core\post.html:52 .\templates\core\semester_list.html:57
+msgid "Edit"
+msgstr "Edit"
+
+#: .\templates\core\post.html:54 .\templates\core\semester_list.html:59
+msgid "Delete"
+msgstr "Delete"
+
+#: .\templates\core\post.html:64
+msgid "ago"
+msgstr "ago"
+
+#: .\templates\core\post.html:74
+msgid "The Genius Academy news and events will appear here."
+msgstr "The Genius Academy news and events will appear here."
+
+#: .\templates\core\post_add.html:7 .\templates\core\post_add.html:22
+#: .\templates\core\post_add.html:39
+msgid "Edit Post"
+msgstr "Edit Post"
+
+#: .\templates\core\post_add.html:9 .\templates\core\post_add.html:41
+msgid "Create New Post"
+msgstr "Create New Post"
+
+#: .\templates\core\post_add.html:19
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\core\post_add.html:24
+msgid "Create Post"
+msgstr "Create Post"
+
+#: .\templates\core\post_add.html:44
+msgid "Share news and events with the community"
+msgstr "Share news and events with the community"
+
+#: .\templates\core\post_add.html:60
+msgid "Post Title"
+msgstr "Post Title"
+
+#: .\templates\core\post_add.html:69
+msgid "Enter a catchy title"
+msgstr "Enter a catchy title"
+
+#: .\templates\core\post_add.html:77
+msgid "Enter a catchy title (max 255 characters)"
+msgstr "Enter a catchy title (max 255 characters)"
+
+#: .\templates\core\post_add.html:83
+msgid "Short Summary"
+msgstr "Short Summary"
+
+#: .\templates\core\post_add.html:96
+msgid "Briefly describe what this post is about"
+msgstr "Briefly describe what this post is about"
+
+#: .\templates\core\post_add.html:102
+msgid "Content"
+msgstr "Content"
+
+#: .\templates\core\post_add.html:116
+msgid "Full content of your post"
+msgstr "Full content of your post"
+
+#: .\templates\core\post_add.html:124
+msgid "Categories"
+msgstr "Categories"
+
+#: .\templates\core\post_add.html:144
+msgid "Select one or more categories"
+msgstr "Select one or more categories"
+
+#: .\templates\core\post_add.html:150
+msgid "Tags"
+msgstr "Tags"
+
+#: .\templates\core\post_add.html:170
+msgid "Add relevant tags"
+msgstr "Add relevant tags"
+
+#: .\templates\core\post_add.html:178
+msgid "Post Details"
+msgstr "Post Details"
+
+#: .\templates\core\post_add.html:183
+msgid "Post Type"
+msgstr "Post Type"
+
+#: .\templates\core\post_add.html:231
+msgid "Featured Image"
+msgstr "Featured Image"
+
+#: .\templates\core\post_add.html:253
+msgid "Image preview will appear here"
+msgstr "Image preview will appear here"
+
+#: .\templates\core\post_add.html:258
+msgid "Recommended size: 1200x630 pixels"
+msgstr "Recommended size: 1200x630 pixels"
+
+#: .\templates\core\post_add.html:264
+msgid "Image Credit"
+msgstr "Image Credit"
+
+#: .\templates\core\post_add.html:288
+msgid "Feature this post"
+msgstr "Feature this post"
+
+#: .\templates\core\post_add.html:300
+msgid "Pin this post"
+msgstr "Pin this post"
+
+#: .\templates\core\post_add.html:312
+msgid "Allow comments"
+msgstr "Allow comments"
+
+#: .\templates\core\post_add.html:318
+msgid "Author Information"
+msgstr "Author Information"
+
+#: .\templates\core\post_add.html:322
+msgid "User"
+msgstr "User"
+
+#: .\templates\core\post_add.html:337
+msgid "Back to Posts"
+msgstr "Back to Posts"
+
+#: .\templates\core\post_add.html:341
+msgid "Reset"
+msgstr "Reset"
+
+#: .\templates\core\post_add.html:346
+msgid "Update Post"
+msgstr "Update Post"
+
+#: .\templates\core\post_add.html:348
+msgid "Save Post"
+msgstr "Save Post"
+
+#: .\templates\core\post_add.html:414
+msgid "Select options"
+msgstr "Select options"
+
+#: .\templates\core\semester_list.html:10
+msgid "Semester list"
+msgstr "Semester List"
+
+#: .\templates\core\semester_list.html:16
+msgid "Add New Semester"
+msgstr "Add New Semester"
+
+#: .\templates\core\semester_list.html:20
+#: .\templates\core\semester_update.html:12
+msgid "Semester List"
+msgstr "Semester List"
+
+#: .\templates\core\semester_list.html:29
+#: .\templates\pdf\profile_single.html:67
+msgid "Semester"
+msgstr "Semester"
+
+#: .\templates\core\semester_list.html:30
+msgid "Is Current semester"
+msgstr "Is Current Semester"
+
+#: .\templates\core\semester_list.html:31
+msgid "Session"
+msgstr "Session"
+
+#: .\templates\core\semester_list.html:32
+msgid "Next Semester Begins"
+msgstr "Next Semester Begins"
+
+#: .\templates\core\semester_list.html:71
+msgid "No Semester."
+msgstr "No Semester."
+
+#: .\templates\core\semester_list.html:75
+msgid "Add Semester Now."
+msgstr "Add Semester Now."
+
+#: .\templates\core\semester_update.html:13
+msgid "Semester Form"
+msgstr "Semester Form"
+
+#: .\templates\core\semester_update.html:22
+msgid "Semester Add & update Form"
+msgstr "Semester Add & Update Form"
+
+#: .\templates\core\services.html:213
+msgid "Découvrez nos services éducatifs"
+msgstr "Discover Our Educational Services"
+
+#: .\templates\core\services.html:214
+msgid ""
+"Un accompagnement sur mesure pour chaque élève, de la maternelle à la "
+"terminale."
+msgstr "Tailored support for each student, from kindergarten to high school."
+
+#: .\templates\core\services.html:215
+msgid "Voir nos services"
+msgstr "View Our Services"
+
+#: .\templates\core\services.html:389
+msgid "Besoin d’un enseignant particulier ?"
+msgstr "Need a Private Tutor?"
+
+#: .\templates\core\services.html:390
+msgid "Contactez-nous dès maintenant pour réserver votre cours personnalisé."
+msgstr "Contact us now to book your personalized course."
+
+#: .\templates\core\services.html:409
+msgid ""
+"Excellent accompagnement, mon enfant a progressé rapidement ! Les "
+"enseignants sont très compétents et à l écoute."
+msgstr "Excellent support, my child progressed quickly! The teachers are very competent and attentive."
+
+#: .\templates\core\services.html:416
+msgid "Mère d élève en CM2"
+msgstr "Mother of a 5th Grade Student"
+
+#: .\templates\core\services.html:426
+msgid ""
+"Les enseignants sont très qualifiés et patients. Ma fille qui avait des "
+"difficultés en maths a finalement eu son bac avec mention."
+msgstr "The teachers are highly qualified and patient. My daughter, who struggled with math, finally passed her baccalaureate with honors."
+
+#: .\templates\core\services.html:433
+msgid "Père d élève en Terminale"
+msgstr "Father of a High School Senior"
+
+#: .\templates\core\services.html:443
+msgid ""
+"Méthodes pédagogiques modernes et efficaces. Mon fils a repris confiance en "
+"lui et ses résultats se sont considérablement améliorés."
+msgstr "Modern and effective teaching methods. My son regained confidence, and his results have significantly improved."
+
+#: .\templates\core\services.html:450
+msgid "Mère d élève en 4ème"
+msgstr "Mother of a 4th Grade Student"
+
+#: .\templates\core\services.html:466
+msgid "Trouvez les réponses à vos questions"
+msgstr "Find Answers to Your Questions"
+
+#: .\templates\core\services.html:476
+msgid "Comment se déroulent les cours à domicile ?"
+msgstr "How do home tutoring sessions work?"
+
+#: .\templates\core\services.html:481
+msgid ""
+"Nos enseignants se déplacent à votre domicile aux horaires convenus. Les "
+"cours sont personnalisés selon les besoins de l élève et durent généralement "
+"1h30 à 2h. Un bilan régulier est effectué avec les parents pour suivre les "
+"progrès."
+msgstr "Our teachers come to your home at agreed times. The courses are personalized based on the student’s needs and typically last 1.5 to 2 hours. Regular progress reviews are conducted with parents."
+
+#: .\templates\core\services.html:489
+msgid "Quelle est la qualification de vos enseignants ?"
+msgstr "What are the qualifications of your teachers?"
+
+#: .\templates\core\services.html:494
+msgid ""
+"Tous nos enseignants sont diplômés et expérimentés. Ils passent par un "
+"processus de sélection rigoureux et reçoivent une formation continue pour "
+"garantir la qualité de nos services."
+msgstr "All our teachers are qualified and experienced. They undergo a rigorous selection process and receive ongoing training to ensure the quality of our services."
+
+#: .\templates\core\services.html:502
+msgid "Proposez-vous des cours en groupe ?"
+msgstr "Do you offer group classes?"
+
+#: .\templates\core\services.html:507
+msgid ""
+"Oui, nous proposons des cours en petits groupes (maximum 5 élèves) pour ceux "
+"qui préfèrent cette formule. Les groupes sont constitués d élèves de niveau "
+"similaire pour un apprentissage optimal."
+msgstr "Yes, we offer small group classes (maximum 5 students) for those who prefer this format. Groups are formed with students of similar levels for optimal learning."
+
+#: .\templates\core\services.html:514
+msgid "Voir toutes les questions"
+msgstr "View All Questions"
+
+#: .\templates\core\testimonials.html:696 .\templates\navbar.html:221
+msgid "Dernière connexion:"
+msgstr "Last Login:"
+
+#: .\templates\core\testimonials.html:702 .\templates\navbar.html:227
+#: .\templates\setting\admin_panel.html:12
+#: .\templates\setting\admin_panel.html:16
+msgid "Panneau Admin"
+msgstr "Admin Panel"
+
+#: .\templates\core\testimonials.html:706 .\templates\navbar.html:231
+#: .\templates\sidebar.html:170
+msgid "Profil"
+msgstr "Profile"
+
+#: .\templates\core\testimonials.html:709 .\templates\navbar.html:234
+msgid "Paramètres"
+msgstr "Settings"
+
+#: .\templates\core\testimonials.html:825
+msgid ""
+"Découvrez ce que nos élèves, parents et enseignants disent de leur "
+"expérience avec"
+msgstr "Discover what our students, parents, and teachers say about their experience with"
+
+#: .\templates\core\testimonials.html:843
+msgid "Basé sur"
+msgstr "Based on"
+
+#: .\templates\core\testimonials.html:843
+msgid "avis"
+msgstr "reviews"
+
+#: .\templates\core\testimonials.html:848
+msgid "Laisser un témoignage"
+msgstr "Leave a Testimonial"
+
+#: .\templates\core\testimonials.html:864
+msgid "Témoignages à la une"
+msgstr "Featured Testimonials"
+
+#: .\templates\core\testimonials.html:909
+#: .\templates\core\testimonials.html:987
+msgid "En vedette"
+msgstr "Featured"
+
+#: .\templates\core\testimonials.html:937
+msgid "Filtrer les témoignages"
+msgstr "Filter Testimonials"
+
+#: .\templates\core\testimonials.html:940
+msgid "Tous les types"
+msgstr "All Types"
+
+#: .\templates\core\testimonials.html:941
+msgid "Élèves"
+msgstr "Students"
+
+#: .\templates\core\testimonials.html:942
+msgid "Parents"
+msgstr "Parents"
+
+#: .\templates\core\testimonials.html:946
+msgid "Toutes les notes"
+msgstr "All Ratings"
+
+#: .\templates\core\testimonials.html:948
+#: .\templates\core\testimonials.html:949
+msgid "et plus"
+msgstr "and above"
+
+#: .\templates\core\testimonials.html:952
+msgid "Plus récents"
+msgstr "Most Recent"
+
+#: .\templates\core\testimonials.html:953
+msgid "Plus anciens"
+msgstr "Oldest"
+
+#: .\templates\core\testimonials.html:954
+msgid "Meilleures notes"
+msgstr "Highest Rated"
+
+#: .\templates\core\testimonials.html:955
+msgid "Moins bonnes notes"
+msgstr "Lowest Rated"
+
+#: .\templates\core\testimonials.html:965
+msgid "Tous les témoignages"
+msgstr "All Testimonials"
+
+#: .\templates\core\testimonials.html:971
+msgid "Aucun témoignage ne correspond à vos critères"
+msgstr "No testimonials match your criteria"
+
+#: .\templates\core\testimonials.html:972
+msgid "Essayez de modifier vos filtres pour voir plus de résultats."
+msgstr "Try adjusting your filters to see more results."
+
+#: .\templates\core\testimonials.html:1024
+msgid "Lire plus"
+msgstr "Read More"
+
+#: .\templates\core\testimonials.html:1077
+msgid "Partagez votre expérience"
+msgstr "Share Your Experience"
+
+#: .\templates\core\testimonials.html:1107
+msgid "Sélectionnez..."
+msgstr "Select..."
+
+#: .\templates\core\testimonials.html:1108
+msgid "Élève/Étudiant"
+msgstr "Student"
+
+#: .\templates\core\testimonials.html:1120
+msgid "Donnez une note"
+msgstr "Give a Rating"
+
+#: .\templates\core\testimonials.html:1168
+#: .\templates\core\testimonials.html:1510
+msgid "Votre témoignage doit contenir au moins 20 caractères."
+msgstr "Your testimonial must contain at least 20 characters."
+
+#: .\templates\core\testimonials.html:1178
+msgid "Photo de profil (optionnel)"
+msgstr "Profile Photo (optional)"
+
+#: .\templates\core\testimonials.html:1181
+msgid "Formats acceptés: JPG, PNG. Taille maximale: 5MB."
+msgstr "Accepted formats: JPG, PNG. Maximum size: 5MB."
+
+#: .\templates\core\testimonials.html:1189
+msgid "Soumettre mon témoignage"
+msgstr "Submit My Testimonial"
+
+#: .\templates\core\testimonials.html:1195
+msgid "Votre témoignage sera examiné par notre équipe avant publication."
+msgstr "Your testimonial will be reviewed by our team before publication."
+
+#: .\templates\core\testimonials.html:1210
+msgid "Détails du témoignage"
+msgstr "Testimonial Details"
+
+#: .\templates\core\testimonials.html:1320
+msgid "Le fichier est trop volumineux. Taille maximale: 5MB."
+msgstr "The file is too large. Maximum size: 5MB."
+
+#: .\templates\core\testimonials.html:1327
+msgid "Seuls les fichiers JPG et PNG sont acceptés."
+msgstr "Only JPG and PNG files are accepted."
+
+#: .\templates\core\testimonials.html:1439
+msgid "Chargement..."
+msgstr "Loading..."
+
+#: .\templates\core\testimonials.html:1491
+msgid "Une erreur s'est produite lors du chargement du témoignage."
+msgstr "An error occurred while loading the testimonial."
+
+#: .\templates\core\testimonials.html:1517
+msgid "Veuillez sélectionner une note."
+msgstr "Please select a rating."
+
+#: .\templates\core\testimonials.html:1523
+msgid "Envoi en cours..."
+msgstr "Submitting..."
+
+#: .\templates\footer.html:25
+msgid ""
+"Excellence Académique reconnue. Nous accompagnons chaque élève vers la "
+"réussite scolaire avec des enseignants qualifiés et une pédagogie adaptée."
+msgstr "Recognized Academic Excellence. We guide each student toward academic success with qualified teachers and tailored pedagogy."
+
+#: .\templates\footer.html:45
+msgid "Liens Rapides"
+msgstr "Quick Links"
+
+#: .\templates\footer.html:49 .\templates\footer.html:117
+msgid "À Propos"
+msgstr "About"
+
+#: .\templates\footer.html:50 .\templates\sidebar.html:184
+msgid "Contact"
+msgstr "Contact"
+
+#: .\templates\footer.html:51 .\templates\sidebar.html:183
+msgid "FAQ"
+msgstr "FAQ"
+
+#: .\templates\footer.html:59
+msgid "Cours Maternelle"
+msgstr "Kindergarten Courses"
+
+#: .\templates\footer.html:60
+msgid "Cours Primaire"
+msgstr "Primary Courses"
+
+#: .\templates\footer.html:61
+msgid "Cours Secondaire"
+msgstr "Secondary Courses"
+
+#: .\templates\footer.html:75
+msgid "Yaoundé, Cameroun"
+msgstr "Yaoundé, Cameroon"
+
+#: .\templates\footer.html:98
+msgid "Programmes d'Excellence"
+msgstr "Excellence Programs"
+
+#: .\templates\footer.html:100
+msgid "Excellence Scientifique"
+msgstr "Scientific Excellence"
+
+#: .\templates\footer.html:101
+msgid "Programme Bilingue"
+msgstr "Bilingual Program"
+
+#: .\templates\footer.html:109
+msgid "Ressources"
+msgstr "Resources"
+
+#: .\templates\footer.html:111
+msgid "Blog Pédagogique"
+msgstr "Educational Blog"
+
+#: .\templates\footer.html:119
+msgid "Notre Équipe"
+msgstr "Our Team"
+
+#: .\templates\footer.html:120
+msgid "Notre Méthodologie"
+msgstr "Our Methodology"
+
+#: .\templates\footer.html:121
+msgid "Nos Résultats"
+msgstr "Our Results"
+
+#: .\templates\footer.html:131
+msgid "Restez informé"
+msgstr "Stay Informed"
+
+#: .\templates\footer.html:132
+msgid "Inscrivez-vous à notre newsletter pour recevoir nos actualités"
+msgstr "Subscribe to our newsletter to receive our updates"
+
+#: .\templates\footer.html:137
+msgid "S'inscrire"
+msgstr "Subscribe"
+
+#: .\templates\footer.html:146 .\templates\registration\login.html:107
+msgid "Tous droits réservés."
+msgstr "All Rights Reserved."
+
+#: .\templates\footer.html:152
+msgid "Plan du site"
+msgstr "Site Map"
+
+#: .\templates\invoice_detail.html:2 .\templates\invoices.html:1
+msgid "Invoices"
+msgstr "Invoices"
+
+#: .\templates\invoices.html:5
+msgid "Pay now"
+msgstr "Pay Now"
+
+#: .\templates\pdf\lecturer_list.html:12 .\templates\pdf\student_list.html:10
+msgid "ID No."
+msgstr "ID No."
+
+#: .\templates\pdf\lecturer_list.html:13 .\templates\pdf\student_list.html:11
+msgid "Full Name"
+msgstr "Full Name"
+
+#: .\templates\pdf\lecturer_list.html:15 .\templates\pdf\student_list.html:13
+msgid "Mob No."
+msgstr "Mobile No."
+
+#: .\templates\pdf\lecturer_list.html:16
+msgid "Address/City"
+msgstr "Address/City"
+
+#: .\templates\pdf\lecturer_list.html:33 .\templates\pdf\student_list.html:30
+msgid "No Lecturer(s)."
+msgstr "No Lecturer(s)."
+
+#: .\templates\pdf\profile_single.html:14
+#: .\templates\pdf\profile_single.html:65
+msgid "Last login:"
+msgstr "Last Login:"
+
+#: .\templates\pdf\profile_single.html:15
+msgid "Role:"
+msgstr "Role:"
+
+#: .\templates\pdf\profile_single.html:25
+msgid "My Courses"
+msgstr "My Courses"
+
+#: .\templates\pdf\profile_single.html:33
+msgid "No courses assigned!"
+msgstr "No courses assigned!"
+
+#: .\templates\pdf\profile_single.html:40
+msgid "Personal Info"
+msgstr "Personal Information"
+
+#: .\templates\pdf\profile_single.html:40
+msgid "First Name:"
+msgstr "First Name:"
+
+#: .\templates\pdf\profile_single.html:41
+msgid "Last Name:"
+msgstr "Last Name:"
+
+#: .\templates\pdf\profile_single.html:42
+msgid "ID No.:"
+msgstr "ID No.:"
+
+#: .\templates\pdf\profile_single.html:47
+msgid "Applicant Info"
+msgstr "Applicant Information"
+
+#: .\templates\pdf\profile_single.html:49
+msgid "School:"
+msgstr "School:"
+
+#: .\templates\pdf\profile_single.html:50
+msgid "Level:"
+msgstr "Level:"
+
+#: .\templates\pdf\profile_single.html:55
+msgid "Contact Info"
+msgstr "Contact Information"
+
+#: .\templates\pdf\profile_single.html:57
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\pdf\profile_single.html:58
+msgid "Tel No.:"
+msgstr "Phone No.:"
+
+#: .\templates\pdf\profile_single.html:59
+msgid "Address/city:"
+msgstr "Address/City:"
+
+#: .\templates\pdf\profile_single.html:63
+msgid "Important Dates"
+msgstr "Important Dates"
+
+#: .\templates\pdf\profile_single.html:67
+msgid "Academic Year:"
+msgstr "Academic Year:"
+
+#: .\templates\pdf\profile_single.html:69
+msgid "Registered Date:"
+msgstr "Registered Date:"
+
+#: .\templates\pdf\student_list.html:14
+msgid "Program"
+msgstr "Program"
+
+#: .\templates\registration\login.html:3
+msgid "The Genius Academy - Connexion"
+msgstr "The Genius Academy - Login"
+
+#: .\templates\registration\login.html:23
+msgid "Répétition à domicile au Cameroun"
+msgstr "Home Tutoring in Cameroon"
+
+#: .\templates\registration\login.html:29
+msgid "Connectez-vous à votre compte"
+msgstr "Log in to Your Account"
+
+#: .\templates\registration\login.html:38
+msgid "Numéro ID"
+msgstr "ID Number"
+
+#: .\templates\registration\login.html:46
+msgid "Entrez votre numéro ID"
+msgstr "Enter Your ID Number"
+
+#: .\templates\registration\login.html:55
+msgid "Mot de passe"
+msgstr "Password"
+
+#: .\templates\registration\login.html:58
+msgid "Mot de passe oublié?"
+msgstr "Forgot Password?"
+
+#: .\templates\registration\login.html:67
+msgid "Entrez votre mot de passe"
+msgstr "Enter Your Password"
+
+#: .\templates\registration\login.html:78
+msgid "ID ou mot de passe invalide."
+msgstr "Invalid ID or Password."
+
+#: .\templates\registration\login.html:84
+msgid "SE CONNECTER"
+msgstr "LOG IN"
+
+#: .\templates\registration\login.html:92
+msgid "Nouveau sur Genius Academy?"
+msgstr "New to Genius Academy?"
+
+#: .\templates\registration\login.html:99
+msgid "Créer un compte"
+msgstr "Create an Account"
+
+#: .\templates\registration\login.html:130
+msgid "Connexion en cours..."
+msgstr "Logging in..."
+
+#: .\templates\registration\login.html:150
+msgid "est déjà pris. Veuillez en essayer un autre."
+msgstr "is already taken. Please try another."
+
+#: .\templates\registration\login.html:157
+msgid "est disponible."
+msgstr "is available."
+
+#: .\templates\registration\login.html:166
+msgid "Vérification de la disponibilité..."
+msgstr "Checking availability..."
+
+#: .\templates\registration\password_reset.html:3
+msgid ""
+"Réinitialisation du mot de passe | Système de gestion de l’apprentissage"
+msgstr "Password Reset | Learning Management System"
+
+#: .\templates\registration\password_reset.html:7
+msgid "Réinitialisation du mot de passe"
+msgstr "Password Reset"
+
+#: .\templates\registration\password_reset.html:12
+msgid "E-mail"
+msgstr "Email"
+
+#: .\templates\registration\password_reset.html:16
+msgid "Demander la réinitialisation"
+msgstr "Request Reset"
+
+#: .\templates\registration\password_reset_complete.html:3
+msgid ""
+"Réinitialisation du mot de passe terminée | Système de gestion de "
+"l’apprentissage"
+msgstr "Password Reset Completed | Learning Management System"
+
+#: .\templates\registration\password_reset_complete.html:8
+msgid "Réinitialisation du mot de passe terminée"
+msgstr "Password Reset Completed"
+
+#: .\templates\registration\password_reset_complete.html:11
+msgid ""
+"Votre mot de passe a été défini, vous pouvez maintenant vous connecter !"
+msgstr "Your password has been set, you can now log in!"
+
+#: .\templates\registration\password_reset_complete.html:13
+msgid "Se connecter ici"
+msgstr "Log in Here"
+
+#: .\templates\registration\password_reset_confirm.html:3
+msgid "Nouveau mot de passe | Système de gestion de l’apprentissage"
+msgstr "New Password | Learning Management System"
+
+#: .\templates\registration\password_reset_confirm.html:10
+msgid "Confirmer le nouveau mot de passe"
+msgstr "Confirm New Password"
+
+#: .\templates\registration\password_reset_confirm.html:14
+msgid "Nouveau mot de passe"
+msgstr "New Password"
+
+#: .\templates\registration\password_reset_confirm.html:16
+msgid "Confirmer le mot de passe"
+msgstr "Confirm Password"
+
+#: .\templates\registration\password_reset_confirm.html:19
+msgid "Réinitialiser le mot de passe"
+msgstr "Reset Password"
+
+#: .\templates\registration\password_reset_done.html:3
+msgid "E-mail envoyé | Système de gestion de l’apprentissage"
+msgstr "Email Sent | Learning Management System"
+
+#: .\templates\registration\password_reset_done.html:8
+msgid "E-mail envoyé"
+msgstr "Email Sent"
+
+#: .\templates\registration\password_reset_done.html:11
+msgid ""
+"Un e-mail a été envoyé avec les instructions pour réinitialiser votre mot de "
+"passe. Veuillez vérifier votre boîte de réception."
+msgstr "An email has been sent with instructions to reset your password. Please check your inbox."
+
+#: .\templates\registration\password_reset_done.html:13
+msgid "Retour à la connexion"
+msgstr "Back to Login"
+
+#: .\templates\registration\register.html:3
+msgid "Register | Learning management system"
+msgstr "Register | Learning Management System"
+
+#: .\templates\registration\register.html:12
+msgid "Create Your Account"
+msgstr "Create Your Account"
+
+#: .\templates\registration\register.html:20
+msgid "Login Form"
+msgstr "Registration Form"
+
+#: .\templates\registration\register.html:73
+msgid "Invalid ID & Password."
+msgstr "Invalid ID & Password."
+
+#: .\templates\registration\register.html:76
+msgid "SIGN UP"
+msgstr "SIGN UP"
+
+#: .\templates\registration\register.html:79
+msgid "Already Registered ?"
+msgstr "Already Registered?"
+
+#: .\templates\registration\register.html:79
+msgid "Login"
+msgstr "Login"
+
+#: .\templates\search\search_view.html:3
+msgid "Résultat de recherche pour"
+msgstr "Search Results for"
+
+#: .\templates\search\search_view.html:3
+#: .\templates\setting\admin_panel.html:3
+#: .\templates\setting\password_change.html:3
+#: .\templates\setting\profile_info_change.html:3
+msgid "Système de gestion de l’apprentissage"
+msgstr "Learning Management System"
+
+#: .\templates\search\search_view.html:12
+msgid "Recherche"
+msgstr "Search"
+
+#: .\templates\search\search_view.html:17
+msgid "résultat"
+msgstr "result"
+
+#: .\templates\search\search_view.html:17
+msgid "pour"
+msgstr "for"
+
+#: .\templates\search\search_view.html:30
+#: .\templates\search\search_view.html:88
+#: .\templates\setting\admin_panel.html:38
+msgid "Cours"
+msgstr "Courses"
+
+#: .\templates\search\search_view.html:31
+msgid "Programme de"
+msgstr "Program of"
+
+#: .\templates\search\search_view.html:38
+#: .\templates\search\search_view.html:89
+msgid "Actualités et Événements"
+msgstr "News and Events"
+
+#: .\templates\search\search_view.html:39
+msgid "Date:"
+msgstr "Date:"
+
+#: .\templates\search\search_view.html:39
+msgid "il y a"
+msgstr "ago"
+
+#: .\templates\search\search_view.html:46
+#: .\templates\search\search_view.html:90
+msgid "Quiz"
+msgstr "Quiz"
+
+#: .\templates\search\search_view.html:47
+msgid "quiz"
+msgstr "Quiz"
+
+#: .\templates\search\search_view.html:47
+msgid "Cours:"
+msgstr "Course:"
+
+#: .\templates\search\search_view.html:73
+msgid "Appuyez sur Entrée pour rechercher"
+msgstr "Press Enter to Search"
+
+#: .\templates\search\search_view.html:74
+msgid "Rechercher..."
+msgstr "Search..."
+
+#: .\templates\search\search_view.html:85
+msgid "Rechercher par :"
+msgstr "Search by:"
+
+#: .\templates\search\search_view.html:87
+msgid "Titre ou description"
+msgstr "Title or Description"
+
+#: .\templates\search\search_view.html:88
+msgid "Titre, code ou description"
+msgstr "Title, Code, or Description"
+
+#: .\templates\search\search_view.html:89
+msgid "Titre, description ou simplement en tapant news ou event"
+msgstr "Title, Description, or simply by typing 'news' or 'event'"
+
+#: .\templates\search\search_view.html:90
+msgid "Titre, description ou catégorie (pratique, devoir ou examen)"
+msgstr "Title, Description, or Category (practice, homework, or exam)"
+
+#: .\templates\setting\admin_panel.html:26
+#: .\templates\setting\admin_panel.html:31
+#: .\templates\setting\admin_panel.html:52
+msgid "Gérer"
+msgstr "Manage"
+
+#: .\templates\setting\admin_panel.html:38
+msgid "Ajouter"
+msgstr "Add"
+
+#: .\templates\setting\admin_panel.html:41
+msgid "Activé"
+msgstr "Enabled"
+
+#: .\templates\setting\admin_panel.html:41
+msgid "Désactivé"
+msgstr "Disabled"
+
+#: .\templates\setting\admin_panel.html:44
+msgid "Basculer"
+msgstr "Toggle"
+
+#: .\templates\setting\admin_panel.html:45
+msgid "ON"
+msgstr "ON"
+
+#: .\templates\setting\admin_panel.html:46
+msgid "ou"
+msgstr "or"
+
+#: .\templates\setting\admin_panel.html:47
+msgid "OFF"
+msgstr "OFF"
+
+#: .\templates\setting\admin_panel.html:52
+msgid "Actualités"
+msgstr "News"
+
+#: .\templates\setting\admin_panel.html:52
+msgid "Événements"
+msgstr "Events"
+
+#: .\templates\setting\password_change.html:12
+msgid "Changement de mot de passe"
+msgstr "Password Change"
+
+#: .\templates\setting\profile_info_change.html:12
+#: .\templates\setting\profile_info_change.html:16
+msgid "Paramètres du compte"
+msgstr "Account Settings"
+
+#: .\templates\setting\profile_info_change.html:44
+msgid "Mettre à jour le profil"
+msgstr "Update Profile"
+
+#: .\templates\sidebar.html:107
+msgid "Navigation Principale"
+msgstr "Main Navigation"
+
+#: .\templates\sidebar.html:114
+msgid "Articles"
+msgstr "Articles"
+
+#: .\templates\sidebar.html:121
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+#: .\templates\sidebar.html:135
+msgid "Générer Calendrier"
+msgstr "Generate Calendar"
+
+#: .\templates\sidebar.html:147
+msgid "Menu Enseignant"
+msgstr "Teacher Menu"
+
+#: .\templates\sidebar.html:149
+msgid "Formulaires d\\"
+msgstr "Teacher Forms"
+
+#: .\templates\sidebar.html:152
+msgid "Exporter PDF"
+msgstr "Export PDF"
+
+#: .\templates\sidebar.html:158
+msgid "Menu Étudiant"
+msgstr "Student Menu"
+
+#: .\templates\sidebar.html:160
+msgid "Mes Réservations"
+msgstr "My Reservations"
+
+#: .\templates\sidebar.html:163
+msgid "Ajouter Réservation"
+msgstr "Add Reservation"
+
+#: .\templates\sidebar.html:168
+msgid "Compte"
+msgstr "Account"
+
+#: .\templates\sidebar.html:173
+msgid "Paramètres du Compte"
+msgstr "Account Settings"
+
+#: .\templates\sidebar.html:176
+msgid "Changer le Mot de Passe"
+msgstr "Change Password"
+
+#: .\templates\sidebar.html:180
+msgid "Informations"
+msgstr "Information"
+
+#: .\templates\sidebar.html:181
+msgid "À propos"
+msgstr "About"
+
+#: .\templates\sidebar.html:182
+msgid "Services"
+msgstr "Services"
+
+#: .\templates\snippets\filter_form.html:12
+msgid "Filtrer"
+msgstr "Filter"

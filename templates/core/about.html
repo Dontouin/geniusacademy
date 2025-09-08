@@ -1,0 +1,315 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "À Propos - The Genius Academy" %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-primary py-5 text-white">
+    <div class="container px-4 text-center">
+        <h1 class="display-4 fw-bold mb-4">{% trans "The Genius Academy" %}</h1>
+        <p class="lead mb-5">{% trans "L'excellence académique à domicile pour tous les niveaux" %}</p>
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+            <a href="/" class="btn btn-light btn-lg px-4">{% trans "Accueil" %}</a>
+            <a href="#about" class="btn btn-outline-light btn-lg px-4">{% trans "En savoir plus" %}</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section - Améliorée -->
+<section id="about" class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">{% trans 'Expertise reconnue' %}</span>
+                    <h2 class="fw-bold mb-4 section-title text-start">{% trans "Qui Sommes-Nous?" %}</h2>
+                    <p class="lead fs-4 text-primary">{% trans 'The Genius Academy est le leader des cours de répétition à domicile au Cameroun.' %}</p>
+                    <p class="fs-5 text-muted">{% trans "Notre mission est d'accompagner chaque élève vers l'excellence académique grâce à un enseignement personnalisé adapté à son rythme et à ses besoins spécifiques" %}</p>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-item h-100 p-3 rounded-3 bg-white shadow-sm">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold">{% trans 'Enseignants Qualifiés' %}</h5>
+                                        <p class="mb-0 text-muted">{% trans 'Des professeurs expérimentés et pédagogues' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-item h-100 p-3 rounded-3 bg-white shadow-sm">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-home fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold">{% trans 'À Domicile' %}</h5>
+                                        <p class="mb-0 text-muted">{% trans 'Apprentissage dans un environnement familier' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-item h-100 p-3 rounded-3 bg-white shadow-sm">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-graduation-cap fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold">{% trans 'Résultats Garantis' %}</h5>
+                                        <p class="mb-0 text-muted">{% trans 'Amélioration notable des notes' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-item h-100 p-3 rounded-3 bg-white shadow-sm">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-clock fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold">{% trans 'Flexibilité' %}</h5>
+                                        <p class="mb-0 text-muted">{% trans 'Horaires adaptés à votre emploi du temps' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="{% static 'img/caroussel1.jpg' %}" alt="Étudiant avec un enseignant" class="img-fluid rounded-3 shadow" style="animation: float 6s ease-in-out infinite;">
+                    <!-- <div class="position-absolute bottom-0 end-0 bg-primary text-white p-4 rounded-3 shadow-lg" style="animation: pulse 2s infinite;">
+                        <h4 class="m-0">
+                            {% blocktrans with rate=success_rate %}
+                                {{ rate }}% de réussite
+                            {% endblocktrans %}
+                        </h4>
+                        <p class="m-0">
+                            {% blocktrans with year=exam_year %}
+                                aux examens {{ year }}
+                            {% endblocktrans %}
+                        </p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Notre Méthode Pédagogique Section -->
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold mb-3 section-title">{% trans 'Notre Méthode Pédagogique' %}</h2>
+                <p class="lead fs-4">{% trans 'Une approche unique pour des résultats exceptionnels' %}</p>
+            </div>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="method-card text-center p-4 rounded-3 shadow-sm h-100">
+                            <div class="method-icon bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-user-check fa-2x text-white"></i>
+                            </div>
+                            <h4 class="h5">{% trans 'Évaluation Initiale' %}</h4>
+                            <p class="mb-0">{% trans 'Diagnostic précis des forces et faiblesses de chaque élève pour un programme sur mesure.' %}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="method-card text-center p-4 rounded-3 shadow-sm h-100">
+                            <div class="method-icon bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-chalkboard-teacher fa-2x text-white"></i>
+                            </div>
+                            <h4 class="h5">{% trans 'Enseignement Adaptatif' %}</h4>
+                            <p class="mb-0">{% trans 'Méthodes pédagogiques ajustées en temps réel selon les progrès et difficultés.' %}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="method-card text-center p-4 rounded-3 shadow-sm h-100">
+                            <div class="method-icon bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-brain fa-2x text-white"></i>
+                            </div>
+                            <h4 class="h5">{% trans 'Apprentissage Actif' %}</h4>
+                            <p class="mb-0">{% trans "L'élève est acteur de son apprentissage grâce à des exercices pratiques et concrets." %}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="method-card text-center p-4 rounded-3 shadow-sm h-100">
+                            <div class="method-icon bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-chart-line fa-2x text-white"></i>
+                            </div>
+                            <h4 class="h5">{% trans 'Suivi Personnalisé' %}</h4>
+                            <p class="mb-0">{% trans 'Bilans réguliers et ajustements constants pour garantir une progression optimale.' %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0">
+                <div class="position-relative">
+                    <img src="{% static 'img/eleve_en_class.jpg' %}" alt="Méthode pédagogique Genius Academy" class="img-fluid rounded-3 shadow">
+                    <div class="position-absolute top-0 start-0 bg-white rounded-3 shadow-sm p-3 m-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-lightbulb text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">{% trans 'Méthode éprouvée' %}</h5>
+                                <small> {% trans 'Excellence reconnue' %}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute bottom-0 end-0 bg-primary text-white rounded-3 shadow-sm p-3 m-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="text-center">
+                                <div class="mb-2 bg-light rounded-circle d-inline-block p-2">
+                                    <i class="fas fa-users fa-2x text-primary"></i>
+                                </div>
+                                <h5 class="mb-0 text-white">{% trans 'Des nombreux d’élèves' %}</h5>
+                                <small class="text-white">{% trans 'accompagnés avec succès' %}</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="bg-light rounded-3 p-4 p-md-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold mb-3">{% trans "Prêt à transformer l'expérience d'apprentissage de votre enfant?" %}</h3>
+                            <p class="mb-0">{% trans "Notre méthode unique a fait ses preuves auprès de nombreux d'élèves. Rejoignez la communauté The Genius Academy dès aujourd'hui." %}</p>
+                        </div>
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <a href="#contact" class="btn btn-primary btn-lg">{% trans 'Démarrer maintenant' %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission, Vision, Values -->
+<section class="py-5">
+    <div class="container px-4">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-primary mb-3">{% trans "Notre Engagement" %}</h2>
+            <div class="mx-auto bg-primary" style="width: 80px; height: 4px;"></div>
+            <p class="lead text-muted mt-4">{% trans "Découvrez les principes qui guident notre action éducative au quotidien" %}</p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-5">
+                        <h2 class="h3 fw-bold text-primary mb-4 d-flex align-items-center">
+                            <i class="fas fa-bolt text-primary me-3"></i>
+                            {% trans "Notre Mission" %}
+                        </h2>
+                        <p class="card-text text-muted fs-5">{% trans "Chez The Genius Academy, nous nous engageons à fournir un soutien scolaire personnalisé et des cours de répétition de haute qualité à domicile. Notre objectif est d'aider chaque élève, de la maternelle à la terminale, à atteindre son plein potentiel académique tout en développant des compétences essentielles pour leur futur." %}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-5">
+                        <h2 class="h3 fw-bold text-primary mb-4 d-flex align-items-center">
+                            <i class="fas fa-lightbulb text-info me-3"></i>
+                            {% trans "Notre Vision" %}
+                        </h2>
+                        <p class="card-text text-muted fs-5">{% trans "Nous aspirons à devenir le centre de référence en matière d'éducation complémentaire au Cameroun, en révolutionnant l'apprentissage à domicile grâce à des méthodes innovantes et des enseignants passionnés. Notre ambition est de former une génération de leaders éclairés, créatifs et compétitifs sur le plan international." %}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-5">
+                        <h2 class="h3 fw-bold text-primary mb-4 d-flex align-items-center">
+                            <i class="fas fa-star text-warning me-3"></i>
+                            {% trans "Nos Valeurs" %}
+                        </h2>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="bg-light p-4 rounded h-100">
+                                    <h3 class="h5 fw-bold text-primary mb-3">{% trans "Excellence Académique" %}</h3>
+                                    <p class="text-muted mb-0">{% trans "Nous nous engageons à fournir un enseignement de la plus haute qualité, avec des résultats tangibles pour nos élèves." %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light p-4 rounded h-100">
+                                    <h3 class="h5 fw-bold text-info mb-3">{% trans "Approche Personnalisée" %}</h3>
+                                    <p class="text-muted mb-0">{% trans "Chaque élève bénéficie d'un programme sur mesure adapté à ses besoins spécifiques et son rythme d'apprentissage." %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light p-4 rounded h-100">
+                                    <h3 class="h5 fw-bold text-success mb-3">{% trans "Innovation Pédagogique" %}</h3>
+                                    <p class="text-muted mb-0">{% trans "Nous combinons méthodes traditionnelles et approches modernes pour un apprentissage optimal." %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light p-4 rounded h-100">
+                                    <h3 class="h5 fw-bold text-purple mb-3">{% trans "Intégrité Professionnelle" %}</h3>
+                                    <p class="text-muted mb-0">{% trans "Transparence, éthique et professionnalisme guident toutes nos interactions avec élèves et parents." %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-5 bg-primary rounded-3 p-5 text-center text-white">
+            <h3 class="h2 fw-bold mb-3">{% trans "Prêt à booster votre réussite académique ?" %}</h3>
+            <p class="mb-4 fs-5">{% trans "Rejoignez les nombreux élèves qui ont déjà bénéficié de notre accompagnement personnalisé." %}</p>
+            <a href="/contact" class="btn btn-light btn-lg px-4">{% trans "Contactez-nous" %}</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    .feature-item {
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .text-purple {
+        color: #6f42c1;
+    }
+</style>
+{% endblock %}

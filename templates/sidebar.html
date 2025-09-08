@@ -1,0 +1,202 @@
+{% load static %}
+{% load i18n %}
+
+<style>
+  /* --- Sidebar Glamorphique Futuriste --- */
+  #side-nav {
+      width: 280px;
+      max-height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(160deg, #0a0a14, #1a1a2e);
+      box-shadow: 8px 8px 25px #0d0d1a, -8px -8px 25px #23233d;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease-in-out;
+  }
+  #side-nav::-webkit-scrollbar { width: 8px; }
+  #side-nav::-webkit-scrollbar-track { background: transparent; }
+  #side-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+  #side-nav .top-side {
+      background: linear-gradient(120deg, rgba(58,58,122,0.6), rgba(20,20,40,0.6));
+      box-shadow: inset 5px 5px 15px #0f0f1a, inset -5px -5px 15px #23233d;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 3rem 1rem 2rem 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+  }
+
+  #side-nav .logo-circle {
+      width: 170px;
+      height: 170px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 4px 12px #0f0f1a, -4px -4px 12px #23233d;
+      transition: all 0.3s ease;
+  }
+  #side-nav .logo-circle img { width: 75%; height: auto; border-radius: 50%; }
+
+  #side-nav ul { list-style: none; padding: 0 0.5rem; margin: 0; }
+  #side-nav ul li { margin: 0.5rem 0; }
+  #side-nav ul li a {
+      display: flex; align-items: center; gap: 12px; padding: 10px 18px;
+      border-radius: 15px; color: #d0d0ff; font-weight: 500; text-decoration: none;
+      transition: all 0.2s ease-in-out; position: relative;
+  }
+  #side-nav ul li a i { width: 20px; text-align: center; color: #a0a0ff; transition: all 0.3s ease; }
+  #side-nav ul li a:hover { background: rgba(255,255,255,0.05); box-shadow: 0 0 10px #6c63ff, 0 0 15px #6c63ff inset; color: #ffffff; }
+  #side-nav ul li a:hover i { color: #fff; text-shadow: 0 0 6px #6c63ff, 0 0 12px #6c63ff; }
+  #side-nav ul li.active a { background: rgba(255,255,255,0.1); box-shadow: inset 4px 4px 12px #0f0f1a, inset -4px -4px 12px #23233d, 0 0 8px #6c63ff; color: #ffffff; }
+  #side-nav p.ms-3 { color: #9a9acc; margin-top: 1rem; margin-bottom: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  #side-nav footer {
+      background: linear-gradient(145deg, #0f0f1b, #1a1a2e);
+      box-shadow: inset 2px 2px 10px #0d0d1a, inset -2px -2px 10px #23233d;
+      border-radius: 15px;
+      padding: 1rem;
+      margin: 2rem 0 1rem 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #a0a0d0;
+  }
+  #side-nav footer select {
+      background: transparent; border: 1px solid #555; border-radius: 5px; padding: 2px 5px; color: #d0d0ff;
+  }
+</style>
+
+<div id="side-nav">
+    <div class="main-menu">
+        <div class="top-side">
+            <div class="desktop-hide">
+                <div class="toggle-btn" onclick="toggleSidebar()">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <a href="{% url 'home' %}" class="logo-circle">
+                <img src="{% static 'img/logo.png' %}" alt="SkyLearn">
+            </a>
+            <p class="mt-2 small">
+                <mark class="bg-secondary text-light rounded px-1">
+                {% if request.user.is_superuser %}
+                    Super Admin
+                {% elif request.user.admin_role_name %}
+                    {{ request.user.admin_role_name }}
+                {% elif request.user.is_lecturer %}
+                    Enseignant
+                {% elif request.user.is_student %}
+                    Étudiant
+                {% elif request.user.is_parent %}
+                    Parent
+                {% else %}
+                    Utilisateur
+                {% endif %}
+                </mark>
+            </p>
+        </div>
+
+        <ul>
+            <!-- Accueil -->
+            <p class="ms-3 small">{% trans 'Navigation Principale' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i> {% trans 'Accueil' %}</a>
+            </li>
+
+            <!-- Articles accessibles à tous -->
+            <li class="{% if request.resolver_match.url_name == 'post' %}active{% endif %}">
+                <a href="{% url 'post' %}"><i class="fas fa-newspaper"></i> {% trans 'Articles' %}</a>
+            </li>
+
+            <!-- Superuser / Admin -->
+            {% if request.user.is_superuser %}
+            <p class="ms-3 small">{% trans 'Administration' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'admin_panel' %}active{% endif %}">
+                <a href="{% url 'admin_panel' %}"><i class="fas fa-user-shield"></i> {% trans 'Admin Panel' %}</a>
+            </li>
+            <li>
+                <a href="/admin/"><i class="fas fa-cogs"></i>TGA Administration</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                <a href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> {% trans 'Tableau de bord' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'secretary_dashboard' %}active{% endif %}">
+                <a href="{% url 'secretary_dashboard' %}">
+                    <i class="fas fa-tasks"></i> Dashboard Secrétaire
+                </a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'generate_calendar' %}active{% endif %}">
+                <a href="{% url 'generate_calendar' %}"><i class="fas fa-calendar-plus"></i> {% trans 'Générer Calendrier' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'lecturer_list' %}active{% endif %}">
+                <a href="{% url 'lecturer_list' %}"><i class="fas fa-chalkboard-teacher"></i> {% trans 'Enseignants' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'student_list' %}active{% endif %}">
+                <a href="{% url 'student_list' %}"><i class="fas fa-user-graduate"></i> {% trans 'Étudiants' %}</a>
+            </li>
+            {% endif %}
+
+            <!-- Lecturers -->
+            {% if request.user.is_lecturer %}
+            <p class="ms-3 small">{% trans 'Menu Enseignant' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'teacher_info_add' %}active{% endif %}">
+                <a href="{% url 'teacher_info_add' %}"><i class="fas fa-file-alt"></i> {% trans 'Formulaires d\'inscription' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'teacher_info_pdf' %}active{% endif %}">
+                <a href="{% url 'teacher_info_pdf' request.user.id %}"><i class="fas fa-file-pdf"></i> {% trans 'Exporter PDF' %}</a>
+            </li>
+            {% endif %}
+
+            <!-- Students -->
+            {% if request.user.is_student %}
+            <p class="ms-3 small">{% trans 'Menu Étudiant' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'res_list' %}active{% endif %}">
+                <a href="{% url 'res_list' %}"><i class="fas fa-calendar-check"></i> {% trans 'Mes Réservations' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'res_add' %}active{% endif %}">
+                <a href="{% url 'res_add' %}"><i class="fas fa-plus-circle"></i> {% trans 'Ajouter Réservation' %}</a>
+            </li>
+            {% endif %}
+
+            <!-- Compte -->
+            <p class="ms-3 small">{% trans 'Compte' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                <a href="{% url 'profile' %}"><i class="fas fa-user"></i> {% trans 'Profil' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                <a href="{% url 'edit_profile' %}"><i class="fas fa-cogs"></i> {% trans 'Paramètres du Compte' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+                <a href="{% url 'change_password' %}"><i class="fas fa-key"></i> {% trans 'Changer le Mot de Passe' %}</a>
+            </li>
+
+            <!-- Informations -->
+            <p class="ms-3 small">{% trans 'Informations' %}</p>
+            <li><a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> {% trans 'À propos' %}</a></li>
+            <li><a href="{% url 'services' %}"><i class="fas fa-concierge-bell"></i> {% trans 'Services' %}</a></li>
+            <li><a href="{% url 'faq' %}"><i class="fas fa-question-circle"></i> {% trans 'FAQ' %}</a></li>
+            <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> {% trans 'Contact' %}</a></li>
+            <li><a href="{% url 'testimonials' %}"><i class="fas fa-star"></i> {% trans 'Témoignages' %}</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> {% trans 'Déconnexion' %}</a></li>
+        </ul>
+    </div>
+
+    <footer>
+        
+        <p>THE GENIUS ACADEMY &copy; <script>document.write(new Date().getFullYear());</script></p>
+    </footer>
+</div>
+
+{% block js %}
+<script>
+document.getElementById("lang-select").addEventListener("change", function() {
+    document.getElementById("lang-form").submit();
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,134 @@
+{% extends 'registration/registration_base.html' %}
+{% block title %}Register Parent{% endblock %}
+
+{% block content %}
+<style>
+/* --- Fond sombre animé futuriste --- */
+body {
+    background: linear-gradient(135deg, #0a0a14, #1a1a2e, #002b36);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-size: 300% 300%;
+    animation: bgShift 20s ease infinite;
+}
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Container glassmorphique --- */
+.container {
+    max-width: 720px;
+    margin: 4rem auto;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-radius: 25px;
+    padding: 2.8rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: all 0.4s ease;
+}
+.container:hover {
+    border-color: rgba(255,255,255,0.25);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.85);
+}
+
+/* --- Titre clair avec glow --- */
+h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.3rem;
+    margin-bottom: 2.2rem;
+    color: #1dd1a1;
+    text-shadow: 0 0 12px rgba(72,219,251,0.7), 0 0 24px rgba(29,209,161,0.6);
+}
+
+/* --- Champs de formulaire --- */
+input, select, textarea {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    margin-top: 0.4rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    outline: none;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: #1dd1a1;
+    box-shadow: 0 0 14px rgba(29,209,161,0.7);
+}
+
+/* --- Labels --- */
+label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #eaeaea;
+}
+
+/* --- Bouton néon futuriste --- */
+.btn-success {
+    position: relative;
+    z-index: 1;
+    border: none;
+    padding: 1rem 2.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 22px;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(90deg, #1dd1a1, #48dbfb);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn-success::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    background: linear-gradient(45deg, #1dd1a1, #48dbfb, #ff6b6b, #feca57, #5f27cd);
+    filter: blur(10px);
+    border-radius: 22px;
+    opacity: 0.55;
+    z-index: -1;
+    animation: pulse 3s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 0.45; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.05); }
+}
+.btn-success:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 0 28px rgba(29,209,161,0.9);
+}
+
+/* --- Messages d'erreur --- */
+.text-danger {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    color: #ff6b6b;
+}
+</style>
+
+<div class="container">
+    <h2>Register Parent</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                <div class="text-danger">{{ field.errors }}</div>
+            </div>
+        {% endfor %}
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #f8f9fa; padding: 20px; text-align: center; }
+        .content { background-color: white; padding: 20px; }
+        .footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; }
+        .response { background-color: #e9ecef; padding: 15px; border-left: 4px solid #007bff; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ site_name }}</h1>
+        </div>
+        
+        <div class="content">
+            <h2>Bonjour {{ user_name }},</h2>
+            
+            <p>Nous vous remercions d'avoir contacté {{ site_name }}. Voici la réponse à votre message :</p>
+            
+            <div class="response">
+                {{ admin_message|linebreaks }}
+            </div>
+            
+            <p>Si vous avez d'autres questions, n'hésitez pas à nous contacter à nouveau.</p>
+            
+            <p>Cordialement,<br>L'équipe {{ site_name }}</p>
+        </div>
+        
+        <div class="footer">
+            <p>Cet email a été envoyé en réponse à votre message sur <a href="{{ site_url }}">{{ site_url }}</a>.</p>
+            <p>Si vous pensez avoir reçu cet email par erreur, veuillez nous contacter à <a href="mailto:{{ support_email }}">{{ support_email }}</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
