@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.views import defaults as default_views
 from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import JavaScriptCatalog
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # --- Personnalisation du panneau admin ---
 admin.site.site_header = "SkyLearn Admin"
@@ -58,3 +59,5 @@ if settings.DEBUG:
         ),
         path("500/", default_views.server_error),
     ]
+
+urlpatterns +=staticfiles_urlpatterns()
