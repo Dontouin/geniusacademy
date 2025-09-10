@@ -2,20 +2,20 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html
 from modeltranslation.admin import TranslationAdmin
-from .models import Slide, GalleryImage, Testimonial, NewsletterSubscriber, ContactMessage, StatValue, NewsAndEvents
+from .models import (
+    Slide, GalleryImage, Testimonial, NewsletterSubscriber, 
+    ContactMessage, StatValue, NewsAndEvents, AcademicEvent,
+    Absence, Reservation, SuccessRate
+)
 
 # ---------------- NewsAndEvents Admin ----------------
-
+@admin.register(NewsAndEvents)
 class NewsAndEventsAdmin(TranslationAdmin):
-    pass
+    list_display = ('title', 'summary', 'posted_as', 'updated_date')
+    list_filter = ('posted_as', 'updated_date')
+    search_fields = ('title', 'summary')
+    date_hierarchy = 'updated_date'
 
-admin.site.register(NewsAndEvents, NewsAndEventsAdmin)
-
-
-from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
-from django.utils.html import format_html
-from .models import Slide, GalleryImage, Testimonial, NewsletterSubscriber, ContactMessage, StatValue
 # ---------------- Drag & Drop Inline pour les images ----------------
 class GalleryImageInline(admin.TabularInline):
     model = GalleryImage
@@ -44,7 +44,6 @@ class GalleryImageInline(admin.TabularInline):
         return "-"
     thumbnail_preview.short_description = _("Prévisualisation")
 
-
 # ---------------- Slide Admin ----------------
 @admin.register(Slide)
 class SlideAdmin(admin.ModelAdmin):
@@ -57,7 +56,6 @@ class SlideAdmin(admin.ModelAdmin):
     def image_count(self, obj):
         return obj.images.count()
     image_count.short_description = _("Nombre d'images")
-
 
 # ---------------- Testimonial Admin ----------------
 @admin.register(Testimonial)
@@ -109,7 +107,6 @@ class TestimonialAdmin(admin.ModelAdmin):
         self.message_user(request, _("%d témoignage(s) désapprouvé(s).") % updated)
     disapprove_testimonials.short_description = _("Désapprouver les témoignages sélectionnés")
 
-
 # ---------------- Newsletter Subscriber Admin ----------------
 @admin.register(NewsletterSubscriber)
 class NewsletterSubscriberAdmin(admin.ModelAdmin):
@@ -144,7 +141,6 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
         updated = queryset.update(is_active=False)
         self.message_user(request, _("%d abonné(s) désactivé(s).") % updated)
     deactivate_subscribers.short_description = _("Désactiver les abonnés sélectionnés")
-
 
 # ---------------- Contact Message Admin ----------------
 @admin.register(ContactMessage)
@@ -187,7 +183,6 @@ class ContactMessageAdmin(admin.ModelAdmin):
         self.message_user(request, _("%d message(s) marqué(s) comme non lu(s).") % updated)
     mark_as_unread.short_description = _("Marquer comme non lu")
 
-
 # ---------------- Stat Value Admin ----------------
 @admin.register(StatValue)
 class StatValueAdmin(admin.ModelAdmin):
@@ -205,25 +200,14 @@ class StatValueAdmin(admin.ModelAdmin):
         return icons.get(obj.name.lower(), '📊')
     display_icon.short_description = _('Icône')
 
-    # core/admin.py
-from django.contrib import admin
-from .models import AcademicEvent
-
+# ---------------- Academic Event Admin ----------------
 @admin.register(AcademicEvent)
 class AcademicEventAdmin(admin.ModelAdmin):
     list_display = ("date", "activity", "responsible")
     search_fields = ("activity", "responsible")
     list_filter = ("date",)
 
-from django.contrib import admin
-from .models import AcademicEvent, Absence, Reservation
-
-# -------------------------------
-# Admin Événements
-# -------------------------------
-from django.contrib import admin
-from .models import SuccessRate
-
+# ---------------- Success Rate Admin ----------------
 @admin.register(SuccessRate)
 class SuccessRateAdmin(admin.ModelAdmin):
     list_display = ('year', 'rate', 'created_at')
@@ -232,10 +216,7 @@ class SuccessRateAdmin(admin.ModelAdmin):
     ordering = ('-year',)
     readonly_fields = ('created_at',)
 
-
-# -------------------------------
-# Admin Absences
-# -------------------------------
+# ---------------- Absence Admin ----------------
 @admin.register(Absence)
 class AbsenceAdmin(admin.ModelAdmin):
     list_display = ['teacher', 'date', 'reason']
@@ -243,9 +224,7 @@ class AbsenceAdmin(admin.ModelAdmin):
     search_fields = ['teacher__username', 'reason']
     ordering = ['date']
 
-# -------------------------------
-# Admin Réservations
-# -------------------------------
+# ---------------- Reservation Admin ----------------
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ['course_name', 'student_name', 'date']
