@@ -20,7 +20,7 @@ DEBUG = config("DEBUG")
 import os
 
 # settings.py
-ALLOWED_HOSTS = ['geniusacademy5.onrender.com']
+ALLOWED_HOSTS = ['geniusacademy5.onrender.com','127.0.0.1']
 
 
 
@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "jazzmin",
+    "jet",  # <-- ajoute ceci
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
