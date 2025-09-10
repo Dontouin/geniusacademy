@@ -20,7 +20,7 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 import os
 
 # settings.py
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 
