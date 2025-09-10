@@ -20,11 +20,7 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 import os
 
 # settings.py
-ALLOWED_HOSTS = [
-    "geniusacademy-41vh.onrender.com",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = ["*"]
 
 
 
