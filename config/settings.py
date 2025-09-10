@@ -17,7 +17,10 @@ SECRET_KEY = config("SECRET_KEY", default="django-insecure-default-key-for-dev")
 
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "adilmohak1.pythonanywhere.com"]
+import os
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+
 
 # Custom user model
 AUTH_USER_MODEL = "accounts.User"
