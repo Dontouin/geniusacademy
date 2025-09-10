@@ -122,10 +122,18 @@ TIME_ZONE = "Africa/Douala"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+import os
+
+# URL pour accéder aux fichiers statiques
+STATIC_URL = '/static/'
+
+# Dossier où collecter les fichiers statiques pour le déploiement
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Optionnel : dossiers supplémentaires contenant des fichiers statiques
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # si tu as un dossier static/ dans ton projet
+]
 
 # Media files
 MEDIA_URL = "/media/"
