@@ -13,14 +13,14 @@ from .views import (
     edit_staff,
     delete_staff,
     student_add_view,
-    edit_student,
+    #edit_student,
     delete_student,
     other_add_view,
     edit_other,
     delete_other,
     other_list,
     ParentAdd,
-    edit_parent,  # AJOUT: Vues pour parents
+    #edit_parent,  # AJOUT: Vues pour parents
     delete_parent,
     parent_list,  # AJOUT: Liste des parents
     validate_username,
