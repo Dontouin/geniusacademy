@@ -6,6 +6,7 @@ from django.views import defaults as default_views
 from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import JavaScriptCatalog
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import RedirectView
 
 # --- Personnalisation du panneau admin ---
 admin.site.site_header = "SkyLearn Admin"
@@ -16,17 +17,19 @@ admin.site.index_title = "Bienvenue sur SkyLearn Admin"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
+    # Redirection automatique de la racine vers la langue par défaut
+    path("", RedirectView.as_view(url=f"/{settings.LANGUAGE_CODE}/", permanent=True)),
 ]
 
 # --- URL patterns avec traduction (i18n) ---
 urlpatterns += i18n_patterns(
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
-    path("", include("core.urls")),
+    path("", include("core.urls")),  # page principale multilingue
     path("jet/", include("jet.urls", "jet")),
     path("jet/dashboard/", include("jet.dashboard.urls", "jet-dashboard")),
     path("accounts/", include("accounts.urls")),
     path("search/", include("search.urls")),
-    # Décommenter si besoin
+    # Décommente si besoin
     # path("programs/", include("course.urls")),
     # path("result/", include("result.urls")),
     # path("quiz/", include("quiz.urls")),
@@ -34,7 +37,6 @@ urlpatterns += i18n_patterns(
 )
 
 # --- Fichiers statiques et media ---
-# En production (DEBUG=False), WhiteNoise servira automatiquement STATIC_ROOT
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -60,4 +62,5 @@ if settings.DEBUG:
         path("500/", default_views.server_error),
     ]
 
-urlpatterns +=staticfiles_urlpatterns()
+# --- Assurer la gestion des fichiers statiques avec WhiteNoise si nécessaire ---
+urlpatterns += staticfiles_urlpatterns()
