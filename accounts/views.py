@@ -216,6 +216,12 @@ def profile_single(request, user_id):
 
     return render(request, "accounts/profile_single.html", context)
 
+
+# ########################################################
+# Settings Views
+# ########################################################
+
+
 @login_required
 def profile_update(request):
     if request.method == "POST":
@@ -228,6 +234,7 @@ def profile_update(request):
     else:
         form = ProfileUpdateForm(instance=request.user)
     return render(request, "setting/profile_info_change.html", {"form": form})
+
 
 @login_required
 def change_password(request):
