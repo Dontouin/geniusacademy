@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Liste des Parents - The Genius Academy</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { width: 100px; height: 100px; }
+        .title { font-size: 24px; font-weight: bold; }
+        .subtitle { font-size: 16px; color: #666; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">THE GENIUS ACADEMY</div>
+        <div class="subtitle">Liste des Parents</div>
+        <div class="date">Généré le : {% now "d/m/Y à H:i" %}</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <th>Nom complet</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Relation</th>
+                <th>Enfant(s)</th>
+                <th>Date d'inscription</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parent in parents %}
+            <tr>
+                <td>{{ parent.parent.username }}</td>
+                <td>{{ parent.parent.get_full_name }}</td>
+                <td>{{ parent.parent.email|default:"-" }}</td>
+                <td>{{ parent.parent.phone|default:"-" }}</td>
+                <td>{{ parent.relation_ship|default:"Non spécifié" }}</td>
+                <td>
+                    {% if parent.student %}
+                        {{ parent.student.student.get_full_name }}
+                    {% else %}
+                        Aucun enfant assigné
+                    {% endif %}
+                </td>
+                <td>{{ parent.parent.date_joined|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Page <pdf:pagenumber> sur <pdf:pagecount> - Total : {{ parents.count }} parent(s)
+    </div>
+</body>
+</html>

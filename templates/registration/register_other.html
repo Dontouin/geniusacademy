@@ -1,0 +1,572 @@
+{% extends 'registration/registration_base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Inscription - Autre Utilisateur | The Genius Academy{% endblock %}
+
+{% block content %}
+<style>
+/* --- Fond bleu marine élégant --- */
+body {
+    position: relative;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #001f3f, #003366, #001a33);
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Effets de particules en arrière-plan */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+/* --- Container en vitre lumineuse --- */
+.glass-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 3rem auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.4s ease-in-out;
+}
+
+.glass-container:hover {
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+/* --- Titres éclatants --- */
+.page-title {
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.7rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.9);
+}
+
+.page-subtitle {
+    text-align: center;
+    color: #e6e6e6;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* --- Formulaire stylisé --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Labels stylisés --- */
+.form-label {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* --- BOUTON DE VALIDATION AMÉLIORÉ --- */
+.btn-submit {
+    background: linear-gradient(135deg, #6c63ff, #4a45b3);
+    border: none;
+    border-radius: 20px;
+    padding: 16px 35px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.4s ease;
+    width: 100%;
+    margin-top: 2rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.3);
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #4a45b3, #6c63ff);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 5px 20px rgba(108, 99, 255, 0.4);
+}
+
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.7s ease;
+}
+
+.btn-submit:hover::before {
+    left: 100%;
+}
+
+.btn-submit .btn-icon {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.btn-submit:hover .btn-icon {
+    transform: rotate(360deg);
+}
+
+.btn-submit .btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation de chargement */
+.btn-submit.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-submit.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Effet de brillance sur le bouton */
+.btn-submit {
+    background: linear-gradient(135deg, #6c63ff 0%, #4a45b3 50%, #6c63ff 100%);
+    background-size: 200% 200%;
+    animation: shimmer 3s ease infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Effet de pulse au survol */
+.btn-submit:hover {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(108, 99, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
+}
+
+/* --- Liens --- */
+.link {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.link:hover {
+    color: #ffa500;
+    text-shadow: 0 0 12px #ffa500;
+}
+
+/* --- Alertes --- */
+.alert {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Icônes --- */
+.form-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 3;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon .form-control {
+    padding-left: 45px;
+}
+
+/* Style pour les selects */
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12L8 12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+/* En-têtes de section */
+.section-header {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+.section-header i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Messages d'erreur */
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* Aide texte */
+.help-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .glass-container {
+        margin: 1.5rem;
+        padding: 2rem;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .btn-submit {
+        padding: 14px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .section-header {
+        font-size: 1.1rem;
+    }
+}
+</style>
+
+<div class="glass-container">
+    <div class="text-center mb-4">
+        <h1 class="page-title"><i class="fas fa-user-cog me-2"></i>Inscription - Autre Utilisateur</h1>
+        <p class="page-subtitle">Rejoignez The Genius Academy en tant qu'utilisateur invité</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <i class="fas fa-{% if message.tags == 'success' %}check-circle{% else %}exclamation-triangle{% endif %} me-2"></i>
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        Veuillez corriger les erreurs ci-dessous.
+    </div>
+    {% endif %}
+
+    <form method="post" novalidate id="registrationForm">
+        {% csrf_token %}
+        
+        <div class="row">
+            <!-- Colonne gauche - Informations de connexion -->
+            <div class="col-md-6">
+                <h5 class="section-header">
+                    <i class="fas fa-key"></i>Informations de connexion
+                </h5>
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Nom d'utilisateur</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user form-icon"></i>
+                        {{ form.username|add_class:"form-control"|attr:"placeholder:Choisissez un nom d'utilisateur" }}
+                    </div>
+                    {% if form.username.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.username.errors.0 }}
+                    </span>
+                    {% endif %}
+                    {% if form.username.help_text %}
+                    <span class="help-text">{{ form.username.help_text }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}" class="form-label">Mot de passe</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock form-icon"></i>
+                        {{ form.password1|add_class:"form-control"|attr:"placeholder:Créez un mot de passe sécurisé" }}
+                    </div>
+                    {% if form.password1.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.password1.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmation du mot de passe</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock form-icon"></i>
+                        {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirmez votre mot de passe" }}
+                    </div>
+                    {% if form.password2.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.password2.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Colonne droite - Informations personnelles -->
+            <div class="col-md-6">
+                <h5 class="section-header">
+                    <i class="fas fa-user-circle"></i>Informations personnelles
+                </h5>
+
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label">Prénom</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-signature form-icon"></i>
+                        {{ form.first_name|add_class:"form-control"|attr:"placeholder:Votre prénom" }}
+                    </div>
+                    {% if form.first_name.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.first_name.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label">Nom</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-signature form-icon"></i>
+                        {{ form.last_name|add_class:"form-control"|attr:"placeholder:Votre nom" }}
+                    </div>
+                    {% if form.last_name.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.last_name.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope form-icon"></i>
+                        {{ form.email|add_class:"form-control"|attr:"placeholder:exemple@email.com" }}
+                    </div>
+                    {% if form.email.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.email.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.gender.id_for_label }}" class="form-label">Genre</label>
+                    {{ form.gender|add_class:"form-control" }}
+                    {% if form.gender.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.gender.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations supplémentaires -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}" class="form-label">Téléphone</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone form-icon"></i>
+                        {{ form.phone|add_class:"form-control"|attr:"placeholder:+237 6xx xx xx xx" }}
+                    </div>
+                    {% if form.phone.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.phone.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}" class="form-label">Adresse</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-map-marker-alt form-icon"></i>
+                        {{ form.address|add_class:"form-control"|attr:"placeholder:Votre adresse complète" }}
+                    </div>
+                    {% if form.address.errors %}
+                    <span class="error-message">
+                        <i class="fas fa-exclamation-circle me-1"></i>{{ form.address.errors.0 }}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Note d'information -->
+        <div class="alert alert-info mt-4">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Note :</strong> En tant qu'utilisateur "autre", vous devez choisir votre propre nom d'utilisateur et mot de passe.
+            Aucun matricule ne sera généré automatiquement.
+        </div>
+
+        <!-- BOUTON DE VALIDATION AMÉLIORÉ -->
+        <button type="submit" class="btn-submit" id="submitButton">
+            <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+            <span class="btn-text">Créer mon compte</span>
+        </button>
+    </form>
+
+    <div class="text-center mt-4">
+        <p>Déjà inscrit ? <a href="{% url 'login' %}" class="link">Connectez-vous ici</a></p>
+        <p>Ou <a href="{% url 'register_choice' %}" class="link">choisissez un autre type de compte</a></p>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registrationForm');
+    const submitButton = document.getElementById('submitButton');
+    
+    form.addEventListener('submit', function(e) {
+        // Animation de chargement
+        submitButton.classList.add('loading');
+        submitButton.disabled = true;
+        
+        // Changement du texte pendant le chargement
+        const btnText = submitButton.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Création en cours...';
+        
+        // Réactivation après 5 secondes maximum (au cas où)
+        setTimeout(() => {
+            submitButton.classList.remove('loading');
+            submitButton.disabled = false;
+            btnText.textContent = originalText;
+        }, 5000);
+    });
+    
+    // Effet de survol amélioré
+    submitButton.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px) scale(1.02)';
+    });
+    
+    submitButton.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+    
+    // Ajouter des classes pour les champs avec erreurs
+    const errorFields = document.querySelectorAll('.error-message');
+    errorFields.forEach(error => {
+        const field = error.closest('.form-group').querySelector('.form-control');
+        if (field) {
+            field.classList.add('is-invalid');
+        }
+    });
+});
+</script>
+
+<!-- Inclure Font Awesome pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+{% endblock %}

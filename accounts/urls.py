@@ -7,13 +7,22 @@ from .views import (
     change_password,
     LecturerFilterView,
     StudentFilterView,
+    OtherFilterView,
+    ParentFilterView,  # AJOUT: Import de la vue pour les parents
     staff_add_view,
     edit_staff,
     delete_staff,
     student_add_view,
     edit_student,
     delete_student,
+    other_add_view,
+    edit_other,
+    delete_other,
+    other_list,
     ParentAdd,
+    edit_parent,  # AJOUT: Vues pour parents
+    delete_parent,
+    parent_list,  # AJOUT: Liste des parents
     validate_username,
     register_choice,
     register_user,
@@ -22,6 +31,8 @@ from .views import (
     teacher_info_delete,
     render_lecturer_pdf_list,
     render_student_pdf_list,
+    render_other_pdf_list,
+    render_parent_pdf_list,  # AJOUT: Export PDF pour parents
     teacher_info_pdf,
     user_login,
     user_logout,
@@ -55,7 +66,16 @@ urlpatterns = [
     path("students/<int:pk>/delete/", delete_student, name="student_delete"),
     
     # Parents
+    path("parents/", ParentFilterView.as_view(), name="parent_list"),  # AJOUT: Liste des parents
     path("parents/add/", ParentAdd.as_view(), name="add_parent"),
+    path("parent/<int:pk>/edit/", edit_parent, name="edit_parent"),  # AJOUT: Édition parent
+    path("parent/<int:pk>/delete/", delete_parent, name="delete_parent"),  # AJOUT: Suppression parent
+
+    # # Autres utilisateurs
+    # path("others/", OtherFilterView.as_view(), name="other_list"),
+    # path("other/add/", other_add_view, name="other_add"),
+    # path("other/<int:pk>/edit/", edit_other, name="edit_other"),
+    # path("other/<int:pk>/delete/", delete_other, name="delete_other"),
 
     # AJAX
     path("ajax/validate-username/", validate_username, name="validate_username"),
@@ -73,4 +93,6 @@ urlpatterns = [
     # PDF exports
     path("create_lecturers_pdf_list/", render_lecturer_pdf_list, name="lecturer_list_pdf"),
     path("create_students_pdf_list/", render_student_pdf_list, name="student_list_pdf"),
+    path("create_others_pdf_list/", render_other_pdf_list, name="other_list_pdf"),
+    path("create_parents_pdf_list/", render_parent_pdf_list, name="parent_list_pdf"),  # AJOUT: Export PDF parents
 ]

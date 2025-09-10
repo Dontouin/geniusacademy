@@ -8,108 +8,687 @@
 
 {% if user.is_authenticated %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">{% trans 'Accueil' %}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ user.get_full_name }}</li>
-    </ol>
-</nav>
-
-{% include 'snippets/messages.html' %}
-
-<div class="row">
-
-    <div class="col-md-3 mx-auto">
-        <div class="card p-2">
-            <div class="text-center">
-                <img src="{{ user.picture.url }}" class="w-100">
-                <ul class="px-2 list-unstyled">
-                    <li>{{ user.get_full_name|title }}</li>
-                    <li><strong>{% trans 'Dernière connexion' %}: </strong>{{ user.last_login|date }}</li>
-                    <li><strong>{% trans 'Rôle' %}: </strong>
-                        {{ user.get_user_role }}
-                    </li>
-                </ul>
+<!-- En-tête moderne -->
+<div class="dashboard-header">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">{% trans 'Accueil' %}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ user.get_full_name }}</li>
+                    </ol>
+                </nav>
+                <h1 class="dashboard-title">Mon Profil</h1>
+                <p class="dashboard-subtitle">Gérez vos informations personnelles et académiques</p>
             </div>
-            <hr>
+            <div class="col-auto">
+                <div class="last-login">{% trans 'Dernière connexion' %}: {{ user.last_login|date }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    {% include 'snippets/messages.html' %}
+    
+    <div class="row">
+        <!-- Colonne de gauche - Carte profil -->
+        <div class="col-xl-3 col-lg-4">
+            <div class="card profile-card">
+                <div class="card-body text-center">
+                    <div class="profile-image-container">
+                        <img src="{{ user.picture.url }}" class="profile-image">
+                        <div class="profile-status-indicator"></div>
+                    </div>
+                    <h4 class="profile-name">{{ user.get_full_name|title }}</h4>
+                    <div class="profile-role">{{ user.get_user_role }}</div>
+                    
+                    <div class="profile-stats">
+                        {% if user.is_lecturer %}
+                        <div class="stat-item">
+                            <div class="stat-value">{{ courses|length }}</div>
+                            <div class="stat-label">{% trans 'Cours' %}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if user.is_student %}
+                        <div class="stat-item">
+                            <div class="stat-value">Unity</div>
+                            <div class="stat-label">{% trans 'École' %}</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if request.user.is_superuser %}
+                    <div class="d-grid gap-2 profile-actions">
+                        {% if user.is_student %}
+                        <a class="btn btn-primary mb-2" href="{% url 'student_edit' pk=user.id %}">
+                            <i class="fas fa-user-edit me-2"></i>{% trans 'Modifier le profil' %}
+                        </a>
+                        <a class="btn btn-outline-primary mb-2" href="{% url 'student_program_edit' user.id %}">
+                            <i class="fas fa-pen-to-square me-2"></i>{% trans 'Changer de programme' %}
+                        </a>
+                        {% endif %}
+                        {% if user.is_lecturer %}
+                        <a class="btn btn-primary" href="{% url 'staff_edit' pk=user.id %}">
+                            <i class="fas fa-user-edit me-2"></i>{% trans 'Modifier le profil' %}
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Carte informations de contact -->
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-phone-alt me-2"></i>{% trans 'Contact' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">{% trans 'Email' %}</div>
+                                <div class="contact-value">{{ user.email }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">{% trans 'Téléphone' %}</div>
+                                <div class="contact-value">{{ user.phone }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">{% trans 'Adresse' %}</div>
+                                <div class="contact-value">{{ user.address }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Colonne centrale - Informations principales -->
+        <div class="col-xl-6 col-lg-8">
+            <!-- Carte informations personnelles -->
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-user me-2"></i>{% trans 'Informations personnelles' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <label>{% trans 'Prénom' %}</label>
+                                <p>{{ user.first_name|title }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <label>{% trans 'Nom' %}</label>
+                                <p>{{ user.last_name|title }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="info-item">
+                                <label>{% trans 'N° d\'identification' %}</label>
+                                <p>{{ user.username }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carte informations académiques -->
+            {% if user.is_student %}
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-graduation-cap me-2"></i>{% trans 'Informations sur l\'étudiant' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <label>{% trans 'École' %}</label>
+                                <p>Unity College</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <label>{% trans 'Niveau' %}</label>
+                                <p>{{ level.level }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="info-item">
+                                <label>{% trans 'Programme' %}</label>
+                                <p>{{ student.program }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Carte des cours (pour les enseignants) -->
+            {% if user.is_lecturer %}
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-book-open me-2"></i>{% trans 'Mes cours' %}</h5>
+                </div>
+                <div class="card-body">
+                    {% if courses %}
+                    <div class="courses-grid">
+                        {% for course in courses %}
+                        <a href="{{ course.get_absolute_url }}" class="course-card">
+                            <div class="course-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="course-details">
+                                <h6>{{ course }}</h6>
+                                <span>{% trans 'Voir le cours' %}</span>
+                            </div>
+                            <div class="course-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-book-open empty-icon"></i>
+                        <h5>{% trans 'Aucun cours assigné !' %}</h5>
+                        <p>{% trans 'Vous n\'êtes actuellement assigné à aucun cours.' %}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Colonne de droite - Informations supplémentaires -->
+        <div class="col-xl-3">
+            <!-- Carte dates importantes -->
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-calendar-day me-2"></i>{% trans 'Dates importantes' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-content">
+                                <h6>{% trans 'Dernière connexion' %}</h6>
+                                <p>{{ user.last_login }}</p>
+                            </div>
+                        </div>
+                        
+                        {% if current_semester and current_session %}
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-content">
+                                <h6>{% trans 'Année académique' %}</h6>
+                                <p>{{ current_semester }} {% trans 'Semestre' %} {{ current_session }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-content">
+                                <h6>{% trans 'Date d\'inscription' %}</h6>
+                                <p>{{ user.date_joined|date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carte actions rapides (pour les superutilisateurs) -->
             {% if request.user.is_superuser %}
-            <div class="d-flex flex-column">
-                {% if user.is_student %}
-                <a href="{% url 'student_edit' pk=user.id %}">
-                    <i class="fas fa-user-edit unstyled"></i><span class="mobile-hide">{% trans 'Modifier le profil' %}</span>
-                </a>
-                <a href="{% url 'student_program_edit' user.id %}">
-                    <i class="fas fa-pen-to-square unstyled"></i><span class="mobile-hide">{% trans 'Changer de programme' %}</span>
-                </a>
-                {% endif %}
-                {% if user.is_lecturer %}
-                <a href="{% url 'staff_edit' pk=user.id %}">
-                    <i class="fas fa-user-edit unstyled"></i><span class="mobile-hide">{% trans 'Modifier le profil' %}</span>
-                </a>
-                {% endif %}
+            <div class="card info-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-bolt me-2"></i>{% trans 'Actions rapides' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="quick-actions">
+                        {% if user.is_student %}
+                        <a href="{% url 'student_edit' pk=user.id %}" class="quick-action-item">
+                            <div class="action-icon bg-primary">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <span>{% trans 'Modifier le profil' %}</span>
+                        </a>
+                        
+                        <a href="{% url 'student_program_edit' user.id %}" class="quick-action-item">
+                            <div class="action-icon bg-success">
+                                <i class="fas fa-pen-to-square"></i>
+                            </div>
+                            <span>{% trans 'Changer de programme' %}</span>
+                        </a>
+                        {% endif %}
+                        
+                        {% if user.is_lecturer %}
+                        <a href="{% url 'staff_edit' pk=user.id %}" class="quick-action-item">
+                            <div class="action-icon bg-info">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <span>{% trans 'Modifier le profil' %}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             {% endif %}
         </div>
     </div>
-
-    <div class="col-md-9 mx-auto">
-        <div class="card">
-            <div class="card-body">
-
-                {% if user.is_lecturer %}
-                <p class="fw-bold"><i class="fas fa-book-open"></i> {% trans 'Mes cours' %}</p>
-                {% if courses %}
-                <ul>
-                    {% for course in courses %}
-                    <li><a href="{{ course.get_absolute_url }}" class="text-primary">{{ course }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <div class="text-danger">{% trans 'Aucun cours assigné !' %}</div>
-                {% endif %}
-                <hr>
-                {% endif %}
-
-                <p class="fw-bold"><i class="me-2 fas fa-user"></i> {% trans 'Informations personnelles' %}</p>
-                <div class="dashboard-description">
-                    <p><strong>{% trans 'Prénom' %}:</strong> {{ user.first_name|title }}</p>
-                    <p><strong>{% trans 'Nom' %}:</strong> {{ user.last_name|title }}</p>
-                    <p><strong>{% trans 'N° d\'identification' %}:</strong> {{ user.username }}</p>
-                </div>
-                {% if user.is_student %}
-                <hr>
-                <p class="fw-bold"><i class="me-2 fas fa-graduation-cap"></i> {% trans 'Informations sur l\'étudiant' %}</p>
-                <div class="dashboard-description">
-                    <p><strong>{% trans 'École' %}: </strong>Unity College</p>
-                    <p><strong>{% trans 'Niveau' %}: </strong>{{ level.level }}</p>
-                    <p><strong>{% trans 'Programme' %}: </strong>{{ student.program }}</p>
-                </div>
-                {% endif %}
-
-                <hr>
-                <p class="fw-bold"><i class="me-2 fas fa-phone-square-alt"></i>{% trans 'Informations de contact' %}</p>
-                <div class="dashboard-description">
-                    <p><strong>{% trans 'Email' %}:</strong> {{ user.email }}</p>
-                    <p><strong>{% trans 'Tél.' %}:</strong> {{ user.phone }}</p>
-                    <p><strong>{% trans 'Adresse / Ville' %}:</strong> {{ user.address }}</p>
-                </div>
-
-                <hr>
-                <p class="fw-bold"><i class="me-2 fa fa-calendar-day"></i>{% trans 'Dates importantes' %}</p>
-                <div class="dashboard-description">
-                    <p><strong>{% trans 'Dernière connexion' %}:</strong> {{ user.last_login }}</p>
-                    {% if current_semester and current_session %}
-                    <p><strong>{% trans 'Année académique' %}:</strong> {{ current_semester }} {% trans 'Semestre' %} {{ current_session }}</p>
-                    {% endif %}
-                    <p><strong>{% trans 'Date d\'inscription' %}:</strong> {{ user.date_joined|date }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 mx-auto"></div>
-
 </div>
+
+<style>
+    /* En-tête du tableau de bord */
+    .dashboard-header {
+        background: linear-gradient(120deg, #4e54c8, #8f94fb);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .dashboard-title {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .dashboard-subtitle {
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+    
+    .last-login {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumb {
+        margin-bottom: 0.5rem;
+        background: transparent;
+        padding: 0;
+    }
+    
+    .breadcrumb-item a {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .breadcrumb-item.active {
+        color: white;
+    }
+    
+    /* Cartes de profil */
+    .profile-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 24px;
+    }
+    
+    .profile-image-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-status-indicator {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+        background-color: #2ecc71;
+        border: 2px solid #fff;
+        border-radius: 50%;
+    }
+    
+    .profile-name {
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    
+    .profile-role {
+        color: #6c757d;
+        margin-bottom: 1.5rem;
+    }
+    
+    .profile-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0;
+        border-top: 1px solid #f1f3f5;
+        border-bottom: 1px solid #f1f3f5;
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #4e54c8;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+    
+    .profile-actions {
+        margin-top: 1rem;
+    }
+    
+    /* Cartes d'informations */
+    .info-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 24px;
+    }
+    
+    .info-card .card-header {
+        background: white;
+        border-bottom: 1px solid #f1f3f5;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .info-card .card-header h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    .info-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    /* Informations de contact */
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.25rem;
+    }
+    
+    .contact-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: #4e54c8;
+    }
+    
+    .contact-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-bottom: 0.25rem;
+    }
+    
+    .contact-value {
+        font-weight: 500;
+        color: #495057;
+    }
+    
+    /* Éléments d'information */
+    .info-item {
+        margin-bottom: 1.25rem;
+    }
+    
+    .info-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .info-item label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+    
+    .info-item p {
+        font-weight: 500;
+        color: #495057;
+        margin: 0;
+    }
+    
+    /* Grille de cours */
+    .courses-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .course-card {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 10px;
+        background: #f8f9fa;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+    }
+    
+    .course-card:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        color: inherit;
+    }
+    
+    .course-icon {
+        width: 40px;
+        height: 40px;
+        background: #4e54c8;
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+    
+    .course-details {
+        flex: 1;
+    }
+    
+    .course-details h6 {
+        margin: 0 0 0.25rem;
+        font-weight: 600;
+    }
+    
+    .course-details span {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+    
+    .course-arrow {
+        color: #6c757d;
+    }
+    
+    /* État vide */
+    .empty-state {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: #dee2e6;
+        margin-bottom: 1rem;
+    }
+    
+    .empty-state h5 {
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+    
+    .empty-state p {
+        color: #6c757d;
+        margin: 0;
+    }
+    
+    /* Timeline */
+    .timeline {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .timeline-point {
+        position: absolute;
+        left: -1.5rem;
+        top: 0.4rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #4e54c8;
+        z-index: 2;
+    }
+    
+    .timeline-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: -1.44rem;
+        top: 1.2rem;
+        bottom: -1.5rem;
+        width: 2px;
+        background: #e9ecef;
+        z-index: 1;
+    }
+    
+    .timeline-content h6 {
+        font-size: 0.9rem;
+        margin: 0 0 0.25rem;
+        color: #495057;
+        font-weight: 600;
+    }
+    
+    .timeline-content p {
+        font-size: 0.85rem;
+        margin: 0;
+        color: #6c757d;
+    }
+    
+    /* Actions rapides */
+    .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .quick-action-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border-radius: 10px;
+        background: #f8f9fa;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+    }
+    
+    .quick-action-item:hover {
+        background: #e9ecef;
+        color: inherit;
+    }
+    
+    .action-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.75rem;
+        color: white;
+    }
+    
+    .quick-action-item span {
+        font-weight: 500;
+        color: #495057;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .profile-stats {
+            gap: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .dashboard-header {
+            padding: 1.5rem 0;
+        }
+        
+        .last-login {
+            margin-top: 1rem;
+        }
+        
+        .profile-image-container {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .profile-stats {
+            gap: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
 {% endif %}
 
 {% endblock content %}

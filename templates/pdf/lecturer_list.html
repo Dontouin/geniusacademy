@@ -1,41 +1,300 @@
 {% block content %}
 {% load i18n %}
-{% load 'static' %}
+{% load static %}
 
-<p class="title-1">{% trans 'Lecturers' %}</p>
+<div class="genius-container">
+  <div class="genius-header">
+    <h1 class="title-1"><i class="fas fa-chalkboard-teacher"></i> {% trans 'Enseignants' %}</h1>
+    <p class="subtitle">{% trans 'Liste de tous les membres du corps enseignant de The Genius Academy' %}</p>
+  </div>
 
-<div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>{% trans 'ID No.' %}</th>
-        <th>{% trans 'Full Name' %}</th>
-        <th>{% trans 'Email' %}</th>
-        <th>{% trans 'Mob No.' %}</th>
-        <th>{% trans 'Address/City' %}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for lecturer in lecturers %}
-      <tr>
-        <td> {{ forloop.counter }}.</td>
-        <td>{{ lecturer.username }}</td>
-        <td><a href="{% url 'profile_single' lecturer.id %}">{{ lecturer.get_full_name }}</a></td>
-        <td>{{ lecturer.email }}</td>
-        <td>{{ lecturer.phone }}</td>
-        <td>{{ lecturer.address }}</td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td>
-          <span class="text-danger">
-            {% trans 'No Lecturer(s).' %}
-          </span>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="genius-table">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th>{% trans 'Numéro ID' %}</th>
+          <th>{% trans 'Nom Complet' %}</th>
+          <th>{% trans 'Email' %}</th>
+          <th>{% trans 'N° Tél.' %}</th>
+          <th>{% trans 'Adresse/Ville' %}</th>
+          <th class="text-center">{% trans 'Actions' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lecturer in lecturers %}
+        <tr>
+          <td class="text-center serial">{{ forloop.counter }}.</td>
+          <td class="id-number">{{ lecturer.username }}</td>
+          <td class="lecturer-name">
+            <div class="avatar-container">
+              <div class="avatar">
+                {% if lecturer.picture %}
+                  <img src="{{ lecturer.picture.url }}" alt="{{ lecturer.get_full_name }}">
+                {% else %}
+                  <div class="avatar-default">
+                    <i class="fas fa-user"></i>
+                  </div>
+                {% endif %}
+              </div>
+              <a href="{% url 'profile_single' lecturer.id %}" class="name-link">{{ lecturer.get_full_name }}</a>
+            </div>
+          </td>
+          <td class="email"><a href="mailto:{{ lecturer.email }}">{{ lecturer.email }}</a></td>
+          <td class="phone"><a href="tel:{{ lecturer.phone }}">{{ lecturer.phone }}</a></td>
+          <td class="address">{{ lecturer.address }}</td>
+          <td class="text-center actions">
+            <div class="action-buttons">
+              <a href="{% url 'profile_single' lecturer.id %}" class="btn-view" title="{% trans 'Voir le Profil' %}">
+                <i class="fas fa-eye"></i>
+              </a>
+              <a href="mailto:{{ lecturer.email }}" class="btn-email" title="{% trans 'Envoyer un Email' %}">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center no-data">
+            <div class="empty-state">
+              <i class="fas fa-users-slash"></i>
+              <h3>{% trans 'Aucun Enseignant Trouvé' %}</h3>
+              <p>{% trans 'Il n\'y a actuellement aucun enseignant enregistré dans le système.' %}</p>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<style>
+  .genius-container {
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+  }
+
+  .genius-header {
+    background: linear-gradient(135deg, #6c63ff 0%, #3a34b3 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.2);
+  }
+
+  .title-1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .table-responsive {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .genius-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .genius-table th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #6c63ff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .genius-table td {
+    padding: 1.25rem;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+    color: #495057;
+  }
+
+  .genius-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .genius-table tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  .avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .avatar, .avatar-default {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6c63ff 0%, #3a34b3 100%);
+    color: white;
+    font-size: 1rem;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .name-link {
+    color: #212529;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .name-link:hover {
+    color: #6c63ff;
+  }
+
+  .email a, .phone a {
+    color: #6c63ff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .email a:hover, .phone a:hover {
+    color: #3a34b3;
+    text-decoration: underline;
+  }
+
+  .serial {
+    font-weight: 600;
+    color: #6c63ff;
+  }
+
+  .id-number {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #495057;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .btn-view, .btn-email {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-view {
+    background: #6c63ff;
+  }
+
+  .btn-email {
+    background: #17a2b8;
+  }
+
+  .btn-view:hover {
+    background: #3a34b3;
+    transform: translateY(-2px);
+  }
+
+  .btn-email:hover {
+    background: #138496;
+    transform: translateY(-2px);
+  }
+
+  .no-data {
+    padding: 3rem 1rem !important;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: #6c757d;
+  }
+
+  .empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #dee2e6;
+  }
+
+  .empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+  }
+
+  .empty-state p {
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .genius-container {
+      padding: 1rem;
+    }
+    
+    .genius-table {
+      display: block;
+      overflow-x: auto;
+    }
+    
+    .genius-header {
+      padding: 1.25rem;
+    }
+    
+    .title-1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .avatar-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .genius-table th:nth-child(3),
+    .genius-table td:nth-child(3) {
+      min-width: 150px;
+    }
+  }
+</style>
 {% endblock content %}

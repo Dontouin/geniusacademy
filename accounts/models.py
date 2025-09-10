@@ -78,6 +78,7 @@ class User(AbstractUser):
     is_lecturer = models.BooleanField(default=False)
     is_parent = models.BooleanField(default=False)
     is_dep_head = models.BooleanField(default=False)
+    is_other = models.BooleanField(default=False)  # Nouveau type d'utilisateur
     
     matricule = models.CharField(max_length=50, blank=True, null=True, unique=True)
     gender = models.CharField(max_length=1, choices=GENDERS, blank=True, null=True)
@@ -93,13 +94,13 @@ class User(AbstractUser):
         ordering = ("-date_joined",)
 
     def save(self, *args, **kwargs):
-        if not self.matricule:
-            from accounts.utils import generate_student_id, generate_lecturer_id
-
-            if self.is_student:
-                self.matricule = generate_student_id()
-            elif self.is_lecturer:
-                self.matricule = generate_lecturer_id()
+        # NE générer un matricule QUE pour les enseignants
+        if not self.matricule and self.is_lecturer:
+            from accounts.utils import generate_lecturer_id
+            self.matricule = generate_lecturer_id()
+        
+        # Pour tous les autres types (étudiants, parents, autres), NE PAS générer de matricule
+        # Ils peuvent avoir un matricule manuel ou rester sans matricule
         
         super().save(*args, **kwargs)
 

@@ -31,9 +31,18 @@
       gap: 1rem;
   }
 
+  #side-nav .logo-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
   #side-nav .logo-circle {
-      width: 170px;
-      height: 170px;
+      width: 150px;
+      height: 150px;
       background-color: #ffffff;
       border-radius: 50%;
       display: flex;
@@ -41,8 +50,46 @@
       justify-content: center;
       box-shadow: 4px 4px 12px #0f0f1a, -4px -4px 12px #23233d;
       transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
   }
-  #side-nav .logo-circle img { width: 75%; height: auto; border-radius: 50%; }
+
+  #side-nav .logo-circle::before {
+      content: '';
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #6c63ff, #ff6584, #6c63ff);
+      z-index: -1;
+      animation: rotateBorder 3s linear infinite;
+  }
+
+  #side-nav .logo-circle::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(160deg, #0a0a14, #1a1a2e);
+      z-index: -1;
+  }
+
+  @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+  }
+
+  #side-nav .logo-circle img { 
+      width: 70%; 
+      height: auto; 
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+  }
+
+  #side-nav .logo-circle:hover img {
+      transform: scale(1.05);
+  }
 
   #side-nav ul { list-style: none; padding: 0 0.5rem; margin: 0; }
   #side-nav ul li { margin: 0.5rem 0; }
@@ -80,9 +127,14 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <a href="{% url 'home' %}" class="logo-circle">
-                <img src="{% static 'img/logo.png' %}" alt="SkyLearn">
-            </a>
+            
+            <!-- Logo avec contour amélioré -->
+            <div class="logo-container">
+                <a href="{% url 'home' %}" class="logo-circle">
+                    <img src="{% static 'img/logo.png' %}" alt="The Genius Academy">
+                </a>
+            </div>
+            
             <p class="mt-2 small">
                 <mark class="bg-secondary text-light rounded px-1">
                 {% if request.user.is_superuser %}
@@ -95,10 +147,12 @@
                     Étudiant
                 {% elif request.user.is_parent %}
                     Parent
+                {% elif request.user.is_other %}
+                    Autre Utilisateur
                 {% else %}
                     Utilisateur
-                {% endif %}
                 </mark>
+                {% endif %}
             </p>
         </div>
 
@@ -126,11 +180,7 @@
             <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                 <a href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> {% trans 'Tableau de bord' %}</a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'secretary_dashboard' %}active{% endif %}">
-                <a href="{% url 'secretary_dashboard' %}">
-                    <i class="fas fa-tasks"></i> Dashboard Secrétaire
-                </a>
-            </li>
+            
             <li class="{% if request.resolver_match.url_name == 'generate_calendar' %}active{% endif %}">
                 <a href="{% url 'generate_calendar' %}"><i class="fas fa-calendar-plus"></i> {% trans 'Générer Calendrier' %}</a>
             </li>
@@ -140,6 +190,11 @@
             <li class="{% if request.resolver_match.url_name == 'student_list' %}active{% endif %}">
                 <a href="{% url 'student_list' %}"><i class="fas fa-user-graduate"></i> {% trans 'Étudiants' %}</a>
             </li>
+            <!-- AJOUT: Liens pour Parents et Autres Utilisateurs -->
+            <li class="{% if request.resolver_match.url_name == 'parent_list' %}active{% endif %}">
+                <a href="{% url 'parent_list' %}"><i class="fas fa-users"></i> {% trans 'Parents' %}</a>
+            </li>
+            
             {% endif %}
 
             <!-- Lecturers -->
@@ -153,14 +208,18 @@
             </li>
             {% endif %}
 
-            <!-- Students -->
-            {% if request.user.is_student %}
-            <p class="ms-3 small">{% trans 'Menu Étudiant' %}</p>
-            <li class="{% if request.resolver_match.url_name == 'res_list' %}active{% endif %}">
-                <a href="{% url 'res_list' %}"><i class="fas fa-calendar-check"></i> {% trans 'Mes Réservations' %}</a>
+            <li class="{% if request.resolver_match.url_name == 'profile_single' %}active{% endif %}">
+                <a href="{% url 'profile_single' request.user.id %}"><i class="fas fa-user"></i> {% trans 'Profil Enfant' %}</a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'res_add' %}active{% endif %}">
-                <a href="{% url 'res_add' %}"><i class="fas fa-plus-circle"></i> {% trans 'Ajouter Réservation' %}</a>
+
+            <!-- Autres Utilisateurs -->
+            {% if request.user.is_other %}
+            <p class="ms-3 small">{% trans 'Menu Utilisateur' %}</p>
+            <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                <a href="{% url 'profile' %}"><i class="fas fa-user"></i> {% trans 'Mon Profil' %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'post' %}active{% endif %}">
+                <a href="{% url 'post' %}"><i class="fas fa-newspaper"></i> {% trans 'Actualités' %}</a>
             </li>
             {% endif %}
 
@@ -188,7 +247,20 @@
     </div>
 
     <footer>
-        
+        <form action="{% url 'set_language' %}" method="post" id="lang-form" class="mb-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select name="language" id="lang-select" class="form-select form-select-sm">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
         <p>THE GENIUS ACADEMY &copy; <script>document.write(new Date().getFullYear());</script></p>
     </footer>
 </div>
