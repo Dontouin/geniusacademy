@@ -13,14 +13,14 @@ from .views import (
     edit_staff,
     delete_staff,
     student_add_view,
-    #edit_student,
+    edit_student,
     delete_student,
     other_add_view,
     edit_other,
     delete_other,
     other_list,
     ParentAdd,
-    #edit_parent,  # AJOUT: Vues pour parents
+    edit_parent,  # AJOUT: Vues pour parents
     delete_parent,
     parent_list,  # AJOUT: Liste des parents
     validate_username,
@@ -62,13 +62,13 @@ urlpatterns = [
     # Students
     path("students/", StudentFilterView.as_view(), name="student_list"),
     path("student/add/", student_add_view, name="add_student"),
-    #path("student/<int:pk>/edit/", edit_student, name="student_edit"),
+    path("student/<int:pk>/edit/", edit_student, name="student_edit"),
     path("students/<int:pk>/delete/", delete_student, name="student_delete"),
     
     # Parents
     path("parents/", ParentFilterView.as_view(), name="parent_list"),  # AJOUT: Liste des parents
     path("parents/add/", ParentAdd.as_view(), name="add_parent"),
-    #path("parent/<int:pk>/edit/", edit_parent, name="edit_parent"),  # AJOUT: Édition parent
+    path("parent/<int:pk>/edit/", edit_parent, name="edit_parent"),  # AJOUT: Édition parent
     path("parent/<int:pk>/delete/", delete_parent, name="delete_parent"),  # AJOUT: Suppression parent
 
     # # Autres utilisateurs
