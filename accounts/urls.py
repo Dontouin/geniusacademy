@@ -3,8 +3,8 @@ from .views import (
     admin_panel,
     profile,
     profile_single,
-    profile_update,
-    change_password,
+    ProfileUpdateView,   # ✅ CBV
+    ChangePasswordView,  # ✅ CBV
     LecturerFilterView,
     StudentFilterView,
     OtherFilterView,
@@ -44,14 +44,14 @@ urlpatterns = [
     path("logout/", user_logout, name="logout"),
     path("", include("django.contrib.auth.urls")),  # routes par défaut: password_reset, etc.
 
-     # Admin Panel
+    # Admin Panel
     path("admin_panel/", admin_panel, name="admin_panel"),
 
     # Dashboard & profile
     path("profile/", profile, name="profile"),
     path("profile/<int:user_id>/detail/", profile_single, name="profile_single"),
-    path("setting/", profile_update, name="edit_profile"),
-    path("change_password/", change_password, name="change_password"),
+    path("setting/", ProfileUpdateView.as_view(), name="edit_profile"),  # ✅ CBV
+    path("change_password/", ChangePasswordView.as_view(), name="change_password"),  # ✅ CBV
 
     # Lecturers
     path("lecturers/", LecturerFilterView.as_view(), name="lecturer_list"),
@@ -75,7 +75,7 @@ urlpatterns = [
     # path("others/", OtherFilterView.as_view(), name="other_list"),
     # path("other/add/", other_add_view, name="other_add"),
     # path("other/<int:pk>/edit/", edit_other, name="edit_other"),
-    # path("other/<int:pk>/delete/", delete_other, name="delete_other"),
+    # path("other/<int:pk>/delete/", delete_other, name="other_delete"),
 
     # AJAX
     path("ajax/validate-username/", validate_username, name="validate_username"),

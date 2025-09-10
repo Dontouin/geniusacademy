@@ -218,37 +218,67 @@ def profile_single(request, user_id):
 
 
 # ########################################################
-# Settings Views
+# Settings Views (Profile & Password Management) - CBV
 # ########################################################
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView, FormView
 
-@login_required
-def profile_update(request):
-    if request.method == "POST":
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your profile has been updated successfully.")
-            return redirect("profile")
-        messages.error(request, "Please correct the error(s) below.")
-    else:
-        form = ProfileUpdateForm(instance=request.user)
-    return render(request, "setting/profile_info_change.html", {"form": form})
+from .forms import ProfileUpdateForm
+from .models import User  # ton custom User
 
 
-@login_required
-def change_password(request):
-    if request.method == "POST":
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
-            messages.success(request, "Your password was successfully updated!")
-            return redirect("profile")
-        messages.error(request, "Please correct the error(s) below.")
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, "setting/password_change.html", {"form": form})
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Vue CBV permettant à un utilisateur connecté
+    de mettre à jour son profil.
+    """
+    model = User
+    form_class = ProfileUpdateForm
+    template_name = "setting/profile_info_change.html"
+    success_url = reverse_lazy("profile")
+
+    def get_object(self, queryset=None):
+        # On s'assure que l'utilisateur ne peut modifier que son profil
+        return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, "✅ Votre profil a été mis à jour avec succès.")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "⚠️ Veuillez corriger les erreurs ci-dessous.")
+        return super().form_invalid(form)
+
+
+class ChangePasswordView(LoginRequiredMixin, FormView):
+    """
+    Vue CBV permettant à un utilisateur connecté
+    de modifier son mot de passe en toute sécurité.
+    """
+    form_class = PasswordChangeForm
+    template_name = "setting/password_change.html"
+    success_url = reverse_lazy("profile")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = form.save()
+        update_session_auth_hash(self.request, user)  # Maintenir la session active
+        messages.success(self.request, "🔑 Votre mot de passe a été mis à jour avec succès.")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "⚠️ Veuillez corriger les erreurs ci-dessous.")
+        return super().form_invalid(form)
 
 # ----------------------------------------
 # Staff / Lecturer views
