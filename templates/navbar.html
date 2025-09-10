@@ -1,5 +1,6 @@
 {% load i18n %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 /* --- Top Navbar Futuriste --- */
@@ -19,6 +20,7 @@
     color: #d0d0ff;
     font-size: 1.2rem;
     transition: all 0.3s;
+    cursor: pointer;
 }
 #top-navbar .toggle-btn i:hover {
     color: #6c63ff;
@@ -30,6 +32,8 @@
     display: flex;
     flex-grow: 1;
     margin-left: 1rem;
+    max-width: 600px;
+    transition: all 0.3s ease;
 }
 #top-navbar .form-header input {
     border-right: 0;
@@ -38,9 +42,12 @@
     color: #fff;
     padding: 0.4rem 0.75rem;
     transition: all 0.3s;
+    border: 1px solid #444;
+    width: 100%;
 }
 #top-navbar .form-header input::placeholder {
     color: #aaaaff;
+    transition: all 0.3s;
 }
 #top-navbar .form-header input:focus {
     background: rgba(255,255,255,0.15);
@@ -53,6 +60,9 @@
     background: #6c63ff;
     color: #fff;
     transition: all 0.3s;
+    border: 1px solid #6c63ff;
+    padding: 0 0.75rem;
+    cursor: pointer;
 }
 #top-navbar .form-header button:hover {
     background: #7d74ff;
@@ -70,8 +80,8 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.3rem 0.75rem;
-    background: #ffffff;       /* fond blanc */
-    color: #0a0a14;            /* texte sombre */
+    background: #ffffff;
+    color: #0a0a14;
     border-radius: 0.375rem;
     border: 1px solid #555;
     cursor: pointer;
@@ -95,7 +105,7 @@
     position: absolute;
     top: 110%;
     left: 0;
-    background: #ffffff;       /* fond blanc */
+    background: #ffffff;
     border: 1px solid #555;
     border-radius: 0.375rem;
     overflow: hidden;
@@ -110,12 +120,31 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    color: #0a0a14;            /* texte sombre */
+    color: #0a0a14;
     transition: all 0.2s;
 }
 
 .language-options div:hover {
-    background: #e0e0e0;       /* hover léger */
+    background: #e0e0e0;
+}
+
+/* Avatar */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+.avatar:hover {
+    border-color: #6c63ff;
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Dropdown Avatar */
@@ -154,6 +183,175 @@
 #top-navbar .dropdown-menu hr {
     border-color: rgba(255,255,255,0.1);
 }
+
+/* Media Queries pour le responsive */
+@media (max-width: 1200px) {
+    #top-navbar .form-header {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 992px) {
+    #top-navbar {
+        padding: 0.5rem;
+    }
+    
+    #top-navbar .form-header {
+        max-width: 400px;
+        margin-left: 0.5rem;
+    }
+    
+    #top-navbar .form-header input {
+        padding: 0.35rem 0.5rem;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        font-size: 0.9rem;
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.5rem;
+    }
+    
+    .language-select {
+        min-width: 90px;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 868px) {
+    #top-navbar .form-header {
+        max-width: 320px;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        font-size: 0.85rem;
+    }
+    
+    .language-select {
+        min-width: 80px;
+        font-size: 0.8rem;
+    }
+    
+    .language-select span {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #top-navbar .form-header {
+        max-width: 250px;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        content: "Rechercher...";
+    }
+    
+    .language-select {
+        min-width: 70px;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .language-select i.bi-globe {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 676px) {
+    #top-navbar .form-header {
+        max-width: 200px;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        font-size: 0.8rem;
+        content: "Recherche...";
+    }
+    
+    .language-select span {
+        display: none;
+    }
+    
+    .language-select {
+        min-width: auto;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+    
+    .language-select i.bi-caret-down-fill {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.5rem;
+    }
+    
+    #top-navbar .form-header {
+        max-width: 160px;
+    }
+    
+    #top-navbar .form-header input {
+        padding: 0.3rem;
+        font-size: 0.85rem;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        content: "Search...";
+        font-size: 0.75rem;
+    }
+    
+    #top-navbar .form-header button {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #top-navbar {
+        padding: 0.4rem;
+    }
+    
+    #top-navbar .form-header {
+        max-width: 130px;
+        margin-left: 0.3rem;
+    }
+    
+    #top-navbar .form-header input {
+        font-size: 0.8rem;
+        padding: 0.25rem;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        font-size: 0.7rem;
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.3rem;
+    }
+    
+    .dropdown.ms-3 {
+        margin-left: 0.3rem !important;
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 400px) {
+    #top-navbar .form-header {
+        max-width: 110px;
+    }
+    
+    #top-navbar .form-header input::placeholder {
+        content: "";
+    }
+    
+    #top-navbar .toggle-btn i {
+        font-size: 1rem;
+    }
+}
 </style>
 
 <div id="top-navbar" class="py-1">
@@ -171,53 +369,55 @@
         </form>
     </div>
 
-    <!-- Language Selector Bootstrap Icon -->
-    <div class="language-select-wrapper">
-        <div class="language-select" id="language-select">
-            <i class="bi bi-globe"></i> <span>FR</span> <i class="bi bi-caret-down-fill ms-auto"></i>
-        </div>
-        <div class="language-options" id="language-options">
-            <div data-lang="fr"><i class="bi bi-flag-fill"></i> Français</div>
-            <div data-lang="en"><i class="bi bi-flag-fill"></i> English</div>
-        </div>
-        <form action="{% url 'set_language' %}" method="post" id="navbar-lang-form">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-            <input type="hidden" name="language" id="navbar-lang-input">
-        </form>
-    </div>
-
-    <!-- User Dropdown -->
-    <div class="dropdown ms-3">
-        <div class="avatar" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ request.user.picture.url }}" alt="Profile">
-        </div>
-        <div class="dropdown-menu dropdown-menu-end" style="min-width: 14rem !important;">
-            <div class="d-flex flex-column align-items-center p-2">
-                <div class="avatar avatar-md mb-2">
-                    <img src="{{ request.user.picture.url }}" alt="Profile Large">
-                </div>
-                <p class="small text-center mb-0" style="color: #e0e0e0; font-size: 0.75rem; margin-top: 0.2rem;">
-                    {% trans 'Dernière connexion:' %} {{ request.user.last_login|date:"d F Y H:i" }}
-                </p>
+    <div class="d-flex align-items-center">
+        <!-- Language Selector Bootstrap Icon -->
+        <div class="language-select-wrapper">
+            <div class="language-select" id="language-select">
+                <i class="bi bi-globe"></i> <span>FR</span> <i class="bi bi-caret-down-fill ms-auto"></i>
             </div>
-            <hr>
-            {% if request.user.is_superuser %}
-            <a class="dropdown-item" href="{% url 'admin_panel' %}">
-                <i class="fas fa-user-tie me-2"></i>{% trans 'Panneau Admin' %}
-            </a>
-            {% endif %}
-            <a class="dropdown-item" href="{% url 'profile' %}">
-                <i class="fas fa-user me-2"></i>{% trans 'Profil' %}
-            </a>
-            <a class="dropdown-item" href="{% url 'edit_profile' %}">
-                <i class="fas fa-cog me-2"></i>{% trans 'Paramètres' %}
-            </a>
-            <hr>
-            <div class="d-flex justify-content-center">
-                <a class="btn btn-secondary" href="{% url 'logout' %}">
-                    <i class="fas fa-sign-out-alt"></i> {% trans 'Déconnexion' %}
+            <div class="language-options" id="language-options">
+                <div data-lang="fr"><i class="bi bi-flag-fill"></i> Français</div>
+                <div data-lang="en"><i class="bi bi-flag-fill"></i> English</div>
+            </div>
+            <form action="{% url 'set_language' %}" method="post" id="navbar-lang-form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <input type="hidden" name="language" id="navbar-lang-input">
+            </form>
+        </div>
+
+        <!-- User Dropdown -->
+        <div class="dropdown ms-3">
+            <div class="avatar" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ request.user.picture.url }}" alt="Profile">
+            </div>
+            <div class="dropdown-menu dropdown-menu-end" style="min-width: 14rem !important;">
+                <div class="d-flex flex-column align-items-center p-2">
+                    <div class="avatar avatar-md mb-2">
+                        <img src="{{ request.user.picture.url }}" alt="Profile Large">
+                    </div>
+                    <p class="small text-center mb-0" style="color: #e0e0e0; font-size: 0.75rem; margin-top: 0.2rem;">
+                        {% trans 'Dernière connexion:' %} {{ request.user.last_login|date:"d F Y H:i" }}
+                    </p>
+                </div>
+                <hr>
+                {% if request.user.is_superuser %}
+                <a class="dropdown-item" href="{% url 'admin_panel' %}">
+                    <i class="fas fa-user-tie me-2"></i>{% trans 'Panneau Admin' %}
                 </a>
+                {% endif %}
+                <a class="dropdown-item" href="{% url 'profile' %}">
+                    <i class="fas fa-user me-2"></i>{% trans 'Profil' %}
+                </a>
+                <a class="dropdown-item" href="{% url 'edit_profile' %}">
+                    <i class="fas fa-cog me-2"></i>{% trans 'Paramètres' %}
+                </a>
+                <hr>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-secondary" href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i> {% trans 'Déconnexion' %}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -247,5 +447,13 @@ document.addEventListener('click', (e) => {
         langOptions.style.display = 'none';
     }
 });
+
+// Fonction pour le toggle de la sidebar (si elle existe)
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+}
 </script>
 {% endblock js %}
