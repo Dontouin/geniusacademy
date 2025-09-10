@@ -133,10 +133,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 #     }
 # }
 
-DATABASE = {
-    'default':dj_database_url.parse(config('DATABASE_URL'))
+# Configuration de la base de données PostgreSQL
+DATABASES = {
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
-
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
