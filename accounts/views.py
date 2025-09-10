@@ -52,6 +52,13 @@ def validate_username(request):
     is_taken = User.objects.filter(username__iexact=username).exists()
     return JsonResponse({"is_taken": is_taken})
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.conf import settings
+
 # ----------------------------------------
 # Multi-type registration views
 # ----------------------------------------
@@ -59,12 +66,13 @@ def register_choice(request):
     """Page to choose type of user to register: student, parent, lecturer, other"""
     return render(request, "registration/register_choice.html")
 
+
 # ---------------------------
 # Login view
 # ---------------------------
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect("home")  # Redirige si déjà connecté
+        return redirect("home")  # Déjà connecté → home
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -72,18 +80,23 @@ def user_login(request):
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            if not user.is_active:
+                messages.error(request, "This account is inactive. Please contact support.")
+                return redirect("login")
+
             login(request, user)
             messages.success(request, f"Welcome back, {user.get_full_name()}!")
-            
-            # Redirection après login
+
+            # Sécurisation de next_url
             next_url = request.GET.get("next")
-            if next_url:
+            if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
                 return redirect(next_url)
             return redirect("home")
-        else:
-            messages.error(request, "Invalid username or password.")
+
+        messages.error(request, "Invalid username or password.")
 
     return render(request, "registration/login.html", {"title": "Login"})
+
 
 # ---------------------------
 # Logout view
@@ -94,39 +107,37 @@ def user_logout(request):
     messages.success(request, "You have been logged out successfully.")
     return redirect("login")
 
+
 # ########################################################
-# Autonomous Registration Views
+# Universal Registration View
 # ########################################################
 def register_user(request, user_type):
     """
     Vue universelle pour enregistrer un utilisateur selon son type.
     user_type: 'student', 'parent', 'lecturer', 'other'
     """
-    form = None
-    template = None
 
-    if user_type == "student":
-        form = StudentAddForm(request.POST or None)
-        template = "registration/register_student.html"
-    elif user_type == "parent":
-        form = ParentAddForm(request.POST or None)
-        template = "registration/register_parent.html"
-    elif user_type == "lecturer":
-        form = StaffAddForm(request.POST or None)  # Correction: Utiliser StaffAddForm pour les enseignants
-        template = "registration/register_lecturer.html"
-    elif user_type == "other":
-        form = OtherAddForm(request.POST or None)
-        template = "registration/register_other.html"
-    else:
+    forms_map = {
+        "student": (StudentAddForm, "registration/register_student.html"),
+        "parent": (ParentAddForm, "registration/register_parent.html"),
+        "lecturer": (StaffAddForm, "registration/register_lecturer.html"),  # StaffAddForm pour enseignants
+        "other": (OtherAddForm, "registration/register_other.html"),
+    }
+
+    if user_type not in forms_map:
         messages.error(request, "Invalid registration type.")
         return redirect("register_choice")
 
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, f"{user_type.capitalize()} account created successfully. Please login.")
-        return redirect("login")
-    elif request.method == "POST":
-        messages.error(request, "Please correct the errors below.")
+    form_class, template = forms_map[user_type]
+    form = form_class(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"{user_type.capitalize()} account created successfully. Please login.")
+            return redirect("login")
+        else:
+            messages.error(request, "Please correct the errors below.")
 
     return render(request, template, {"form": form, "title": f"Register {user_type.capitalize()}"})
 
@@ -142,15 +153,14 @@ def admin_panel(request):
 @login_required
 def profile(request):
     """Display current user's profile with relevant info"""
-    context = {
-        "title": request.user.get_full_name(),
-    }
+    context = {"title": request.user.get_full_name()}
 
     if request.user.is_student:
-        student = get_object_or_404(Student, student__pk=request.user.id)
+        student = get_object_or_404(Student, student=request.user)  # ✅ clair
         parent = Parent.objects.filter(student=student).first()
-        
+
         context.update({
+            "user_type": "Student",
             "student": student,
             "parent": parent,
             "level": student.level,
@@ -159,21 +169,26 @@ def profile(request):
     elif request.user.is_parent:
         parent = get_object_or_404(Parent, parent=request.user)
         children = Student.objects.filter(parent=parent)
+
         context.update({
+            "user_type": "Parent",
             "parent": parent,
             "children": children,
         })
 
     elif request.user.is_other:
-        context.update({
-            "user_type": "Other",
-        })
+        context["user_type"] = "Other"
 
     else:  # Admin, superuser ou enseignant
-        staff = User.objects.filter(is_lecturer=True)
-        context["staff"] = staff
+        if request.user.is_superuser or request.user.is_staff:
+            context["user_type"] = "Admin"
+        elif request.user.is_lecturer:
+            context["user_type"] = "Lecturer"
+        else:
+            context["user_type"] = "Staff"
 
     return render(request, "accounts/profile.html", context)
+
 
 @login_required
 @admin_required
@@ -183,17 +198,15 @@ def profile_single(request, user_id):
         return redirect("profile")
 
     user = get_object_or_404(User, pk=user_id)
-    context = {
-        "title": user.get_full_name(),
-        "user": user,
-    }
+    context = {"title": user.get_full_name(), "user": user}
 
     if user.is_lecturer:
-        context.update({"user_type": "Lecturer"})
+        context["user_type"] = "Lecturer"
 
     elif user.is_student:
-        student = get_object_or_404(Student, student__pk=user_id)
+        student = get_object_or_404(Student, student=user)
         parent = Parent.objects.filter(student=student).first()
+
         context.update({
             "user_type": "Student",
             "student": student,
@@ -206,15 +219,17 @@ def profile_single(request, user_id):
         context.update({"user_type": "Parent", "parent": parent, "children": children})
 
     elif user.is_other:
-        context.update({"user_type": "Other"})
+        context["user_type"] = "Other"
 
     else:
         context["user_type"] = "Superuser"
 
+    # PDF Export
     if request.GET.get("download_pdf"):
         return render_to_pdf("pdf/profile_single.html", context)
 
     return render(request, "accounts/profile_single.html", context)
+
 
 
 # ########################################################
