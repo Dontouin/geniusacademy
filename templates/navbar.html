@@ -16,6 +16,10 @@
 }
 
 /* Toggle Sidebar */
+#top-navbar .toggle-btn {
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
 #top-navbar .toggle-btn i {
     color: #d0d0ff;
     font-size: 1.2rem;
@@ -31,7 +35,6 @@
 #top-navbar .form-header {
     display: flex;
     flex-grow: 1;
-    margin-left: 1rem;
     max-width: 600px;
     transition: all 0.3s ease;
 }
@@ -196,9 +199,12 @@
         padding: 0.5rem;
     }
     
+    #top-navbar .toggle-btn {
+        margin-right: 0.8rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 400px;
-        margin-left: 0.5rem;
     }
     
     #top-navbar .form-header input {
@@ -210,7 +216,7 @@
     }
     
     .language-select-wrapper {
-        margin-right: 0.5rem;
+        margin-right: 0.8rem;
     }
     
     .language-select {
@@ -220,12 +226,20 @@
 }
 
 @media (max-width: 868px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.7rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 320px;
     }
     
     #top-navbar .form-header input::placeholder {
         font-size: 0.85rem;
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.7rem;
     }
     
     .language-select {
@@ -239,12 +253,20 @@
 }
 
 @media (max-width: 768px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.6rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 250px;
     }
     
     #top-navbar .form-header input::placeholder {
         content: "Rechercher...";
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.6rem;
     }
     
     .language-select {
@@ -258,6 +280,10 @@
 }
 
 @media (max-width: 676px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.5rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 200px;
     }
@@ -265,6 +291,10 @@
     #top-navbar .form-header input::placeholder {
         font-size: 0.8rem;
         content: "Recherche...";
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.5rem;
     }
     
     .language-select span {
@@ -288,7 +318,7 @@
 
 @media (max-width: 576px) {
     #top-navbar .toggle-btn {
-        margin-right: 0.5rem;
+        margin-right: 0.4rem;
     }
     
     #top-navbar .form-header {
@@ -308,6 +338,10 @@
     #top-navbar .form-header button {
         padding: 0 0.5rem;
     }
+    
+    .language-select-wrapper {
+        margin-right: 0.4rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -315,9 +349,12 @@
         padding: 0.4rem;
     }
     
+    #top-navbar .toggle-btn {
+        margin-right: 0.3rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 130px;
-        margin-left: 0.3rem;
     }
     
     #top-navbar .form-header input {
@@ -340,6 +377,10 @@
 
 /* Pour les très petits écrans */
 @media (max-width: 400px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.25rem;
+    }
+    
     #top-navbar .form-header {
         max-width: 110px;
     }
@@ -351,13 +392,37 @@
     #top-navbar .toggle-btn i {
         font-size: 1rem;
     }
+    
+    .language-select-wrapper {
+        margin-right: 0.25rem;
+    }
+}
+
+/* Pour les écrans extrêmement petits */
+@media (max-width: 360px) {
+    #top-navbar .toggle-btn {
+        margin-right: 0.2rem;
+    }
+    
+    #top-navbar .form-header {
+        max-width: 90px;
+    }
+    
+    .language-select-wrapper {
+        margin-right: 0.2rem;
+    }
+    
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
 }
 </style>
 
 <div id="top-navbar" class="py-1">
     <div class="d-flex align-items-center">
         <!-- Toggle Sidebar -->
-        <div class="toggle-btn me-3" onclick="toggleSidebar()">
+        <div class="toggle-btn" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </div>
 
