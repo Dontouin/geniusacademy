@@ -1,1531 +1,602 @@
-
 {% load static %}
 {% load i18n %}
 
 {% block content %}
-
-
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% trans "Témoignages" %} - {{ site_name }}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <style>
-        :root {
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-            --secondary: #0ea5e9;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        body {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6e6ff 100%);
-            color: var(--dark);
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
-            z-index: -1;
-        }
-
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-flex;
-            margin: 0 auto;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .avatar-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .avatar-wrapper::after {
-            content: "";
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 2s infinite;
-        }
-
-        .avatar-placeholder {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-gradient);
-            color: white;
-            font-weight: bold;
-            font-size: 2rem;
-            border: 3px solid white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .avatar-small {
-            width: 50px;
-            height: 50px;
-        }
-
-        .avatar-small.avatar-placeholder {
-            font-size: 1.2rem;
-        }
-
-        .rating-summary {
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-modern {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-            color: white;
-        }
-
-        .testimonial-card {
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            height: 100%;
-            border: none;
-            box-shadow: var(--shadow-sm);
-            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .carousel-indicators button {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-indicators .active {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary);
-            opacity: 0.8;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-        }
-
-        .carousel-control-prev {
-            left: 15px;
-        }
-
-        .carousel-control-next {
-            right: 15px;
-        }
-
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .filter-controls {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .form-control, .form-select {
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-            border-color: var(--primary);
-        }
-
-        .modal-content {
-            border-radius: 20px;
-            border: none;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .badge-modern {
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-        }
-
-        .pagination .page-link {
-            border-radius: 10px;
-            margin: 0 3px;
-            border: none;
-            color: var(--dark);
-        }
-
-        .pagination .page-item.active .page-link {
-            background: var(--primary-gradient);
-            color: white;
-        }
-
-        .testimonial-content {
-            position: relative;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            border-radius: 16px;
-            border-left: 4px solid var(--primary);
-            margin: 1rem 0;
-        }
-
-        .testimonial-content::before {
-            content: """;
-            position: absolute;
-            top: -15px;
-            left: 15px;
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.15;
-            font-family: Georgia, serif;
-            font-weight: bold;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #7c2d12;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(255, 215, 0, 0.3);
-            z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 2px;
-        }
-
-        /* NOUVEAU DESIGN POUR LES ÉTOILES - Style application réelle */
-        .rating-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-
-        .rating-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            text-align: center;
-        }
-
-        .stars-wrapper {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-            gap: 0.25rem;
-        }
-
-        .star-input {
-            display: none;
-        }
-
-        .star-label {
-            cursor: pointer;
-            width: 46px;
-            height: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8fafc;
-            border-radius: 50%;
-            border: 2px solid #e2e8f0;
-            transition: all 0.2s ease;
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .star-label:hover {
-            transform: scale(1.15);
-            border-color: #f59e0b;
-            box-shadow: 0 4px 8px rgba(245, 158, 11, 0.2);
-            background: #fffbeb;
-        }
-
-        .star-label i {
-            font-size: 1.4rem;
-            color: #e2e8f0;
-            transition: all 0.2s ease;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .star-input:checked ~ .star-label i,
-        .star-label:hover i,
-        .star-label:hover ~ .star-label i {
-            color: #f59e0b;
-            text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
-        }
-
-        .star-input:checked ~ .star-label {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border-color: #f59e0b;
-            transform: scale(1.1);
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
-        }
-
-        .rating-labels {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 0.75rem;
-        }
-
-        .rating-label {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .star-input:checked ~ .star-label .rating-text {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .rating-text {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75rem;
-            color: #f59e0b;
-            font-weight: 600;
-            opacity: 0;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        /* Animation pour la sélection */
-        @keyframes star-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .star-input:checked ~ .star-label {
-            animation: star-pulse 0.6s ease;
-        }
-
-        /* Style pour les étoiles dans les cartes */
-        .testimonial-stars {
-            display: flex;
-            gap: 0.15rem;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-stars i {
-            color: #f59e0b;
-            font-size: 0.95rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Amélioration de la typographie et du design des témoignages */
-        .testimonial-text {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #374151;
-            font-weight: 400;
-            margin-bottom: 0;
-            text-align: left;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .author-info {
-            margin-left: 1rem;
-        }
-
-        .author-name {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.25rem;
-            font-size: 1.05rem;
-        }
-
-        .author-type {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-
-        .testimonial-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .testimonial-date {
-            color: #9ca3af;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .testimonial-date i {
-            margin-right: 0.5rem;
-        }
-
-        /* Animation pour l'apparition des témoignages */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .testimonial-item {
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
-        }
-
-        .testimonial-item:nth-child(1) { animation-delay: 0.1s; }
-        .testimonial-item:nth-child(2) { animation-delay: 0.2s; }
-        .testimonial-item:nth-child(3) { animation-delay: 0.3s; }
-        .testimonial-item:nth-child(4) { animation-delay: 0.4s; }
-        .testimonial-item:nth-child(5) { animation-delay: 0.5s; }
-
-        /* Style pour le texte des témoignages dans les cartes */
-        .testimonial-excerpt {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #4b5563;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Bouton "Lire plus" amélioré */
-        .read-more-btn {
-            background: linear-gradient(135deg, var(--primary), #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 0.5rem 1.25rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
-        }
-
-        .read-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
-            color: white;
-        }
-
-        /* Design responsive */
-        @media (max-width: 768px) {
-            .star-label {
-                width: 42px;
-                height: 42px;
-            }
+<div class="container py-5">
+    <!-- Header Section -->
+    <div class="row mb-5 text-center">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold text-primary mb-3" data-aos="fade-down">{% trans "Témoignages" %}</h1>
+            <p class="lead text-muted mb-4" data-aos="fade-down" data-aos-delay="100">{% trans "Découvrez ce que nos élèves, parents et enseignants disent de leur expérience avec" %} {{ site_name }}</p>
             
-            .star-label i {
-                font-size: 1.3rem;
-            }
-            
-            .rating-labels {
-                max-width: 250px;
-            }
-            
-            .rating-label {
-                font-size: 0.7rem;
-            }
-
-            .avatar, .avatar-placeholder {
-                width: 80px;
-                height: 80px;
-            }
-            
-            .avatar-small, .avatar-small.avatar-placeholder {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .rating-summary {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .rating-summary .vr {
-                display: none;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .star-label {
-                width: 38px;
-                height: 38px;
-            }
-            
-            .star-label i {
-                font-size: 1.1rem;
-            }
-            
-            .stars-wrapper {
-                gap: 0.2rem;
-            }
-        }
-
-        #image-preview {
-            transition: all 0.3s ease;
-        }
-
-        .progress-bar {
-            background: var(--primary-gradient);
-        }
-
-        .no-testimonials {
-            text-align: center;
-            padding: 3rem;
-            background: var(--card-bg);
-            border-radius: 16px;
-            margin: 2rem 0;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 2rem;
-            height: 2rem;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-    </style>
-</head>
-<body>
-    <!-- Navbar Futuriste Complet -->
-<nav id="top-navbar" class="mb-4 py-3 rounded shadow-sm d-flex align-items-center justify-content-between">
-    <div class="d-flex align-items-center flex-grow-1">
-        <!-- Toggle Sidebar (optionnel pour cette page) -->
-        <div class="toggle-btn me-3" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </div>
-
-        <!-- Titre page -->
-        <h4 class="mb-0 text-light me-4" style="font-weight: 600;">Témoignages</h4>
-
-        <!-- Search Form -->
-        <form class="form-header flex-grow-1 me-3" action="{% url 'query' %}" method="GET">
-            <input id="primary-search" type="text" name="q" value="{{ request.GET.q }}"
-                placeholder="Rechercher... #cours, #programme, #Quiz, #Actualités, #Événements" required />
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-
-        <!-- Bouton Accueil -->
-        <a href="/" class="home-btn d-flex align-items-center px-3 py-1 rounded me-3">
-            <i class="fas fa-home me-2"></i>Accueil
-        </a>
-    </div>
-
-    <!-- Language Selector -->
-    <form action="{% url 'set_language' %}" method="post" id="lang-form" class="me-3">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <div class="custom-select-wrapper">
-            <select name="language" id="lang-select" class="custom-select">
-                <option value="fr" selected>Français (fr)</option>
-                <option value="en">English (en)</option>
-            </select>
-        </div>
-    </form>
-
-    <!-- User Dropdown -->
-    <div class="dropdown">
-        <div class="avatar" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ request.user.picture.url }}" alt="Profile">
-        </div>
-        <div class="dropdown-menu dropdown-menu-end" style="min-width: 14rem !important;">
-            <div class="d-flex flex-column align-items-center p-2">
-                <div class="avatar avatar-md mb-2">
-                    <img src="{{ request.user.picture.url }}" alt="Profile Large">
+            <!-- Rating Summary -->
+            <div class="d-flex justify-content-center align-items-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="rating-summary d-flex align-items-center p-3">
+                    <div class="me-3 text-center">
+                        <h2 class="fw-bold text-white mb-0">{{ average_rating }}</h2>
+                        <div class="text-warning mb-1">
+                            {% for i in "12345"|make_list %}
+                                {% if forloop.counter <= average_rating|floatformat:0|add:"0" %}
+                                    <i class="fas fa-star"></i>
+                                {% elif forloop.counter|add:"-0.5" <= average_rating %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <small class="text-white opacity-90">{% trans "Basé sur" %} {{ total_testimonials }} {% trans "avis" %}</small>
+                    </div>
+                    <div class="vr mx-3 d-none d-md-block opacity-25 bg-white"></div>
+                    <div class="mt-2 mt-md-0">
+                        <a href="#testimonial-form" class="btn btn-light rounded-pill px-4 smooth-scroll">
+                            <i class="fas fa-pen me-2"></i>{% trans "Laisser un témoignage" %}
+                        </a>
+                    </div>
                 </div>
-                <p class="small text-center mb-0" style="color: #e0e0e0; font-size: 0.75rem; margin-top: 0.2rem;">
-                    {% trans 'Dernière connexion:' %} {{ request.user.last_login|date:"d F Y H:i" }}
-                </p>
-            </div>
-            <hr>
-            {% if request.user.is_superuser %}
-            <a class="dropdown-item" href="{% url 'admin_panel' %}">
-                <i class="fas fa-user-tie me-2"></i>{% trans 'Panneau Admin' %}
-            </a>
-            {% endif %}
-            <a class="dropdown-item" href="{% url 'profile' %}">
-                <i class="fas fa-user me-2"></i>{% trans 'Profil' %}
-            </a>
-            <a class="dropdown-item" href="{% url 'edit_profile' %}">
-                <i class="fas fa-cog me-2"></i>{% trans 'Paramètres' %}
-            </a>
-            <hr>
-            <div class="d-flex justify-content-center">
-                <a class="btn btn-secondary" href="{% url 'logout' %}">
-                    <i class="fas fa-sign-out-alt"></i> {% trans 'Déconnexion' %}
-                </a>
             </div>
         </div>
     </div>
-</nav>
 
-<style>
-/* --- Navbar Futuriste Complet --- */
-#top-navbar {
-    background: linear-gradient(120deg, #1a1a2e, #0a0a14);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    border-radius: 0 0 20px 20px;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s;
-}
+    <!-- Testimonials Carousel -->
+    {% if featured_testimonials %}
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="glass-card mb-5" data-aos="fade-up">
+                <div class="card-header bg-transparent border-0 py-4">
+                    <h3 class="card-title mb-0 text-center">
+                        <i class="fas fa-star text-warning me-2"></i>
+                        {% trans "Témoignages à la une" %}
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <!-- Indicators -->
+                        <div class="carousel-indicators">
+                            {% for testimonial in featured_testimonials %}
+                                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            {% for testimonial in featured_testimonials %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="6000">
+                                    <div class="testimonial-carousel-content text-center px-4 px-md-5">
+                                        <div class="d-flex justify-content-center mb-4">
+                                            <div class="avatar-wrapper">
+                                                {% if testimonial.image %}
+                                                    <img src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}" class="avatar" loading="lazy">
+                                                {% else %}
+                                                    <div class="avatar-placeholder">{{ testimonial.author_initials }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="testimonial-stars justify-content-center mb-3">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= testimonial.rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        
+                                        <blockquote class="blockquote mb-4 mx-auto" style="max-width: 800px;">
+                                            <p class="font-italic fs-5 testimonial-text">"{{ testimonial.excerpt }}"</p>
+                                        </blockquote>
+                                        
+                                        <div class="testimonial-author justify-content-center">
+                                            <h5 class="mb-1 text-primary">{{ testimonial.author }}</h5>
+                                            <p class="text-muted mb-0">{{ testimonial.get_type_display }}</p>
+                                            <span class="badge bg-warning text-dark mt-2">
+                                                <i class="fas fa-star me-1"></i>{% trans "En vedette" %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">{% trans "Précédent" %}</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">{% trans "Suivant" %}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-#top-navbar h4 {
-    color: #d0d0ff;
-}
-
-#top-navbar .form-header input {
-    border-right: 0;
-    border-radius: 0.375rem 0 0 0.375rem;
-    background: rgba(255,255,255,0.05);
-    color: #fff;
-    padding: 0.4rem 0.75rem;
-    transition: all 0.3s;
-}
-#top-navbar .form-header input::placeholder { color: #aaaaff; }
-#top-navbar .form-header input:focus {
-    background: rgba(255,255,255,0.15);
-    outline: none;
-    box-shadow: 0 0 8px #6c63ff;
-}
-#top-navbar .form-header button {
-    border-left: 0;
-    border-radius: 0 0.375rem 0.375rem 0;
-    background: #6c63ff;
-    color: #fff;
-    transition: all 0.3s;
-}
-#top-navbar .form-header button:hover { background: #7d74ff; }
-
-.home-btn {
-    background: rgba(108,99,255,0.2);
-    color: #fff;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-.home-btn:hover {
-    background: #6c63ff;
-    box-shadow: 0 0 8px #6c63ff;
-    color: #fff;
-}
-
-/* Language Selector */
-.custom-select-wrapper { position: relative; display: inline-block; width: 120px; }
-.custom-select {
-    width: 100%; padding: 0.25rem 2.5rem 0.25rem 0.5rem;
-    font-size: 0.875rem; color: #d0d0ff; background-color: #0a0a14;
-    border: 1px solid #555; border-radius: 0.375rem; appearance: none; transition: all 0.3s;
-}
-.custom-select:hover, .custom-select:focus {
-    border-color: #6c63ff; box-shadow: 0 0 6px #6c63ff; outline: none;
-}
-.custom-select-wrapper::after {
-    content: "\25BC"; position: absolute; top: 50%; right: 0.75rem;
-    transform: translateY(-50%); pointer-events: none; color: #d0d0ff; font-size: 0.7rem;
-}
-.custom-select option { background-color: #0a0a14; color: #d0d0ff; }
-
-/* Avatar */
-.avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; border: 2px solid #6c63ff; cursor: pointer; position: relative; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; transition: all 0.3s; }
-.avatar:hover img { transform: scale(1.1); }
-.dropdown-menu .avatar-md { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid #6c63ff; display: flex; align-items: center; justify-content: center; }
-.dropdown-menu .avatar-md img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Dropdown */
-#top-navbar .dropdown-menu {
-    background: linear-gradient(160deg, #0a0a14, #1a1a2e);
-    border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); color: #d0d0ff;
-}
-#top-navbar .dropdown-menu a.dropdown-item { color: #d0d0ff; transition: all 0.3s; }
-#top-navbar .dropdown-menu a.dropdown-item:hover { background: rgba(108,99,255,0.1); color: #fff; }
-#top-navbar .dropdown-menu hr { border-color: rgba(255,255,255,0.1); }
-
-/* Responsive */
-@media (max-width: 768px) {
-    #top-navbar h4 { font-size: 1rem; }
-    #top-navbar .home-btn { padding: 0.25rem 0.75rem; font-size: 0.875rem; }
-    .dropdown-menu .avatar-md { width: 60px; height: 60px; }
-    .avatar { width: 35px; height: 35px; }
-}
-</style>
-
-{% block js %}
-<script>
-document.getElementById("lang-select").addEventListener("change", function() {
-    document.getElementById("lang-form").submit();
-});
-</script>
-{% endblock js %}
-
-    <div class="container py-5">
-        <!-- Header Section -->
-        <div class="row mb-5 text-center">
-            <div class="col-12">
-                <h1 class="display-4 fw-bold text-primary mb-3 floating" data-aos="fade-down">{% trans "Témoignages" %}</h1>
-                <p class="lead text-muted mb-4" data-aos="fade-down" data-aos-delay="100">{% trans "Découvrez ce que nos élèves, parents et enseignants disent de leur expérience avec" %} {{ site_name }}</p>
-                
-                <!-- Rating Summary -->
-                <div class="d-flex justify-content-center align-items-center mt-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="rating-summary d-flex align-items-center p-3">
-                        <div class="me-3 text-center">
-                            <h2 class="fw-bold text-white mb-0">{{ average_rating }}</h2>
-                            <div class="text-warning mb-1">
+    <!-- All Testimonials Grid -->
+    <div class="row mb-5" id="testimonials-grid">
+        <div class="col-12 mb-4">
+            <h3 class="text-center mb-4 section-title" data-aos="fade-up">{% trans "Tous les témoignages" %}</h3>
+        </div>
+        
+        <!-- Testimonials will be loaded here dynamically -->
+        <div id="testimonials-container" class="row">
+            {% for testimonial in testimonials %}
+                <div class="col-md-6 col-lg-4 mb-4 testimonial-item" 
+                     data-aos="fade-up" 
+                     data-aos-delay="{{ forloop.counter|add:"-1"|divisibleby:3|yesno:"100,150" }}"
+                     data-type="{{ testimonial.testimonial_type }}"
+                     data-rating="{{ testimonial.rating }}"
+                     data-date="{{ testimonial.created_at|date:'Y-m-d' }}">
+                    <div class="testimonial-card glass-card h-100">
+                        {% if testimonial.featured %}
+                            <span class="featured-badge">
+                                <i class="fas fa-star me-1"></i>{% trans "En vedette" %}
+                            </span>
+                        {% endif %}
+                        
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-wrapper">
+                                    {% if testimonial.image %}
+                                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}" class="avatar avatar-small" loading="lazy">
+                                    {% else %}
+                                        <div class="avatar-placeholder avatar-small">{{ testimonial.author_initials }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 author-name">{{ testimonial.author }}</h6>
+                                    <small class="author-type">{{ testimonial.get_type_display }}</small>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial-stars mb-3">
                                 {% for i in "12345"|make_list %}
-                                    {% if forloop.counter <= average_rating|floatformat:0|add:"0" %}
+                                    {% if forloop.counter <= testimonial.rating %}
                                         <i class="fas fa-star"></i>
-                                    {% elif forloop.counter|add:"-0.5" <= average_rating %}
-                                        <i class="fas fa-star-half-alt"></i>
                                     {% else %}
                                         <i class="far fa-star"></i>
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <small class="text-white opacity-90">{% trans "Basé sur" %} {{ total_testimonials }} {% trans "avis" %}</small>
-                        </div>
-                        <div class="vr mx-3 d-none d-md-block opacity-25 bg-white"></div>
-                        <div class="mt-2 mt-md-0">
-                            <a href="#testimonial-form" class="btn btn-light rounded-pill px-4 smooth-scroll">
-                                <i class="fas fa-pen me-2"></i>{% trans "Laisser un témoignage" %}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Testimonials Carousel -->
-        {% if featured_testimonials %}
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="glass-card mb-5" data-aos="fade-up">
-                    <div class="card-header bg-transparent border-0 py-4">
-                        <h3 class="card-title mb-0 text-center">
-                            <i class="fas fa-star text-warning me-2"></i>
-                            {% trans "Témoignages à la une" %}
-                        </h3>
-                    </div>
-                    <div class="card-body p-4">
-                        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <!-- Indicators -->
-                            <div class="carousel-indicators">
-                                {% for testimonial in featured_testimonials %}
-                                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-                                {% endfor %}
-                            </div>
                             
-                            <!-- Carousel items -->
-                            <div class="carousel-inner">
-                                {% for testimonial in featured_testimonials %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="6000">
-                                        <div class="testimonial-carousel-content text-center px-4 px-md-5">
-                                            <div class="d-flex justify-content-center mb-4">
-                                                <div class="avatar-wrapper">
-                                                    {% if testimonial.image %}
-                                                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}" class="avatar" loading="lazy">
-                                                    {% else %}
-                                                        <div class="avatar-placeholder">{{ testimonial.author_initials }}</div>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="testimonial-stars justify-content-center mb-3">
-                                                {% for i in "12345"|make_list %}
-                                                    {% if forloop.counter <= testimonial.rating %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% else %}
-                                                        <i class="far fa-star"></i>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                            
-                                            <blockquote class="blockquote mb-4 mx-auto" style="max-width: 800px;">
-                                                <p class="font-italic fs-5 testimonial-text">"{{ testimonial.excerpt }}"</p>
-                                            </blockquote>
-                                            
-                                            <div class="testimonial-author justify-content-center">
-                                                <h5 class="mb-1 text-primary">{{ testimonial.author }}</h5>
-                                                <p class="text-muted mb-0">{{ testimonial.get_type_display }}</p>
-                                                <span class="badge bg-warning text-dark mt-2">
-                                                    <i class="fas fa-star me-1"></i>{% trans "En vedette" %}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            
-                            <!-- Controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">{% trans "Précédent" %}</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">{% trans "Suivant" %}</span>
+                            <p class="testimonial-excerpt">"{{ testimonial.excerpt }}"</p>
+                        </div>
+                        
+                        <div class="card-footer bg-transparent border-0 pt-0 d-flex justify-content-between align-items-center">
+                            <small class="testimonial-date">
+                                <i class="far fa-clock me-1"></i>{{ testimonial.created_at|timesince }}
+                            </small>
+                            <button class="btn btn-sm read-more-btn" data-testimonial-id="{{ testimonial.id }}">
+                                {% trans "Lire plus" %}
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-        {% endif %}
+    </div>
 
-        <!-- Filter and Sort Section -->
-        <div class="row mb-4" data-aos="fade-up">
-            <div class="col-12">
-                <div class="filter-controls d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-                    <h5 class="mb-3 mb-md-0">{% trans "Filtrer les témoignages" %}</h5>
-                    <div class="d-flex flex-wrap gap-2">
-                        <select id="filter-type" class="form-select form-select-sm" style="width: auto;">
-                            <option value="all">{% trans "Tous les types" %}</option>
-                            <option value="student">{% trans "Élèves" %}</option>
-                            <option value="parent">{% trans "Parents" %}</option>
-                            <option value="teacher">{% trans "Enseignants" %}</option>
-                        </select>
-                        <select id="filter-rating" class="form-select form-select-sm" style="width: auto;">
-                            <option value="all">{% trans "Toutes les notes" %}</option>
-                            <option value="5">5 ★</option>
-                            <option value="4">4 ★ {% trans "et plus" %}</option>
-                            <option value="3">3 ★ {% trans "et plus" %}</option>
-                        </select>
-                        <select id="sort-by" class="form-select form-select-sm" style="width: auto;">
-                            <option value="newest">{% trans "Plus récents" %}</option>
-                            <option value="oldest">{% trans "Plus anciens" %}</option>
-                            <option value="highest">{% trans "Meilleures notes" %}</option>
-                            <option value="lowest">{% trans "Moins bonnes notes" %}</option>
-                        </select>
-                    </div>
+    <!-- Pagination -->
+    {% if testimonials.has_other_pages %}
+    <div class="row mb-5">
+        <div class="col-12">
+            <nav aria-label="Testimonials pagination">
+                <ul class="pagination justify-content-center">
+                    {% if testimonials.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ testimonials.previous_page_number }}">&laquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                    {% endif %}
+                    
+                    {% for i in testimonials.paginator.page_range %}
+                        {% if testimonials.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if testimonials.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ testimonials.next_page_number }}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Testimonial Form Section -->
+    <div class="row justify-content-center mb-5" id="testimonial-form">
+        <div class="col-lg-8">
+            <div class="glass-card" data-aos="fade-up">
+                <div class="card-header bg-primary text-white py-4">
+                    <h3 class="mb-0 text-center"><i class="fas fa-pen me-2"></i>{% trans "Partagez votre expérience" %}</h3>
                 </div>
-            </div>
-        </div>
-
-        <!-- All Testimonials Grid -->
-        <div class="row mb-5" id="testimonials-grid">
-            <div class="col-12 mb-4">
-                <h3 class="text-center mb-4 section-title" data-aos="fade-up">{% trans "Tous les témoignages" %}</h3>
-            </div>
-            
-            <!-- No testimonials message -->
-            <div id="no-testimonials" class="no-testimonials {% if not testimonials %}d-block{% else %}d-none{% endif %}">
-                <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 3rem;"></i>
-                <h4 class="text-muted">{% trans "Aucun témoignage ne correspond à vos critères" %}</h4>
-                <p class="text-muted">{% trans "Essayez de modifier vos filtres pour voir plus de résultats." %}</p>
-            </div>
-            
-            <!-- Testimonials will be loaded here dynamically -->
-            <div id="testimonials-container" class="row">
-                {% for testimonial in testimonials %}
-                    <div class="col-md-6 col-lg-4 mb-4 testimonial-item" 
-                         data-aos="fade-up" 
-                         data-aos-delay="{{ forloop.counter|add:"-1"|divisibleby:3|yesno:"100,150" }}"
-                         data-type="{{ testimonial.testimonial_type }}"
-                         data-rating="{{ testimonial.rating }}"
-                         data-date="{{ testimonial.created_at|date:'Y-m-d' }}">
-                        <div class="testimonial-card glass-card h-100">
-                            {% if testimonial.featured %}
-                                <span class="featured-badge">
-                                    <i class="fas fa-star me-1"></i>{% trans "En vedette" %}
-                                </span>
-                            {% endif %}
-                            
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="avatar-wrapper">
-                                        {% if testimonial.image %}
-                                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}" class="avatar avatar-small" loading="lazy">
-                                        {% else %}
-                                            <div class="avatar-placeholder avatar-small">{{ testimonial.author_initials }}</div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 author-name">{{ testimonial.author }}</h6>
-                                        <small class="author-type">{{ testimonial.get_type_display }}</small>
-                                    </div>
+                <div class="card-body p-4">
+                    <form method="post" enctype="multipart/form-data" id="testimonialForm">
+                        {% csrf_token %}
+                        
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                                
-                                <div class="testimonial-stars mb-3">
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <div class="row">
+                            <!-- Author Name -->
+                            <div class="col-md-6 mb-3">
+                                <label for="author" class="form-label">{% trans "Votre nom" %}</label>
+                                <input type="text" class="form-control" id="author" name="author" required value="{{ form.author.value|default:'' }}">
+                                {% if form.author.errors %}
+                                    <div class="text-danger">{{ form.author.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Testimonial Type -->
+                            <div class="col-md-6 mb-3">
+                                <label for="testimonial_type" class="form-label">{% trans "Vous êtes" %}</label>
+                                <select class="form-select" id="testimonial_type" name="testimonial_type" required>
+                                    <option value="">{% trans "Sélectionnez..." %}</option>
+                                    <option value="student" {% if form.testimonial_type.value == 'student' %}selected{% endif %}>{% trans "Élève/Étudiant" %}</option>
+                                    <option value="parent" {% if form.testimonial_type.value == 'parent' %}selected{% endif %}>{% trans "Parent" %}</option>
+                                    <option value="teacher" {% if form.testimonial_type.value == 'teacher' %}selected{% endif %}>{% trans "Enseignant" %}</option>
+                                </select>
+                                {% if form.testimonial_type.errors %}
+                                    <div class="text-danger">{{ form.testimonial_type.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Rating Section -->
+                        <div class="mb-4">
+                            <label class="form-label">{% trans "Donnez une note" %}</label>
+                            <div class="d-flex align-items-center">
+                                <div class="star-rating me-3">
                                     {% for i in "12345"|make_list %}
-                                        {% if forloop.counter <= testimonial.rating %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
+                                        <input type="radio" id="star{{ forloop.revcounter }}" name="rating" value="{{ forloop.revcounter }}" {% if form.rating.value == forloop.revcounter|stringformat:'i' %}checked{% endif %}>
+                                        <label for="star{{ forloop.revcounter }}"><i class="fas fa-star"></i></label>
                                     {% endfor %}
                                 </div>
-                                
-                                <p class="testimonial-excerpt">"{{ testimonial.excerpt }}"</p>
+                                <span id="rating-text">{% trans "Sélectionnez une note" %}</span>
                             </div>
-                            
-                            <div class="card-footer bg-transparent border-0 pt-0 d-flex justify-content-between align-items-center">
-                                <small class="testimonial-date">
-                                    <i class="far fa-clock me-1"></i>{{ testimonial.created_at|timesince }}
-                                </small>
-                                <button class="btn btn-sm read-more-btn" data-testimonial-id="{{ testimonial.id }}">
-                                    {% trans "Lire plus" %}
-                                </button>
-                            </div>
+                            {% if form.rating.errors %}
+                                <div class="text-danger">{{ form.rating.errors }}</div>
+                            {% endif %}
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Pagination -->
-        {% if testimonials.has_other_pages %}
-        <div class="row mb-5">
-            <div class="col-12">
-                <nav aria-label="Testimonials pagination">
-                    <ul class="pagination justify-content-center">
-                        {% if testimonials.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ testimonials.previous_page_number }}">&laquo;</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <span class="page-link">&laquo;</span>
-                            </li>
-                        {% endif %}
                         
-                        {% for i in testimonials.paginator.page_range %}
-                            {% if testimonials.number == i %}
-                                <li class="page-item active"><span class="page-link">{{ i }}</span></li>
-                            {% else %}
-                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        <!-- Content -->
+                        <div class="mb-4">
+                            <label for="content" class="form-label">{% trans "Votre témoignage" %}</label>
+                            <textarea class="form-control" id="content" name="content" rows="5" required>{{ form.content.value|default:'' }}</textarea>
+                            <div class="form-text">{% trans "Votre témoignage doit contenir au moins 20 caractères." %}</div>
+                            {% if form.content.errors %}
+                                <div class="text-danger">{{ form.content.errors }}</div>
                             {% endif %}
-                        {% endfor %}
+                        </div>
                         
-                        {% if testimonials.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ testimonials.next_page_number }}">&raquo;</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <span class="page-link">&raquo;</span>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Testimonial Form Section -->
-        <div class="row justify-content-center mb-5" id="testimonial-form">
-            <div class="col-lg-8">
-                <div class="glass-card" data-aos="fade-up">
-                    <div class="card-header bg-primary text-white py-4">
-                        <h3 class="mb-0 text-center"><i class="fas fa-pen me-2"></i>{% trans "Partagez votre expérience" %}</h3>
-                    </div>
-                    <div class="card-body p-4">
-                    
-                        <form method="post" enctype="multipart/form-data" id="testimonialForm">
-                            {% csrf_token %}
-                            
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                                        {{ message }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                {% endfor %}
+                        <!-- Image -->
+                        <div class="mb-4">
+                            <label for="image" class="form-label">{% trans "Photo de profil (optionnel)" %}</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/jpeg,image/png">
+                            <div class="form-text">{% trans "Formats acceptés: JPG, PNG. Taille maximale: 5MB." %}</div>
+                            {% if form.image.errors %}
+                                <div class="text-danger">{{ form.image.errors }}</div>
                             {% endif %}
-                            
-                            <div class="row">
-                                <!-- Author Name -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="author" class="form-label">{% trans "Votre nom" %}</label>
-                                    <input type="text" class="form-control" id="author" name="author" required value="{{ form.author.value|default:'' }}">
-                                    {% if form.author.errors %}
-                                        <div class="text-danger">{{ form.author.errors }}</div>
-                                    {% endif %}
-                                </div>
-                                
-                                <!-- Testimonial Type -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="testimonial_type" class="form-label">{% trans "Vous êtes" %}</label>
-                                    <select class="form-select" id="testimonial_type" name="testimonial_type" required>
-                                        <option value="">{% trans "Sélectionnez..." %}</option>
-                                        <option value="student" {% if form.testimonial_type.value == 'student' %}selected{% endif %}>{% trans "Élève/Étudiant" %}</option>
-                                        <option value="parent" {% if form.testimonial_type.value == 'parent' %}selected{% endif %}>{% trans "Parent" %}</option>
-                                        <option value="teacher" {% if form.testimonial_type.value == 'teacher' %}selected{% endif %}>{% trans "Enseignant" %}</option>
-                                    </select>
-                                    {% if form.testimonial_type.errors %}
-                                        <div class="text-danger">{{ form.testimonial_type.errors }}</div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            
-                            <!-- Rating Section -->
-                            <div class="rating-container">
-                                <div class="rating-title">{% trans "Donnez une note" %}</div>
-                                <div class="stars-wrapper">
-                                    <input type="radio" id="star5" name="rating" value="5" class="star-input" {% if form.rating.value == '5' %}checked{% endif %}>
-                                    <label for="star5" class="star-label">
-                                        <i class="fas fa-star"></i>
-                                        <span class="rating-text">Excellent</span>
-                                    </label>
-                                    
-                                    <input type="radio" id="star4" name="rating" value="4" class="star-input" {% if form.rating.value == '4' %}checked{% endif %}>
-                                    <label for="star4" class="star-label">
-                                        <i class="fas fa-star"></i>
-                                        <span class="rating-text">Très bien</span>
-                                    </label>
-                                    
-                                    <input type="radio" id="star3" name="rating" value="3" class="star-input" {% if form.rating.value == '3' %}checked{% endif %}>
-                                    <label for="star3" class="star-label">
-                                        <i class="fas fa-star"></i>
-                                        <span class="rating-text">Bien</span>
-                                    </label>
-                                    
-                                    <input type="radio" id="star2" name="rating" value="2" class="star-input" {% if form.rating.value == '2' %}checked{% endif %}>
-                                    <label for="star2" class="star-label">
-                                        <i class="fas fa-star"></i>
-                                        <span class="rating-text">Moyen</span>
-                                    </label>
-                                    
-                                    <input type="radio" id="star1" name="rating" value="1" class="star-input" {% if form.rating.value == '1' %}checked{% endif %}>
-                                    <label for="star1" class="star-label">
-                                        <i class="fas fa-star"></i>
-                                        <span class="rating-text">Décevant</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="rating-labels">
-                                    <span class="rating-label">1 - Décevant</span>
-                                    <span class="rating-label">5 - Excellent</span>
-                                </div>
-                                
-                                {% if form.rating.errors %}
-                                    <div class="text-danger mt-2">{{ form.rating.errors }}</div>
-                                {% endif %}
-                            </div>
-                            
-                            <!-- Content -->
-                            <div class="mb-4">
-                                <label for="content" class="form-label">{% trans "Votre témoignage" %}</label>
-                                <textarea class="form-control" id="content" name="content" rows="5" required>{{ form.content.value|default:'' }}</textarea>
-                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                    <div class="form-text">{% trans "Votre témoignage doit contenir au moins 20 caractères." %}</div>
-                                    <small id="content-counter" class="text-muted">0/500</small>
-                                </div>
-                                {% if form.content.errors %}
-                                    <div class="text-danger">{{ form.content.errors }}</div>
-                                {% endif %}
-                            </div>
-                            
-                            <!-- Image -->
-                            <div class="mb-4">
-                                <label for="image" class="form-label">{% trans "Photo de profil (optionnel)" %}</label>
-                                <input type="file" class="form-control" id="image" name="image" accept="image/jpeg,image/png">
-                                <div class="mt-2" id="image-preview"></div>
-                                <div class="form-text">{% trans "Formats acceptés: JPG, PNG. Taille maximale: 5MB." %}</div>
-                                {% if form.image.errors %}
-                                    <div class="text-danger">{{ form.image.errors }}</div>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-modern" id="submit-button">
-                                    <i class="fas fa-paper-plane me-2"></i>{% trans "Soumettre mon témoignage" %}
-                                </button>
-                            </div>
-                            
-                            <div class="text-center mt-3">
-                                <small class="text-muted">
-                                    {% trans "Votre témoignage sera examiné par notre équipe avant publication." %}
-                                </small>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>{% trans "Soumettre mon témoignage" %}
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                {% trans "Votre témoignage sera examiné par notre équipe avant publication." %}
+                            </small>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal for testimonial details -->
-    <div class="modal fade" id="testimonialModal" tabindex="-1" aria-labelledby="testimonialModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="testimonialModalLabel">{% trans "Détails du témoignage" %}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="testimonial-modal-content">
-                    <!-- Content will be loaded here via JavaScript -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bouton Retour en Haut --> 
-    <button id="backToTop" style="display: none; position: fixed; bottom: 2rem; right: 2rem; z-index: 99; background: linear-gradient(to right, #4c1d95, #2563eb); color: white; border: none; border-radius: 50%; width: 3.5rem; height: 3.5rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease;">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+<style>
+/* Styles pour la section témoignages */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS animations
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('.smooth-scroll').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Rating stars interaction
-            const ratingInputs = document.querySelectorAll('input[name="rating"]');
-            const ratingLabels = document.querySelectorAll('.star-label');
-            
-            ratingInputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    const rating = parseInt(this.value);
-                    
-                    // Update star display
-                    ratingLabels.forEach((label, index) => {
-                        const starIcon = label.querySelector('i');
-                        if (index < rating) {
-                            starIcon.classList.remove('far', 'fa-star-half-alt');
-                            starIcon.classList.add('fas');
-                        } else {
-                            starIcon.classList.remove('fas', 'fa-star-half-alt');
-                            starIcon.classList.add('far');
-                        }
-                    });
-                });
-            });
-            
-            // Initialize stars based on current selection
-            const selectedRating = document.querySelector('input[name="rating"]:checked');
-            if (selectedRating) {
-                const rating = parseInt(selectedRating.value);
-                ratingLabels.forEach((label, index) => {
-                    const starIcon = label.querySelector('i');
-                    if (index < rating) {
-                        starIcon.classList.remove('far', 'fa-star-half-alt');
-                        starIcon.classList.add('fas');
-                    } else {
-                        starIcon.classList.remove('fas', 'fa-star-half-alt');
-                        starIcon.classList.add('far');
-                    }
-                });
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.rating-summary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-small {
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-small.avatar-placeholder {
+    font-size: 1.2rem;
+}
+
+.testimonial-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-stars {
+    display: flex;
+    gap: 0.15rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-stars i {
+    color: #f59e0b;
+    font-size: 0.95rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-excerpt {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4b5563;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.read-more-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+}
+
+.read-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+    color: white;
+}
+
+.testimonial-date {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-date i {
+    margin-right: 0.5rem;
+}
+
+.author-name {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    font-size: 1.05rem;
+}
+
+.author-type {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #7c2d12;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(255, 215, 0, 0.3);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 2px;
+}
+
+/* Star rating system */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star-rating label i {
+    color: #e2e8f0;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.star-rating input:checked ~ label i,
+.star-rating label:hover i,
+.star-rating label:hover ~ label i {
+    color: #f59e0b;
+}
+
+.star-rating input:checked ~ label i {
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .avatar, .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .avatar-small, .avatar-small.avatar-placeholder {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .rating-summary {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .rating-summary .vr {
+        display: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Star rating interaction
+    const starInputs = document.querySelectorAll('.star-rating input');
+    const ratingText = document.getElementById('rating-text');
+    
+    const ratingLabels = {
+        1: "{% trans 'Décevant' %}",
+        2: "{% trans 'Moyen' %}",
+        3: "{% trans 'Bien' %}",
+        4: "{% trans 'Très bien' %}",
+        5: "{% trans 'Excellent' %}"
+    };
+    
+    starInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            if (ratingText) {
+                ratingText.textContent = ratingLabels[this.value];
             }
-            
-            // Character counter for content textarea
-            const contentTextarea = document.getElementById('content');
-            const contentCounter = document.getElementById('content-counter');
-            
-            if (contentTextarea && contentCounter) {
-                function updateContentCounter() {
-                    const length = contentTextarea.value.length;
-                    contentCounter.textContent = `${length}/500`;
-                    
-                    if (length > 500) {
-                        contentCounter.classList.add('text-danger');
-                    } else {
-                        contentCounter.classList.remove('text-danger');
-                    }
-                }
-                
-                contentTextarea.addEventListener('input', updateContentCounter);
-                updateContentCounter(); // Initialize counter
-            }
-            
-            // Image preview
-            const imageInput = document.getElementById('image');
-            const imagePreview = document.getElementById('image-preview');
-            
-            if (imageInput && imagePreview) {
-                imageInput.addEventListener('change', function() {
-                    imagePreview.innerHTML = '';
-                    
-                    if (this.files && this.files[0]) {
-                        const file = this.files[0];
-                        
-                        // Check file size (max 5MB)
-                        if (file.size > 5 * 1024 * 1024) {
-                            alert('{% trans "Le fichier est trop volumineux. Taille maximale: 5MB." %}');
-                            this.value = '';
-                            return;
-                        }
-                        
-                        // Check file type
-                        if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-                            alert('{% trans "Seuls les fichiers JPG et PNG sont acceptés." %}');
-                            this.value = '';
-                            return;
-                        }
-                        
-                        const reader = new FileReader();
-                        
-                        reader.onload = function(e) {
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.classList.add('img-thumbnail', 'mt-2');
-                            img.style.maxHeight = '150px';
-                            imagePreview.appendChild(img);
-                        }
-                        
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-            
-            // Filter functionality
-            const filterType = document.getElementById('filter-type');
-            const filterRating = document.getElementById('filter-rating');
-            const sortBy = document.getElementById('sort-by');
-            const testimonialItems = document.querySelectorAll('.testimonial-item');
-            const noTestimonials = document.getElementById('no-testimonials');
-            
-            function filterTestimonials() {
-                const typeValue = filterType.value;
-                const ratingValue = filterRating.value;
-                const sortValue = sortBy.value;
-                
-                let visibleCount = 0;
-                
-                testimonialItems.forEach(item => {
-                    const itemType = item.getAttribute('data-type');
-                    const itemRating = parseInt(item.getAttribute('data-rating'));
-                    const itemDate = item.getAttribute('data-date');
-                    
-                    // Type filter
-                    const typeMatch = typeValue === 'all' || itemType === typeValue;
-                    
-                    // Rating filter
-                    const ratingMatch = ratingValue === 'all' || itemRating >= parseInt(ratingValue);
-                    
-                    // Show/hide based on filters
-                    if (typeMatch && ratingMatch) {
-                        item.style.display = 'block';
-                        visibleCount++;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-                
-                // Show no results message if no testimonials match
-                if (visibleCount === 0) {
-                    noTestimonials.classList.remove('d-none');
-                    noTestimonials.classList.add('d-block');
-                } else {
-                    noTestimonials.classList.remove('d-block');
-                    noTestimonials.classList.add('d-none');
-                }
-                
-                // Sort functionality
-                const container = document.getElementById('testimonials-container');
-                const items = Array.from(testimonialItems).filter(item => item.style.display !== 'none');
-                
-                items.sort((a, b) => {
-                    const aRating = parseInt(a.getAttribute('data-rating'));
-                    const bRating = parseInt(b.getAttribute('data-rating'));
-                    const aDate = new Date(a.getAttribute('data-date'));
-                    const bDate = new Date(b.getAttribute('data-date'));
-                    
-                    switch(sortValue) {
-                        case 'newest':
-                            return bDate - aDate;
-                        case 'oldest':
-                            return aDate - bDate;
-                        case 'highest':
-                            return bRating - aRating;
-                        case 'lowest':
-                            return aRating - bRating;
-                        default:
-                            return 0;
-                    }
-                });
-                
-                // Reorder items in DOM
-                items.forEach(item => {
-                    container.appendChild(item);
-                });
-            }
-            
-            // Add event listeners to filters
-            if (filterType && filterRating && sortBy) {
-                filterType.addEventListener('change', filterTestimonials);
-                filterRating.addEventListener('change', filterTestimonials);
-                sortBy.addEventListener('change', filterTestimonials);
-            }
-            
-            // Read more functionality
-            const readMoreButtons = document.querySelectorAll('.read-more-btn');
-            const testimonialModal = new bootstrap.Modal(document.getElementById('testimonialModal'));
-            
-            readMoreButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const testimonialId = this.getAttribute('data-testimonial-id');
-                    
-                    // Show loading state
-                    document.getElementById('testimonial-modal-content').innerHTML = `
-                        <div class="text-center py-4">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">{% trans "Chargement..." %}</span>
-                            </div>
-                        </div>
-                    `;
-                    
-                    testimonialModal.show();
-                    
-                    // Fetch testimonial details via AJAX
-                    fetch(`/testimonials/${testimonialId}/detail/`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            document.getElementById('testimonial-modal-content').innerHTML = `
-                                <div class="testimonial-content">
-                                    <div class="d-flex align-items-center mb-3">
-                                        ${data.image ? 
-                                            `<div class="avatar-wrapper">
-                                                <img src="${data.image}" alt="${data.author}" class="avatar avatar-small">
-                                            </div>` : 
-                                            `<div class="avatar-wrapper">
-                                                <div class="avatar-placeholder avatar-small">${data.author_initials}</div>
-                                            </div>`
-                                        }
-                                        <div class="ms-3">
-                                            <h6 class="author-name mb-0">${data.author}</h6>
-                                            <small class="author-type">${data.type_display}</small>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-stars mb-3">
-                                        ${Array.from({length: 5}, (_, i) => 
-                                            `<i class="${i < data.rating ? 'fas' : 'far'} fa-star"></i>`
-                                        ).join('')}
-                                    </div>
-                                    <p class="testimonial-text">"${data.excerpt}"</p>
-                                    <p class="testimonial-text">${data.full_content}</p>
-                                    <div class="testimonial-meta">
-                                        <div class="testimonial-date">
-                                            <i class="far fa-clock"></i>
-                                            <span>${data.date}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            document.getElementById('testimonial-modal-content').innerHTML = `
-                                <div class="alert alert-danger">
-                                    {% trans "Une erreur s'est produite lors du chargement du témoignage." %}
-                                </div>
-                            `;
-                        });
-                });
-            });
-            
-            // Form validation
-            const testimonialForm = document.getElementById('testimonialForm');
-            
-            if (testimonialForm) {
-                testimonialForm.addEventListener('submit', function(e) {
-                    const submitButton = document.getElementById('submit-button');
-                    const content = document.getElementById('content');
-                    const rating = document.querySelector('input[name="rating"]:checked');
-                    
-                    // Basic validation
-                    if (content.value.length < 20) {
-                        e.preventDefault();
-                        alert('{% trans "Votre témoignage doit contenir au moins 20 caractères." %}');
-                        content.focus();
-                        return;
-                    }
-                    
-                    if (!rating) {
-                        e.preventDefault();
-                        alert('{% trans "Veuillez sélectionner une note." %}');
-                        return;
-                    }
-                    
-                    // Disable submit button to prevent double submission
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<span class="loading-spinner me-2"></span>{% trans "Envoi en cours..." %}';
+        });
+    });
+    
+    // Initialize rating text if a rating is already selected
+    const selectedRating = document.querySelector('.star-rating input:checked');
+    if (selectedRating && ratingText) {
+        ratingText.textContent = ratingLabels[selectedRating.value];
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('.smooth-scroll').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
-    </script>
-</body>
-</html>
-    
-{% endblock  %}
+    });
+});
+</script>
+{% endblock %}
