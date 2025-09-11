@@ -62,6 +62,10 @@ def register_choice(request):
 # ---------------------------
 # Login view
 # ---------------------------
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 def user_login(request):
     if request.user.is_authenticated:
         return redirect("home")  # Redirige si déjà connecté
@@ -106,30 +110,58 @@ def register_user(request, user_type):
     template = None
 
     if user_type == "student":
-        form = StudentAddForm(request.POST or None)
+        form = StudentAddForm(request.POST or None, request.FILES or None)
         template = "registration/register_student.html"
     elif user_type == "parent":
-        form = ParentAddForm(request.POST or None)
+        form = ParentAddForm(request.POST or None, request.FILES or None)
         template = "registration/register_parent.html"
     elif user_type == "lecturer":
-        form = StaffAddForm(request.POST or None)  # Correction: Utiliser StaffAddForm pour les enseignants
+        form = TeacherAddForm(request.POST or None, request.FILES or None)  # ✅ Corrigé
         template = "registration/register_lecturer.html"
     elif user_type == "other":
-        form = OtherAddForm(request.POST or None)
+        form = OtherAddForm(request.POST or None, request.FILES or None)
         template = "registration/register_other.html"
     else:
         messages.error(request, "Invalid registration type.")
         return redirect("register_choice")
 
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, f"{user_type.capitalize()} account created successfully. Please login.")
-        return redirect("login")
-    elif request.method == "POST":
-        messages.error(request, "Please correct the errors below.")
+    if request.method == "POST":
+        if form.is_valid():
+            try:
+                # Pour les enseignants, désactiver temporairement la génération auto
+                if user_type == "lecturer":
+                    user = form.save(commit=False)
+                    # Marquer manuellement comme enseignant
+                    user.is_lecturer = True
+                    user.save()
+                    
+                    # Créer le profil enseignant
+                    Teacher.objects.create(
+                        user=user,
+                        speciality=form.cleaned_data.get("speciality"),
+                    )
+                else:
+                    form.save()
+                    
+                messages.success(
+                    request, 
+                    f"{user_type.capitalize()} account created successfully. Please login."
+                )
+                return redirect("login")
+                
+            except Exception as e:
+                messages.error(
+                    request, 
+                    f"An error occurred during registration: {str(e)}"
+                )
+        else:
+            messages.error(request, "Please correct the errors below.")
 
-    return render(request, template, {"form": form, "title": f"Register {user_type.capitalize()}"})
-
+    return render(request, template, {
+        "form": form, 
+        "title": f"Register {user_type.capitalize()}",
+        "user_type": user_type
+    })
 @login_required
 @admin_required
 def admin_panel(request):

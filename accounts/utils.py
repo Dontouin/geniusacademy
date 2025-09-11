@@ -1,4 +1,7 @@
 import threading
+import random
+import string
+import logging
 from datetime import datetime
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -7,8 +10,9 @@ from django.core.mail import send_mail
 from django.db import IntegrityError, transaction
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-import random
-import string
+
+# Configuration du logger
+logger = logging.getLogger(__name__)
 
 # -----------------------------
 # Génération de mot de passe
@@ -30,15 +34,9 @@ def generate_lecturer_id():
         number = random.randint(1000, 9999)
         lecturer_id = f"{year}{prefix}{number}"
 
-        try:
-            with transaction.atomic():
-                if not user_model.objects.select_for_update().filter(
-                    is_lecturer=True,
-                    username=lecturer_id
-                ).exists():
-                    return lecturer_id
-        except IntegrityError:
-            continue
+        # Vérifier si le matricule existe déjà
+        if not user_model.objects.filter(username=lecturer_id).exists():
+            return lecturer_id
 
     raise Exception("Impossible de générer un lecturer_id unique après 20 essais")
 
@@ -53,17 +51,21 @@ def generate_lecturer_credentials():
 # -----------------------------
 def send_html_email(subject, recipient_list, template, context):
     """Envoi d'un email HTML basé sur un template"""
-    html_message = render_to_string(template, context)
-    plain_message = strip_tags(html_message)
+    try:
+        html_message = render_to_string(template, context)
+        plain_message = strip_tags(html_message)
 
-    send_mail(
-        subject,
-        plain_message,
-        settings.EMAIL_FROM_ADDRESS,
-        recipient_list,
-        html_message=html_message,
-        fail_silently=False,
-    )
+        send_mail(
+            subject,
+            plain_message,
+            settings.DEFAULT_FROM_EMAIL,  # Utiliser le paramètre standard Django
+            recipient_list,
+            html_message=html_message,
+            fail_silently=False,
+        )
+        logger.info(f"Email envoyé à {recipient_list}")
+    except Exception as e:
+        logger.error(f"Erreur envoi email à {recipient_list}: {e}")
 
 class EmailThread(threading.Thread):
     def __init__(self, subject, recipient_list, template_name, context):
@@ -82,19 +84,20 @@ class EmailThread(threading.Thread):
                 context=self.context,
             )
         except Exception as e:
-            print(f"Email sending failed: {e}")
+            logger.error(f"EmailThread failed: {e}")
 
 def send_new_account_email(user, password):
     """Envoi d'un email de confirmation de compte UNIQUEMENT pour les enseignants"""
     if user.is_lecturer:  # SEULEMENT pour les enseignants
-        template = "accounts/email/new_lecturer_account_confirmation.html"
-        
-        EmailThread(
-            subject="Confirmation de votre compte The Genius Academy",
-            recipient_list=[user.email],
-            template_name=template,
-            context={"user": user, "password": password}
-        ).start()
-    
-    # Pour tous les autres types (étudiants, parents, autres, admins)
-    # NE RIEN FAIRE - pas d'envoi d'email automatique
+        try:
+            template = "accounts/email/new_lecturer_account_confirmation.html"
+            
+            EmailThread(
+                subject="Confirmation de votre compte The Genius Academy",
+                recipient_list=[user.email],
+                template_name=template,
+                context={"user": user, "password": password}
+            ).start()
+            logger.info(f"Email de confirmation programmé pour l'enseignant {user.email}")
+        except Exception as e:
+            logger.error(f"Erreur programmation email pour {user.email}: {e}")

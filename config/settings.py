@@ -31,7 +31,7 @@ AUTH_USER_MODEL = "accounts.User"
 # Installed apps
 # -------------------------
 DJANGO_APPS = [
-    "modeltranslation",  # multilingue
+   
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,6 +42,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "jazzmin",
+    "modeltranslation",  # multilingue
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",

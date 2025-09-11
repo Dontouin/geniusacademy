@@ -94,21 +94,32 @@ class User(AbstractUser):
         ordering = ("-date_joined",)
 
     def save(self, *args, **kwargs):
-        # NE générer un matricule QUE pour les enseignants
-        if not self.matricule and self.is_lecturer:
-            from accounts.utils import generate_lecturer_id
-            self.matricule = generate_lecturer_id()
-        
-        # Pour tous les autres types (étudiants, parents, autres), NE PAS générer de matricule
-        # Ils peuvent avoir un matricule manuel ou rester sans matricule
+        # Éviter la boucle infinie avec un flag
+        if not hasattr(self, '_generating_matricule') and not self.matricule and self.is_lecturer:
+            try:
+                from accounts.utils import generate_lecturer_id
+                self._generating_matricule = True  # ⛔ Flag anti-boucle
+                self.matricule = generate_lecturer_id()
+            except ImportError:
+                # Fallback si l'import échoue
+                import random
+                self.matricule = f"TGA{random.randint(1000, 9999)}"
+            finally:
+                if hasattr(self, '_generating_matricule'):
+                    delattr(self, '_generating_matricule')
         
         super().save(*args, **kwargs)
-
-        if self.picture and os.path.exists(self.picture.path):
-            img = Image.open(self.picture.path)
-            if img.height > 300 or img.width > 300:
-                img.thumbnail((300, 300))
-                img.save(self.picture.path)
+        
+        # Traitement de l'image APRÈS l'enregistrement
+        if self.picture and hasattr(self.picture, 'path') and os.path.exists(self.picture.path):
+            try:
+                img = Image.open(self.picture.path)
+                if img.height > 300 or img.width > 300:
+                    img.thumbnail((300, 300))
+                    img.save(self.picture.path)
+            except (IOError, OSError):
+                # Gérer les erreurs de traitement d'image
+                pass
 
     # Méthodes utiles pour AdminRole
     def is_admin_role(self, role_name):

@@ -334,14 +334,14 @@ class ParentAddForm(CustomUserCreationForm):
 # -----------------------------
 # Formulaire ajout Enseignant
 # -----------------------------
-class TeacherAddForm(UserCreationForm):
-    """Formulaire pour ajouter un enseignant."""
+class TeacherAddForm(forms.ModelForm):
+    """Formulaire pour ajouter un enseignant (sans gestion de mot de passe auto)."""
     username = forms.CharField(
         max_length=30,
-        required=False,
         widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Nom d'utilisateur"}),
         label="Nom d'utilisateur",
-        help_text="Optionnel. 150 caractères maximum. Lettres, chiffres et @/./+/-/_ seulement."
+        required=False,
+        help_text="Laissé vide pour génération automatique"
     )
     first_name = forms.CharField(
         max_length=30,
@@ -384,18 +384,6 @@ class TeacherAddForm(UserCreationForm):
         label="Spécialité",
         required=True
     )
-    password1 = forms.CharField(
-        max_length=30,
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Mot de passe"}),
-        label="Mot de passe",
-        required=True
-    )
-    password2 = forms.CharField(
-        max_length=30,
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Confirmez le mot de passe"}),
-        label="Confirmation du mot de passe",
-        required=True
-    )
 
     class Meta:
         model = User
@@ -415,28 +403,16 @@ class TeacherAddForm(UserCreationForm):
             raise forms.ValidationError("Veuillez entrer un numéro de téléphone valide (ex: +237 6xx xx xx xx).")
         return phone
 
-    def clean(self):
-        """Valide que les mots de passe correspondent."""
-        cleaned_data = super().clean()
-        password1 = cleaned_data.get("password1")
-        password2 = cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Les mots de passe ne correspondent pas.")
-        return cleaned_data
-
     @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_lecturer = True
         user.is_staff = False
-        user.first_name = self.cleaned_data.get("first_name")
-        user.last_name = self.cleaned_data.get("last_name")
-        user.gender = self.cleaned_data.get("gender")
-        user.address = self.cleaned_data.get("address")
-        user.phone = self.cleaned_data.get("phone")
-        user.email = self.cleaned_data.get("email")
-        if self.cleaned_data.get("password1"):
-            user.set_password(self.cleaned_data["password1"])
+        
+        # Si aucun username n'est fourni, on le laisse vide pour que le signal le génère
+        if not self.cleaned_data.get("username"):
+            user.username = ""  # Le signal générera un username
+        
         if commit:
             user.save()
             Teacher.objects.create(
