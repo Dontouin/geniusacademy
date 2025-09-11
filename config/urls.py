@@ -7,6 +7,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import JavaScriptCatalog
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import RedirectView
+from django.views.static import serve
 
 # --- Personnalisation admin ---
 admin.site.site_header = "Genius Academy Admin"
@@ -17,7 +18,7 @@ admin.site.index_title = "Bienvenue dans Genius Academy"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("pwa/", include("pwa.urls")),  # PWA manifest & service worker
+    path("pwa/", include("pwa.urls")),  # si tu utilises django-pwa
 ]
 
 # --- URL patterns traduites (i18n) ---
@@ -36,6 +37,18 @@ urlpatterns += i18n_patterns(
 # --- Redirection racine vers langue par défaut (après i18n_patterns) ---
 urlpatterns += [
     path("", RedirectView.as_view(url=f"/{settings.LANGUAGE_CODE}/", permanent=True)),
+]
+
+# --- Ajout du manifest et du service worker à la racine ---
+urlpatterns += [
+    path("manifest/site.webmanifest", serve, {
+        "path": "manifest/site.webmanifest",
+        "document_root": settings.STATIC_ROOT
+    }),
+    path("serviceworker.js", serve, {
+        "path": "js/service-worker.js",
+        "document_root": settings.STATIC_ROOT
+    }),
 ]
 
 # --- Fichiers statiques et media en DEBUG ---
