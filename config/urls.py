@@ -8,28 +8,32 @@ from django.views.i18n import JavaScriptCatalog
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import RedirectView
 
-# --- Personnalisation du panneau admin ---
-admin.site.site_header = "SkyLearn Admin"
-admin.site.site_title = "SkyLearn Admin Portal"
-admin.site.index_title = "Bienvenue sur SkyLearn Admin"
+# --- Personnalisation du panneau admin (Jazzmin prend le relai mais on garde pour sécurité) ---
+admin.site.site_header = "Genius Academy Admin"
+admin.site.site_title = "Genius Academy Admin Portal"
+admin.site.index_title = "Bienvenue dans Genius Academy"
 
 # --- URL patterns principales (non traduites) ---
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # Multilingue
     path("i18n/", include("django.conf.urls.i18n")),
-    # Redirection automatique de la racine vers la langue par défaut
+
+    # # Progressive Web App (django-pwa fournit manifest.json + serviceworker.js)
+    # path("", include("pwa.urls")),
+
+    # Redirection racine vers la langue par défaut (fr)
     path("", RedirectView.as_view(url=f"/{settings.LANGUAGE_CODE}/", permanent=True)),
 ]
 
 # --- URL patterns avec traduction (i18n) ---
 urlpatterns += i18n_patterns(
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
-    path("", include("core.urls")),  # page principale multilingue
-    path("jet/", include("jet.urls", "jet")),
-    path("jet/dashboard/", include("jet.dashboard.urls", "jet-dashboard")),
+    path("", include("core.urls")),         # Pages principales multilingues
     path("accounts/", include("accounts.urls")),
     path("search/", include("search.urls")),
-    # Décommente si besoin
+    # Autres apps potentielles :
     # path("programs/", include("course.urls")),
     # path("result/", include("result.urls")),
     # path("quiz/", include("quiz.urls")),
@@ -41,7 +45,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# --- Pages d'erreur personnalisées pour tests en mode DEBUG ---
+# --- Pages d'erreur personnalisées (DEBUG uniquement) ---
 if settings.DEBUG:
     urlpatterns += [
         path(
@@ -62,5 +66,5 @@ if settings.DEBUG:
         path("500/", default_views.server_error),
     ]
 
-# --- Assurer la gestion des fichiers statiques avec WhiteNoise si nécessaire ---
+# --- Gestion des fichiers statiques avec WhiteNoise ---
 urlpatterns += staticfiles_urlpatterns()

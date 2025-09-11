@@ -208,10 +208,6 @@
             </li>
             {% endif %}
 
-            <li class="{% if request.resolver_match.url_name == 'profile_single' %}active{% endif %}">
-                <a href="{% url 'profile_single' request.user.id %}"><i class="fas fa-user"></i> {% trans 'Profil Enfant' %}</a>
-            </li>
-
             <!-- Autres Utilisateurs -->
             {% if request.user.is_other %}
             <p class="ms-3 small">{% trans 'Menu Utilisateur' %}</p>

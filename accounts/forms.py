@@ -561,72 +561,83 @@ class TeacherInfoForm(forms.ModelForm):
             "matieres_secondaire": forms.Textarea(attrs={"rows": 2, "class": "form-control"}),
         }
 
-# -----------------------------
-# Mise à jour profil utilisateur
-# -----------------------------
+
 class ProfileUpdateForm(UserChangeForm):
-    password = None
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Prénom"}),
-        label="Prénom",
-        required=True
-    )
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Nom"}),
-        label="Nom",
-        required=True
-    )
-    gender = forms.ChoiceField(
-        choices=GENDERS,
-        widget=forms.Select(attrs={"class": "form-control"}),
-        label="Genre",
-        required=True
-    )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "adresse@example.com"}),
-        label="Email",
-        required=True
+        widget=forms.TextInput(
+            attrs={
+                "type": "email",
+                "class": "form-control",
+            }
+        ),
+        label="Email Address",
     )
+
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "type": "text",
+                "class": "form-control",
+            }
+        ),
+        label="First Name",
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "type": "text",
+                "class": "form-control",
+            }
+        ),
+        label="Last Name",
+    )
+
+    gender = forms.CharField(
+        widget=forms.Select(
+            choices=GENDERS,
+            attrs={
+                "class": "browser-default custom-select form-control",
+            },
+        ),
+    )
+
     phone = forms.CharField(
-        max_length=30,
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex: +237 6xx xx xx xx"}),
-        label="Téléphone",
-        required=True
+        widget=forms.TextInput(
+            attrs={
+                "type": "text",
+                "class": "form-control",
+            }
+        ),
+        label="Phone No.",
     )
+
     address = forms.CharField(
-        max_length=60,
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Adresse complète"}),
-        label="Adresse",
-        required=True
-    )
-    picture = forms.ImageField(
-        widget=forms.FileInput(attrs={"class": "form-control"}),
-        label="Photo de profil",
-        required=False
+        widget=forms.TextInput(
+            attrs={
+                "type": "text",
+                "class": "form-control",
+            }
+        ),
+        label="Address / city",
     )
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'gender', 'email', 'phone', 'address', 'picture']
+        fields = [
+            "first_name",
+            "last_name",
+            "gender",
+            "email",
+            "phone",
+            "address",
+            "picture",
+        ]
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email__iexact=email).exclude(id=self.instance.id).exists():
-            raise forms.ValidationError("Cet email est déjà utilisé.")
-        return email
-
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        if not phone.startswith('+') or len(phone) < 10:
-            raise forms.ValidationError("Veuillez entrer un numéro de téléphone valide (ex: +237 6xx xx xx xx).")
-        return phone
-
-# -----------------------------
-# Validation email pour mot de passe oublié
-# -----------------------------
-class EmailValidationOnForgotPasswordAlt(PasswordResetForm):
+class EmailValidationOnForgotPassword(PasswordResetForm):
     def clean_email(self):
         email = self.cleaned_data["email"]
         if not User.objects.filter(email__iexact=email, is_active=True).exists():
-            raise forms.ValidationError("Aucun utilisateur n'est enregistré avec cette adresse e-mail.")
-        return email
+            msg = "There is no user registered with the specified E-mail address. "
+            self.add_error("email", msg)
+            return email

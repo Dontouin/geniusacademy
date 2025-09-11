@@ -8,6 +8,15 @@ from .models import (
     Absence, Reservation, SuccessRate
 )
 
+# ------------------------------
+# Action générique pour supprimer
+# ------------------------------
+def delete_selected_objects(modeladmin, request, queryset):
+    count = queryset.count()
+    queryset.delete()
+    modeladmin.message_user(request, _("%d objet(s) supprimé(s) avec succès.") % count)
+delete_selected_objects.short_description = _("Supprimer les objets sélectionnés")
+
 # ---------------- NewsAndEvents Admin ----------------
 @admin.register(NewsAndEvents)
 class NewsAndEventsAdmin(TranslationAdmin):
@@ -15,6 +24,7 @@ class NewsAndEventsAdmin(TranslationAdmin):
     list_filter = ('posted_as', 'updated_date')
     search_fields = ('title', 'summary')
     date_hierarchy = 'updated_date'
+    actions = [delete_selected_objects]
 
 # ---------------- Drag & Drop Inline pour les images ----------------
 class GalleryImageInline(admin.TabularInline):
@@ -52,6 +62,7 @@ class SlideAdmin(admin.ModelAdmin):
     list_display_links = ["image_count"]
     ordering = ["order"]
     inlines = [GalleryImageInline]
+    actions = [delete_selected_objects]
 
     def image_count(self, obj):
         return obj.images.count()
@@ -64,7 +75,7 @@ class TestimonialAdmin(admin.ModelAdmin):
     list_editable = ["order", "is_active", "is_approved"]
     list_filter = ["is_active", "is_approved", "created_at"]
     search_fields = ["author", "content"]
-    actions = ["approve_testimonials", "disapprove_testimonials"]
+    actions = ["approve_testimonials", "disapprove_testimonials", delete_selected_objects]
     readonly_fields = ["created_at", "thumbnail_preview"]
     ordering = ["order", "created_at"]
     
@@ -113,7 +124,7 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_display = ["email", "subscribed_at", "is_active", "display_subscription_source"]
     list_filter = ["is_active", "subscribed_at"]
     search_fields = ["email"]
-    actions = ["activate_subscribers", "deactivate_subscribers"]
+    actions = ["activate_subscribers", "deactivate_subscribers", delete_selected_objects]
     readonly_fields = ["subscribed_at"]
     list_per_page = 25
     
@@ -128,6 +139,7 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
     )
 
     def display_subscription_source(self, obj):
+        from .models import ContactMessage
         contact_message = ContactMessage.objects.filter(email=obj.email, newsletter=True).first()
         return _("Via formulaire de contact") if contact_message else _("Via formulaire de newsletter")
     display_subscription_source.short_description = _("Source de l'inscription")
@@ -148,7 +160,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ["nom", "email", "sujet", "created_at", "is_read", "newsletter"]
     list_filter = ["newsletter", "is_read", "created_at"]
     search_fields = ["nom", "email", "sujet", "message"]
-    actions = ["mark_as_read", "mark_as_unread"]
+    actions = ["mark_as_read", "mark_as_unread", delete_selected_objects]
     readonly_fields = ["created_at"]
     list_per_page = 25
     
@@ -189,6 +201,7 @@ class StatValueAdmin(admin.ModelAdmin):
     list_display = ('name', 'value', 'display_icon')
     list_editable = ('value',)
     search_fields = ('name',)
+    actions = [delete_selected_objects]
     
     def display_icon(self, obj):
         icons = {
@@ -206,6 +219,7 @@ class AcademicEventAdmin(admin.ModelAdmin):
     list_display = ("date", "activity", "responsible")
     search_fields = ("activity", "responsible")
     list_filter = ("date",)
+    actions = [delete_selected_objects]
 
 # ---------------- Success Rate Admin ----------------
 @admin.register(SuccessRate)
@@ -215,6 +229,7 @@ class SuccessRateAdmin(admin.ModelAdmin):
     search_fields = ('year',)
     ordering = ('-year',)
     readonly_fields = ('created_at',)
+    actions = [delete_selected_objects]
 
 # ---------------- Absence Admin ----------------
 @admin.register(Absence)
@@ -223,6 +238,7 @@ class AbsenceAdmin(admin.ModelAdmin):
     list_filter = ['date', 'teacher']
     search_fields = ['teacher__username', 'reason']
     ordering = ['date']
+    actions = [delete_selected_objects]
 
 # ---------------- Reservation Admin ----------------
 @admin.register(Reservation)
@@ -231,3 +247,4 @@ class ReservationAdmin(admin.ModelAdmin):
     list_filter = ['date']
     search_fields = ['course_name', 'student_name']
     ordering = ['date']
+    actions = [delete_selected_objects]

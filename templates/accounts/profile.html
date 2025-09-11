@@ -38,7 +38,7 @@
             <div class="card profile-card">
                 <div class="card-body text-center">
                     <div class="profile-image-container">
-                        <img src="{{ user.picture.url }}" class="profile-image">
+                        <img src="{{request.user.picture.url }}" class="profile-image">
                         <div class="profile-status-indicator"></div>
                     </div>
                     <h4 class="profile-name">{{ user.get_full_name|title }}</h4>
