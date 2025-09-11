@@ -7,41 +7,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- Meta Description Optimisée pour le SEO -->
+
+    <!-- SEO -->
     <meta name="description" content="The Genius Academy - Service de répétition à domicile au Cameroun. Cours pour maternelle, primaire et secondaire en sections francophone et anglophone. Domaines scientifiques et littéraires.">
-    
-    <!-- Keywords -->
     <meta name="keywords" content="répétition à domicile, cours particuliers, Cameroun, Yaoundé, soutien scolaire, francophone, anglophone, maternelle, primaire, secondaire, scientifique, littéraire, The Genius Academy">
-    
-    <!-- Auteur -->
     <meta name="author" content="The Genius Academy">
-    
+    <link rel="canonical" href="https://www.geniusacademy.cm">
+
     <!-- Open Graph -->
     <meta property="og:title" content="The Genius Academy - Répétition à domicile au Cameroun">
     <meta property="og:description" content="Service de répétition à domicile pour élèves de maternelle à Terminale, sections francophone et anglophone, domaines scientifiques et littéraires.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.geniusacademy.cm">
     <meta property="og:image" content="{% static 'img/logo-genius-academy.jpg' %}">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Genius Academy - Répétition à domicile au Cameroun">
     <meta name="twitter:description" content="Service de répétition à domicile pour élèves de maternelle à Terminale">
 
-    <!-- Canonical -->
-    <!-- <link rel="canonical" href="https://www.geniusacademy.cm"> -->
-    
-    <!-- PWA Manifest
-    <link rel="manifest" href="#">
-    <meta name="theme-color" content="#0a0a14"> -->
-
-    <!-- Icônes pour PWA -->
-    <!-- <link rel="icon" sizes="192x192" href="{% static 'images/icons/icon-192x192.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/icons/icon-512x512.png' %}">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    Schema.org
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -49,7 +34,7 @@
       "name": "The Genius Academy",
       "description": "Service de répétition à domicile au Cameroun pour élèves de maternelle à Terminale",
       "url": "https://www.geniusacademy.cm",
-      "telephone": "+237-6XX-XXX-XXX",
+      "telephone": "+237-680700470",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Plateau",
@@ -58,40 +43,42 @@
       },
       "areaServed": "Cameroun",
       "serviceType": "Cours particuliers à domicile"
-    } -->
+    }
     </script>
 
-    <title>{% block title %}The Genius Academy - Répétition à domicile au Cameroun{% endblock title %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <title>{% block title %}The Genius Academy - Répétition à domicile au Cameroun{% endblock %}</title>
 
+    <!-- PWA -->
+    <link rel="manifest" href="{% static 'manifest/site.webmanifest' %}">
+    <meta name="theme-color" content="#0a0a14">
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
-    
-    <!-- Preload Fonts -->
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="apple-touch-icon" href="{% static 'images/icons/icon-512x512.png' %}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"></noscript>
 
-    <!-- Fontawesome -->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-6.5.1/css/all.min.css' %}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-6.5.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-5.3.2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <!-- Bootstrap5 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-5.3.2/css/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/tailwind.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
+    <!-- AOS Animations -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-    AOS.init({
-        duration: 1000,
-        easing: 'ease-out-cubic',
-        once: true
-    });
+        AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: true });
     </script>
 
     {% block header %}{% endblock %}
 </head>
+
 <body itemscope itemtype="https://schema.org/EducationalOrganization">
+
     {% block sidebar %}
         {% include 'sidebar.html' %}
     {% endblock %}
@@ -103,17 +90,14 @@
         {% endblock %}
 
         <div class="container-fluid" id="main-content" itemprop="mainContentOfPage">
-            {% block content %}{% endblock content %}
+            {% block content %}{% endblock %}
         </div>
     </div>
     {% endblock %}
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/237680700470?text=Bonjour,%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services" 
-       class="whatsapp-float" 
-       target="_blank" 
-       rel="noopener"
-       aria-label="Contactez-nous sur WhatsApp">
+       class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactez-nous sur WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -121,13 +105,13 @@
         {% include 'footer.html' %}
     {% endblock %}
 
-    <!-- JS -->
+    <!-- JS Scripts -->
     <script src="{% url 'javascript-catalog' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/jquery-3.7.1/jquery-3.7.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/bootstrap-5.3.2/js/bootstrap.bundle.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'vendor/jquery-3.7.1/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-5.3.2/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
-    <!-- Back to Top Script -->
+    <!-- Back to Top -->
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         const backToTopButton = document.getElementById('backToTop');
@@ -138,21 +122,16 @@
                 backToTopButton.style.display = 'none';
             }
         };
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 
     <!-- Service Worker -->
     <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("#")
-        .then(function(reg) {
-            console.log("Service Worker enregistré avec succès:", reg.scope);
-        }).catch(function(error) {
-            console.log("Échec de l'enregistrement du Service Worker:", error);
-        });
-    }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'js/service-worker.js' %}")
+            .then(reg => console.log("Service Worker enregistré:", reg.scope))
+            .catch(err => console.log("Échec Service Worker:", err));
+        }
     </script>
 
     {% block js %}{% endblock js %}

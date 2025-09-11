@@ -1,0 +1,26 @@
+{
+  "name": "The Genius Academy",
+  "short_name": "The GeniusAcademy",
+  "description": "Application web progressive de Genius Academy - Répétition à domicile au Cameroun",
+  "icons": [
+    {
+      "src": "/static/img/icons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/static/img/icons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#0a0a14",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "any",
+  "lang": "fr-FR"
+}

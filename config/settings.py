@@ -1,5 +1,5 @@
 """
-Django settings for config project.
+Django settings for Genius Academy project.
 
 Optimisé pour Genius Academy : 100% Jazzmin + multilingue + PWA.
 """
@@ -20,11 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-default-key-for-dev")
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = [
-    "*",
-    "127.0.0.1",
-    "localhost",
-]
+ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost"]
 
 # -------------------------
 # Custom user model
@@ -50,7 +46,7 @@ THIRD_PARTY_APPS = [
     "crispy_bootstrap5",
     "django_filters",
     "widget_tweaks",
-    "pwa",  # <- Ajout pour PWA
+    "pwa",  # PWA support
 ]
 
 PROJECT_APPS = [
@@ -68,7 +64,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",  # multilingue
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -102,16 +98,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # -------------------------
 # Database
 # -------------------------
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
-# Alternative PostgreSQL (Render par ex.)
 DATABASES = {
-     "default": dj_database_url.parse(config("DATABASE_URL"))
- }
+    "default": dj_database_url.parse(config("DATABASE_URL", default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"))
+}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -126,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # -------------------------
-# Internationalization & Languages
+# Internationalization
 # -------------------------
 LANGUAGE_CODE = "fr"
 TIME_ZONE = "Africa/Douala"
@@ -138,9 +127,7 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, "locale"),
-]
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
 # -------------------------
 # Static & Media
@@ -148,18 +135,21 @@ LOCALE_PATHS = [
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# WhiteNoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -------------------------
 # Email
 # -------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# Pour production, configure SMTP via env (ex: Gmail, SendGrid, Mailgun...)
+# Pour production, configure SMTP via env (Gmail, SendGrid, Mailgun, etc.)
+EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
 # -------------------------
 # Crispy Forms
@@ -203,9 +193,6 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": True,
 }
 
-# -------------------------
-# Jazzmin Theme (couleurs)
-# -------------------------
 JAZZMIN_UI_TWEAKS = {
     "theme": "flatly",
     "dark_mode_theme": "darkly",
@@ -228,7 +215,7 @@ JAZZMIN_UI_TWEAKS = {
 # -------------------------
 # Progressive Web App (PWA)
 # -------------------------
-PWA_APP_NAME = "Genius Academy"
+PWA_APP_NAME = "The Genius Academy"
 PWA_APP_DESCRIPTION = "Application web progressive de Genius Academy"
 PWA_APP_THEME_COLOR = "#0a0a14"
 PWA_APP_BACKGROUND_COLOR = "#ffffff"
@@ -237,23 +224,14 @@ PWA_APP_SCOPE = "/"
 PWA_APP_ORIENTATION = "any"
 PWA_APP_START_URL = "/"
 PWA_APP_ICONS = [
-    {
-        "src": "/static/images/icons/icon-512x512.png",
-        "sizes": "512x512"
-    }
+    {"src": "/static/img/icons/web-app-manifest-192x192.png", "sizes": "192x192"},
+    {"src": "/static/img/icons/web-app-manifest-512x512.png", "sizes": "512x512"},
 ]
 PWA_APP_ICONS_APPLE = [
-    {
-        "src": "/static/images/icons/icon-512x512.png",
-        "sizes": "512x512"
-    }
+    {"src": "/static/img/icons/web-app-manifest-512x512.png", "sizes": "512x512"}
 ]
-PWA_APP_SPLASH_SCREEN = [
-    {
-        "src": "/static/images/icons/splash-640x1136.png",
-        "media": "(device-width: 320px) and (device-height: 568px)"
-    }
-]
+# Splash screen désactivé pour éviter l'erreur
+PWA_APP_SPLASH_SCREEN = []
 PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "fr-FR"
 
@@ -263,8 +241,6 @@ PWA_APP_LANG = "fr-FR"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
-    },
+    "handlers": {"console": {"level": "DEBUG", "class": "logging.StreamHandler"}},
     "root": {"level": "INFO", "handlers": ["console"]},
 }
