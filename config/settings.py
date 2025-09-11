@@ -102,16 +102,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 # -------------------------
 # Database
 # -------------------------
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
-# Alternative PostgreSQL (Render par ex.)
 # DATABASES = {
-#     "default": dj_database_url.parse(config("DATABASE_URL"))
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     }
 # }
+# Alternative PostgreSQL (Render par ex.)
+DATABASES = {
+     "default": dj_database_url.parse(config("DATABASE_URL"))
+ }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
