@@ -1,5 +1,6 @@
 # core/urls.py
 from django.urls import path
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -40,4 +41,6 @@ urlpatterns = [
     # --- Secrétariat ---
     path("secretary/", views.secretary_dashboard, name="secretary_dashboard"),
     path("secretary/report/pdf/", views.secretary_report_pdf, name="secretary_report_pdf"),
+
+    path('offline/', TemplateView.as_view(template_name='offline.html'), name='offline'),
 ]
